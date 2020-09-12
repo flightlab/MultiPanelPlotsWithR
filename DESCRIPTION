@@ -1,0 +1,42 @@
+Package: MultiPanelPlotsWithR
+Title: Multi Panel Plots in R for UBC Graduate Course BIO548L
+Version: 0.9.0.9000
+Authors@R: 
+    c(
+	person(given = "Douglas L.",
+           family = "Altshuler",
+           role = c("edt"),
+           email = "doug@zoology.ubc.ca",
+           comment = c(ORCID = "0000-0002-1364-3617")),
+    person(given = "Vikram B.",
+           family = "Baliga",
+           role = c("aut", "cre"),
+           email = "vbaliga87@gmail.com",
+           comment = c(ORCID = "0000-0002-9367-8974")),
+    person(given = "Andrea",
+           family = "Gaede",
+           role = c("aut"),
+           email = "andrea.gaede@gmail.com",
+           comment = c(ORCID = "0000-0002-1909-7004")),
+    person(given = "Eric R.", 
+             family = "Press",
+             role = "aut",
+             email = "epress12@gmail.com",
+             comment = c(ORCID = "0000-0002-1944-3755")),
+    person(given = "Shree",
+           family = "Senthivasan",
+           role = c("aut"),
+           email = "shreeramsenti@gmail.com",
+           comment = c(ORCID = "0000-0002-7118-9547")))           
+Description: Tutorial that walks students of different skill levels through a 
+  series of data wrangling and visualization exercises. The goal is to make sure 
+  students are comfortable using packages within the tidyverse, along with 
+  `cowplot`, to produce publication quality figures.
+URL: https://github.com/beep-boopR/MultiPanelPlotsWithR
+License: file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

@@ -61,8 +61,7 @@ knitr::opts_chunk$set(
 
 This vignette is Part 3 of 3 for an R workshop created for 
 [BIOL 548L](http://www.biology.ubc.ca/course-listing-2/#500level-4), a 
-graduate-level course on data visualization taught at the University of British 
-Columbia. 
+graduate-level course taught at the University of British Columbia. 
 
 When the workshop runs, we split students into three groups with successively
 increasing levels of difficulty. **To make sense of what follows, we recommend 
@@ -172,7 +171,7 @@ package.check <-
 ### Data sets
 
 You can get all data used in this vignette (and the other two vignettes!) by 
-downloading [this zip file](https://github.com/beep-boopR/MultiPanelPlotsWithR/raw/master/inst/extdata/UBC-BIOL548L_data_files.zip).
+downloading [this zip file](ADD NEW LINK HERE).
 
 #### Prep work for figure legends:
 

@@ -50,8 +50,7 @@ knitr::opts_chunk$set(
 
 This vignette is Part 2 of 3 for an R workshop created for 
 [BIOL 548L](http://www.biology.ubc.ca/course-listing-2/#500level-4), 
-a graduate-level course on data visualization taught at the University of
-British Columbia.
+a graduate-level course taught at the University of British Columbia.
 
 When the workshop runs, we split students into three groups with successively
 increasing levels of difficulty. **To make sense of what follows, we recommend 
@@ -254,11 +253,11 @@ functions all follow this convention, as do many other functions.
 The RStudio cheat sheets are a whole lot more useful once you start piping --
 here are a few:
 
-[Data transformation]("https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf")
+- [Data transformation](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
 
-[Data import and restructuring]("https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf")
+- [Data import and restructuring](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)
 
-[Other cheat sheets]("https://www.rstudio.com/resources/cheatsheets/")
+- [Other cheat sheets](https://www.rstudio.com/resources/cheatsheets/)
 
 ## Some prep work for the coding part of the lesson:
 In this section our main goal will be to reproduce as closely as possible all
@@ -307,7 +306,7 @@ my_data %>%
 ```
 But how do you know what geometries are available or what aesthetic mappings you
 can use for each? Use the
-[plotting with ggplot2 cheat sheet]("https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf")
+[plotting with ggplot2 cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 
 Other possibly relevant componenets include:  
 
@@ -1134,9 +1133,9 @@ fig_C <- data_C %>%
 fig_C
 ```
 
-#### Figure 3 Panel A:
+## Build a connected-line plot (Figure 3 Panel A):
 Panel A is a bit complicated, so we'll just provide the full code here
-```{r panel_A}
+```{r panel_A, message=FALSE, warning=FALSE}
 # First, import data
 fig_A <-
   read_csv("./Fig3A_data.csv") %>%

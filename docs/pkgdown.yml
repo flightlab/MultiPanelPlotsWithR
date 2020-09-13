@@ -5,7 +5,7 @@ articles:
   group-01_Fundamentals-data-wrangling-tidyverse: group-01_Fundamentals-data-wrangling-tidyverse.html
   group-02_Piping-single-panel-ggplot-figs: group-02_Piping-single-panel-ggplot-figs.html
   group-03_Using-cowplot-multi-panel: group-03_Using-cowplot-multi-panel.html
-last_built: 2020-09-13T20:15Z
+last_built: 2020-09-13T20:43Z
 urls:
   reference: https://flightlab.github.io/MultiPanelPlotsWithR//reference
   article: https://flightlab.github.io/MultiPanelPlotsWithR//articles

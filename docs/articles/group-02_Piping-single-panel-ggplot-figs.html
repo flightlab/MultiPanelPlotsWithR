@@ -88,7 +88,7 @@
       <h1 data-toc-skip>Part 2: Piping and producing single-panel ggplot figures</h1>
                         <h4 class="author">by Vikram B. Baliga, Andrea Gaede and Shreeram Senthivasan</h4>
             
-            <h4 class="date">Last updated on 2020-09-13 13:15:42</h4>
+            <h4 class="date">Last updated on 2020-09-13 13:43:22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/flightlab/MultiPanelPlotsWithR/blob/master/vignettes/group-02_Piping-single-panel-ggplot-figs.Rmd"><code>vignettes/group-02_Piping-single-panel-ggplot-figs.Rmd</code></a></small>
       <div class="hidden name"><code>group-02_Piping-single-panel-ggplot-figs.Rmd</code></div>
@@ -100,7 +100,7 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>This vignette is Part 2 of 3 for an R workshop created for <a href="http://www.biology.ubc.ca/course-listing-2/#500level-4">BIOL 548L</a>, a graduate-level course on data visualization taught at the University of British Columbia.</p>
+<p>This vignette is Part 2 of 3 for an R workshop created for <a href="http://www.biology.ubc.ca/course-listing-2/#500level-4">BIOL 548L</a>, a graduate-level course taught at the University of British Columbia.</p>
 <p>When the workshop runs, we split students into three groups with successively increasing levels of difficulty. <strong>To make sense of what follows, we recommend working through (or at least looking at) <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-01_Fundamentals-data-wrangling-tidyverse.html">Part 1’s vignette</a>.</strong></p>
 <p>The goal of Part 2’s vignette is to learn how to structure data to produce single plots ready for presentations and publications</p>
 <p>Part 3’s vignette (which we recommend going through only <em>after</em> completing this page) can be found <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html">here</a>.</p>
@@ -277,9 +277,11 @@ If we don’t want to save intermediates, we can just do all the steps in one li
 <p>When you chain together multiple manipulations, piping makes it easy to focus on what’s important at every step. One caveat is that you need the first argument of every function in the pipe to be the object you are manipulating. Tidyverse functions all follow this convention, as do many other functions.</p>
 <p><strong>Where do you find new verbs?</strong></p>
 <p>The RStudio cheat sheets are a whole lot more useful once you start piping – here are a few:</p>
-<p><a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf%22">Data transformation</a></p>
-<p><a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf%22">Data import and restructuring</a></p>
-<p><a href="%22https://www.rstudio.com/resources/cheatsheets/%22">Other cheat sheets</a></p>
+<ul>
+<li><p><a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">Data transformation</a></p></li>
+<li><p><a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf">Data import and restructuring</a></p></li>
+<li><p><a href="https://www.rstudio.com/resources/cheatsheets/">Other cheat sheets</a></p></li>
+</ul>
 </div>
 <div id="some-prep-work-for-the-coding-part-of-the-lesson" class="section level2">
 <h2 class="hasAnchor">
@@ -309,7 +311,7 @@ If we don’t want to save intermediates, we can just do all the steps in one li
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">my_data</span> <span class="kw">%&gt;%</span>
   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">var1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">var2</span>)) +
   <span class="fu">geom_point</span>()</pre></body></html></div>
-<p>But how do you know what geometries are available or what aesthetic mappings you can use for each? Use the <a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf%22">plotting with ggplot2 cheat sheet</a></p>
+<p>But how do you know what geometries are available or what aesthetic mappings you can use for each? Use the <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">plotting with ggplot2 cheat sheet</a></p>
 <p>Other possibly relevant componenets include:</p>
 <ul>
 <li>Coordinate systems (eg cartesian vs polar plots)</li>
@@ -1542,9 +1544,10 @@ To fudge the lines, let’s make another dataset:</p>
     <span class="fu">scale_x_continuous</span>(<span class="kw">breaks</span> <span class="kw">=</span> -<span class="fl">1</span>:<span class="fl">4</span> / <span class="fl">2</span>)
 <span class="no">fig_C</span></pre></body></html></div>
 <p><img src="group-02_Piping-single-panel-ggplot-figs_files/figure-html/unnamed-chunk-61-1.png" width="700"></p>
-<div id="figure-3-panel-a" class="section level4">
-<h4 class="hasAnchor">
-<a href="#figure-3-panel-a" class="anchor"></a>Figure 3 Panel A:</h4>
+</div>
+<div id="build-a-connected-line-plot-figure-3-panel-a" class="section level2">
+<h2 class="hasAnchor">
+<a href="#build-a-connected-line-plot-figure-3-panel-a" class="anchor"></a>Build a connected-line plot (Figure 3 Panel A):</h2>
 <p>Panel A is a bit complicated, so we’ll just provide the full code here</p>
 <div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="co"># First, import data</span>
 <span class="no">fig_A</span> <span class="kw">&lt;-</span>
@@ -1600,15 +1603,8 @@ To fudge the lines, let’s make another dataset:</p>
         ),
       <span class="co"># Use 'sharp' arrow heads</span>
       <span class="kw">linejoin</span> <span class="kw">=</span> <span class="st">'mitre'</span>)
-<span class="co">#&gt; Parsed with column specification:</span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   time = col_double(),</span>
-<span class="co">#&gt;   stim = col_double(),</span>
-<span class="co">#&gt;   spike = col_double()</span>
-<span class="co">#&gt; )</span>
 <span class="no">fig_A</span></pre></body></html></div>
 <p><img src="group-02_Piping-single-panel-ggplot-figs_files/figure-html/panel_A-1.png" width="700"></p>
-</div>
 <div id="congratulations-you-finished-part-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#congratulations-you-finished-part-2" class="anchor"></a>Congratulations! You finished part 2!!</h3>

@@ -12,3 +12,5 @@ Please see the vignettes in the drop-down menu above.
 
 ## Over three vignettes, we make this entire figure via code:
 ![Figure_3](images/gaedeetal_fig3.png)
+
+🐢

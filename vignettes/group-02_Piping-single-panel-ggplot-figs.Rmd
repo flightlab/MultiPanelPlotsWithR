@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 
 ```{r, include = FALSE}
 
+  library(MultiPanelPlotsWithR)
+
   file.copy(system.file("extdata", "gapminder.csv",
               package = "MultiPanelPlotsWithR"),
             "./gapminder.csv")
@@ -47,19 +49,20 @@ knitr::opts_chunk$set(
 ## Introduction
 
 This vignette is Part 2 of 3 for an R workshop created for 
-[BIOL 548L](http://www.biology.ubc.ca/course-listing-2/#500level-4), a graduate-level course on data visualization taught at the University of British 
-Columbia. 
+[BIOL 548L](http://www.biology.ubc.ca/course-listing-2/#500level-4), 
+a graduate-level course on data visualization taught at the University of
+British Columbia.
 
 When the workshop runs, we split students into three groups with successively
 increasing levels of difficulty. **To make sense of what follows, we recommend 
 working through (or at least looking at) 
-[Part 1's vignette](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-01_Fundamentals-data-wrangling-tidyverse.html).** 
+[Part 1's vignette](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-01_Fundamentals-data-wrangling-tidyverse.html).** 
  
 The goal of Part 2's vignette is to learn how to structure data to produce single plots ready for presentations and publications
 
 Part 3's vignette (which we recommend going through only *after* completing this
 page) can be found 
-[here](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html).
+[here](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html).
 
 All code and contents of this vignette were written together by Vikram B. 
 Baliga, Andrea Gaede and Shreeram Senthivasan.  
@@ -81,8 +84,6 @@ The code block is modified from
 [this blog post](https://vbaliga.github.io/verify-that-r-packages-are-installed-and-loaded/) 
 
 ```{r package_loading, message=FALSE, warning=FALSE}
-#library(MultiPanelPlotsWithR)
-
 ## Modified from: 
 ## https://vbaliga.github.io/verify-that-r-packages-are-installed-and-loaded/
 
@@ -103,43 +104,52 @@ packages <-
     # ggmap and maps are optional; needed for creating maps
     "ggmap",
     "maps")
+
 ## Now load or install&load all packages
-package.check <- lapply(
-  packages,
-  FUN = function(x)
-  {
-    if (!require(x, character.only = TRUE))
+package.check <-
+  lapply(
+    packages,
+    FUN = function(x)
     {
-      install.packages(x, dependencies = TRUE,
-                       repos = "http://cran.us.r-project.org")
-      library(x, character.only = TRUE)
+      if (!require(x, character.only = TRUE))
+      {
+        install.packages(x, dependencies = TRUE,
+                         repos = "http://cran.us.r-project.org")
+        library(x, character.only = TRUE)
+      }
     }
-  }
-)
+  )
 ```
 
 ### Data sets
 
 You can get all data used in this vignette (and the other two!) by downloading 
-[this zip file](https://github.com/beep-boopR/MultiPanelPlotsWithR/raw/master/inst/extdata/UBC-BIOL548L_data_files.zip).
+[this zip file](ADD NEW LINK HERE).
 
 
 ## What is literate programming?
 
-Literate programming is a coding paradigm that rethinks the "grammar" of traditional code to more closely resemble writing in a human language, like English.  
+"Literate programming" rethinks the "grammar" of traditional code to more
+closely resemble writing in a human language, like English.
 
-The primary goal of literate programming is to move away from coding "for computers" (ie, code that simplifies compilation) and instead to write in a way that more resembles how we think.  
+The primary goal of literate programming is to move away from coding "for
+computers" (ie, code that simplifies compilation) and instead to write in a way
+that more resembles how we think.
 
-In addition to making for much more readable code even with fewer comments, a good literate coding language should make it easier for you to translate ideas into code.  
+In addition to making for much more readable code even with fewer comments, a
+good literate coding language should make it easier for you to translate ideas
+into code.
 
-In the tidyverse, we will largely use the analogy of variables as nouns and functions as verbs that operate on the nouns.  
+In the `tidyverse`, we will largely use the analogy of variables as nouns and
+functions as verbs that operate on the nouns.
 
-The main way we will make our code literate however is with the pipe: %>%  
+The main way we will make our code literate however is with the pipe: `%>%`  
 
 ## What is a pipe? 
-A pipe, or %>% , is an operator that takes everything on the left and plugs it into the function on the right.  
+A pipe, or `%>%`, is an operator that takes everything on the left and plugs it
+into the function on the right.
 
-In short: x %>% f(y)  is equivalent to  f(x, y)  
+In short: `x %>% f(y)`  is equivalent to  `f(x, y)` 
 
 ```{r}
 # So:
@@ -149,10 +159,13 @@ filter(gapminder, continent == 'Asia')
 gapminder %>%
   filter(continent == 'Asia')
 ```
-In RStudio you can use the shortcut CTRL/CMD + SHIFT + M to insert a pipe  
+In RStudio you can use the shortcut 
+`CTRL + SHIFT + M` (on Windows) or 
+`CMD + SHIFT + M` (on Mac) to insert a pipe  
 
 ## Why bother with pipes?  
-To see how pipes can make code more readable, let's translate this simple cake recipe into pseudo R code:
+To see how pipes can make code more readable, let's translate this cake
+recipe into pseudo R code:
 
 1. Cream together sugar and butter
 2. Beat in eggs and vanilla
@@ -171,7 +184,9 @@ batter_4   <- stir_in(batter_3, milk)
 cake       <- bake(batter_3)  
 cake_final <- frost(cake)  
 ```
-The info is all there, but there's a lot of repetition and opportunity for typos. You also have to jump back and forth between lines to make sure you're calling the right variables.  
+The info is all there, but there's a lot of repetition and opportunity for
+typos. You also have to jump back and forth between lines to make sure you're
+calling the right variables.
 
 A similar approach would be to keep overwriting a single variable:  
 ```{r, eval = FALSE}
@@ -182,7 +197,8 @@ cake <- stir_in(cake, milk)
 cake <- bake(cake)  
 cake <- frost(cake)  
 ```
-But it's still not as clear as the original recipe...And if anything goes wrong you have to re-run the whole pipeline.
+But it's still not as clear as the original recipe...And if anything goes wrong
+you have to re-run the whole pipeline.
 
 **Function Composition:**  
 If we don't want to save intermediates, we can just do all the steps in one line:  
@@ -223,26 +239,38 @@ cake <-
 ```
 When you are reading code, you can replace pipes with the phrase "and then."  
 
-And remember, pipes just take everything on the left and plug it into the function on the right. If you step through this code, this chunk is exactly the same as the function composition example above, it's just written for people to read.  
+And remember, pipes just take everything on the left and plug it into the
+function on the right. If you step through this code, this chunk is exactly the
+same as the function composition example above, it's just written for people to
+read.
 
-When you chain together multiple manipulations, piping makes it easy to focus on what's important at every step. One caveat is that you need the first argument of every function in the pipe to be the object you are manipulating. Tidyverse functions all follow this convention, as do many other functions.  
+When you chain together multiple manipulations, piping makes it easy to focus on
+what's important at every step. One caveat is that you need the first argument
+of every function in the pipe to be the object you are manipulating. Tidyverse
+functions all follow this convention, as do many other functions.
 
 **Where do you find new verbs?**  
 
-The RStudio cheat sheets are a whole lot more useful once you start piping -- here are a few:
+The RStudio cheat sheets are a whole lot more useful once you start piping --
+here are a few:
 
 [Data transformation]("https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf")
 
-[Data import + restructuring]("https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf")
+[Data import and restructuring]("https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf")
 
 [Other cheat sheets]("https://www.rstudio.com/resources/cheatsheets/")
 
 ## Some prep work for the coding part of the lesson:
-In this section our main goal will be to reproduce as closely as possible all the individual plots that make up Figure 3 in the [Gaede et al. 2017 paper](https://www.cell.com/current-biology/fulltext/S0960-9822(16)31394-X).  
+In this section our main goal will be to reproduce as closely as possible all
+the individual plots that make up Figure 3 in the
+[Gaede et al. 2017 paper](https://www.cell.com/current-biology/fulltext/S0960-9822(16)31394-X).  
 
-The one exception to that will be the legends and icons, which are easier to align and arrange when organizing the plots into a single multipanel figure, which is left for Group 3.  
+The one exception to that will be the legends and icons, which are easier to
+align and arrange when organizing the plots into a single multipanel figure,
+which is left for Group 3.
 
-Let's start by opening up the paper and setting up some variables we will be using throughout the plotting.  
+Let's start by opening up the paper and setting up some variables we will be
+using throughout the plotting.
 
 **Colours for the different birds**  
 ```{r}
@@ -253,15 +281,19 @@ col_pg <- "#4AA4F2"
 
 
 ## Anatomy of a ggplot
-`ggplot` is built around the idea of a "Grammar of Graphics" -- a way of describing (almost) any graphic.  
+`ggplot2` is built around the idea of a "Grammar of Graphics" -- a way of
+describing (almost) any graphic.
 
 There are three key components to any graphic under the Grammar of Graphics:
 
 * Data: the information to be conveyed
-* Geometries: the things you actually draw on the plot (lines, points, polygons, etc...)
-* Aesthetic mapping: the connection between relevant parts of the data and the aesthetics (size, colour, position, etc...) of the geometries  
+* Geometries: the things you actually draw on the plot (lines, points, polygons,
+etc...)
+* Aesthetic mapping: the connection between relevant parts of the data and the
+aesthetics (size, colour, position, etc...) of the geometries
 
-Any ggplot you make will at the very minimum require these three things and will usually look something like this:
+Any ggplot you make will at the very minimum require these three things and will
+usually look something like this:
 ```{r, eval=FALSE}
 ggplot(data = my_data, mapping = aes(x = var1, y = var2)) +
   geom_point()
@@ -273,8 +305,9 @@ my_data %>%
   ggplot(aes(x = var1, y = var2)) +
   geom_point()
 ```
-But how do you know what geometries are available or what aesthetic mappings you can use for each?  
-Use the [plotting with ggplot2 cheat sheet]("https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf")
+But how do you know what geometries are available or what aesthetic mappings you
+can use for each? Use the
+[plotting with ggplot2 cheat sheet]("https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf")
 
 Other possibly relevant componenets include:  
 
@@ -371,7 +404,8 @@ data_D %>%
     geom_boxplot(alpha = 0.5, outlier.size = 0) +
     geom_point(
       aes(shape = species),
-      position = position_jitterdodge(jitter.height = 0.3, jitter.width = 0.2)
+      position = position_jitterdodge(jitter.height = 0.3, 
+                                      jitter.width = 0.2)
     ) +
     scale_fill_manual(values = c(col_hb, col_zb)) +
     scale_shape_manual(values = c(24, 21))
@@ -384,7 +418,8 @@ fig_D <- data_D %>%
     geom_boxplot(alpha = 0.5, outlier.size = 0) +
     geom_point(
       aes(shape = species),
-      position = position_jitterdodge(jitter.height = 0.3, jitter.width = 0.2)
+      position = position_jitterdodge(jitter.height = 0.3, 
+                                      jitter.width = 0.2)
     ) +
     scale_fill_manual(values = c(col_hb, col_zb)) +
     scale_shape_manual(values = c(24, 21)) +
@@ -445,7 +480,8 @@ data_D %>%
     geom_boxplot(alpha = 0.5, outlier.size = 0) +
     geom_point(
       aes(shape = species),
-      position = position_jitterdodge(jitter.height = 0.3, jitter.width = 0.2)
+      position = position_jitterdodge(jitter.height = 0.3, 
+                                      jitter.width = 0.2)
     ) +
     scale_fill_manual(values = c(col_hb, col_zb)) +
     scale_shape_manual(values = c(24, 21)) +
@@ -464,7 +500,8 @@ fig_D <- data_D %>%
     geom_boxplot(alpha = 0.5, outlier.size = 0) +
     geom_point(
       aes(shape = species),
-      position = position_jitterdodge(jitter.height = 0.3, jitter.width = 0.2)
+      position = position_jitterdodge(jitter.height = 0.3, 
+                                      jitter.width = 0.2)
     ) +
     scale_fill_manual(values = c(col_hb, col_zb)) +
     scale_shape_manual(values = c(24, 21)) +
@@ -1070,7 +1107,9 @@ fig_C <- data_C %>%
       ),
       width = 0.02
     ) +
-    geom_point(aes(colour = direction, shape = direction, size = direction)) +
+    geom_point(aes(colour = direction, 
+                   shape = direction, 
+                   size = direction)) +
     # Annotate points over threshold
     annotate(
       geom = "segment",
@@ -1095,11 +1134,68 @@ fig_C <- data_C %>%
 fig_C
 ```
 
+#### Figure 3 Panel A:
+Panel A is a bit complicated, so we'll just provide the full code here
+```{r panel_A}
+# First, import data
+fig_A <-
+  read_csv("./Fig3A_data.csv") %>%
+  # Now take every nth data point (produces plot faster)
+  filter(row_number() %% 5 == 0) %>%
+  # Clean outliers
+  filter(abs(spike) < 7 * sd(spike)) %>%
+  ggplot(aes(time, spike)) +
+    geom_path(size = 0.1) +
+    theme_void() +
+    # Y-axis vertical scale
+    annotate(geom = "segment",
+             y = 0.00278 - 0.01, yend = 0.00278 + 0.01,
+             x = -1.5, xend = -1.5,
+             lwd = 1.2) +
+    # Y-axis scale label
+    annotate(geom = "text", y = 0.00278, x = -3,
+             label = "0.2 mV", size = 5, angle = 90) +
+    # X-axis scale bar
+    annotate(geom = "segment",
+             y = -0.035, yend = -0.035,
+             x = 70 + 1.5, xend = 75 + 1.5,
+             lwd = 1.2) +
+    # X-axis scale label
+    annotate(geom = "text", y = -0.04, x = 74,
+             label = "5s", size = 5) +
+    # Large ticks
+    annotate(geom = "segment",
+             y = -0.03, yend = -0.025,
+             x = 1.5 + 1:15 * 5, xend = 1.5 + 1:15 * 5,
+             lwd = 1) +
+    # Small ticks within large ticks
+    annotate(geom = "segment",
+             y = -0.027, yend = -0.028,
+             x = 1.5 + 1:79, xend = 1.5 + 1:79,
+             lwd = 0.8) +
+    # Arrows
+    annotate(
+      geom = "segment",
+      y = -0.0275,
+      yend = -0.0275,
+      x = -10 + 2.5 + 1:8 * 10,
+      xend = -10 + 5.5 + 1:8 * 10,
+      lwd = 1.2,
+      arrow = arrow(
+        # Control the direction of each arrow. first = left; last = right
+        ends = c("first", "last", "last", "last",
+                 "first", "first", "first", "last"),
+        # Control the size of each arrow head
+        length = unit(c(1, 6, 10, 10, 6, 10, 1, 6), "pt"),
+        type = "closed"
+        ),
+      # Use 'sharp' arrow heads
+      linejoin = 'mitre')
+fig_A
+```
 
+### Congratulations! You finished part 2!! 
+Now check out 
+[part 3](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html)
 
-
-
-
-
-
-
+🐢

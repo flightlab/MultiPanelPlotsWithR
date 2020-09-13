@@ -25,6 +25,8 @@ knitr::opts_chunk$set(
   file.copy(system.file("extdata", "gapminder.xlsx",
                         package = "MultiPanelPlotsWithR"),
             "./gapminder.xlsx")
+  
+  library(MultiPanelPlotsWithR)
 
 ```
 
@@ -36,11 +38,13 @@ graduate-level course on data visualization taught at the University of British
 Columbia. 
 
 When the workshop runs, we split students into three groups with successively
-increasing levels of difficulty. We recommend everyone starts here and works 
-through the code that follows. This vignette shows users how to load a clean data file into R and make boxplots and scatterplots. Once you are comfortable with the contents of this page, please feel free to move on to
-[Part 2](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html) and
+increasing levels of difficulty. We recommend everyone starts here and works
+through the code that follows. This vignette shows users how to load a clean
+data file into R and make boxplots and scatterplots. Once you are comfortable
+with the contents of this page, please feel free to move on to
+[Part 2](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html) and
 ultimately to Part 3 (which we recommend going through only *after* completing 
-Part 2) [here](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html).
+Part 2) [here](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html).
 
 All code and contents of this vignette were written together by Vikram B. 
 Baliga, Andrea Gaede and Shreeram Senthivasan.  
@@ -48,14 +52,16 @@ Baliga, Andrea Gaede and Shreeram Senthivasan.
 
 ## Learning Objectives:
 1. Determine how to import and control data stored in different filetypes
-2. Understand the best practices for structuring data in *tidyverse/ggplot*
-3. Construct basic plots using *ggplot*
+2. Understand the best practices for structuring data in `tidyverse/ggplot2`
+3. Construct basic plots using `ggplot2`
 
 ## Load or install & load necessary packages
-Before running the code below, make sure you have the necessary packages loaded. If you do not have the packages listed below installed on your computer, then download them from the CRAN site using `install.packages()` and then load them with `library()` as shown below. 
+Before running the code below, make sure you have the necessary packages loaded.
+If you do not have the packages listed below installed on your computer, then
+download them from the CRAN site using `install.packages()` and then load them
+with `library()` as shown below.
 
 ```{r setup}
-library(MultiPanelPlotsWithR)
 library(gapminder)
 library(ggplot2)
 library(tidyr)
@@ -68,11 +74,12 @@ library(readxl)
 ### Data sets
 
 You can get all data used in this vignette (and the other two!) by downloading 
-[this zip file](https://github.com/beep-boopR/MultiPanelPlotsWithR/raw/master/inst/extdata/UBC-BIOL548L_data_files.zip).
+[this zip file](ADD NEW LINK HERE).
 
 
 ## Importing and peeking at data:
 **Import data using base R command, and give it the name `my_data`**
+
 ```{r}
 my_data <- read.csv("gapminder.csv")
 # In practise, read_csv() is often better
@@ -99,7 +106,9 @@ tail(my_data)
 ```
 
 **Arguments can be added to a function using commas**  
-**Note:** arguments with the default setting are hidden, unless specified. Here n changes the default from 6 to 10 lines
+**Note:** arguments with the default setting are hidden, unless specified. Here
+`n` changes the default from 6 to 10 lines
+
 ```{r}
 head(my_data, n = 10)
 ```
@@ -109,8 +118,8 @@ head(my_data, n = 10)
 ?head
 ```
 
-
 **A better import option using Tidyverse**
+
 ```{r}
 my_data <- read_csv("gapminder.csv")
 # Cleaner import and print with read_csv, don't need head()
@@ -120,7 +129,9 @@ str(my_data)
 # But underlying data is the same
 summary(my_data)
 ```
+
 **Other formats for import**
+
 ```{r}
 my_data <- read_delim("gapminder.csv", ',')
 # Looks like a weird error
@@ -132,27 +143,32 @@ my_data <- read_excel("gapminder.xlsx")
 # Inspect with head, or excel. We see two junk rows:
 head(my_data)
 
-# This can be solved by adding an argument `skip` is the number of rows to skip
+# This can be solved by adding an argument `skip` 
+# is the number of rows to skip
 my_data <- read_excel("gapminder.xlsx",
                    skip = 2)
 
 my_data <- read_csv("gapminder.csv",col_names = FALSE)
-# Setting `col_names` to false made the column headers row one and added dummy column names
+# Setting `col_names` to false made the column headers 
+# row one and added dummy column names
 my_data
 ```
 
 ```{r}
-# We're now going to import the gapminder dataset using the preferred read_csv() function
+# We're now going to import the gapminder dataset 
+# using the preferred read_csv() function
 my_data <- read_csv("gapminder.csv",col_names = TRUE)
 ```
 ```{r}
-# This looks correct. Note: TRUE is the default so was not needed above
+# This looks correct. Note: TRUE is the default 
+# so was not needed above
 my_data
 ```
 
 ## Using qplot to make a histogram, scatter plot, or dot plot
 ```{r}
-# This command makes a histogram of the `lifeExp` column of the `my_data` dataset
+# This command makes a histogram of the `lifeExp` 
+# column of the `my_data` dataset
 qplot(x = lifeExp, data = my_data)
 ```
 ```{r}
@@ -160,17 +176,20 @@ qplot(x = lifeExp, data = my_data)
 qplot(x = gdpPercap, y = lifeExp, data = my_data)
 ```
 ```{r}
-# The same function here makes a dot plot because the x axis is categorical
+# The same function here makes a dot plot because 
+# the x axis is categorical
 qplot(x = continent, y = lifeExp, data = my_data)
 ```
 
 **How can the same function make three different classes of plots?**  
-One of the hidden arguments is `geom` which specifies the type of plot. The default is `auto` which leads to a guess of the plot type based on the
-data type(s) in the column(s) you specify.  
+One of the hidden arguments is `geom` which specifies the type of plot. The
+default is `auto` which leads to a guess of the plot type based on the data
+type(s) in the column(s) you specify.
 
 Type `?qplot` in the console to read the `qplot` documentation
 
 **Now let's specify the type of plot explicitly**
+
 ```{r}
 qplot(x = lifeExp, data = my_data, geom = 'histogram')
 qplot(x = gdpPercap, y = lifeExp, data = my_data, geom = 'point')
@@ -182,6 +201,7 @@ qplot(x = continent, y = lifeExp, data = my_data, geom = 'boxplot')
 
 ## How to quickly make plots with `qplot()` that are easy to interpret
 **Now let's change the number of bins in a histogram and make the plot prettier**
+
 ```{r}
 # The hidden argument `bins` has a default valute of 30
 qplot(x = lifeExp, data = my_data, geom = 'histogram')
@@ -231,7 +251,8 @@ qplot(x = gdpPercap,
       geom = 'point')
 
 # Let's add a trendline to the data as well.
-# The linear regression model (`lm`) will be added on top of our previous plot
+# The linear regression model (`lm`) will be added on 
+# top of our previous plot
 qplot(x = gdpPercap,
       y = lifeExp,
       log = 'x',
@@ -258,4 +279,6 @@ qplot(x = continent,
       geom = 'boxplot')
 ```
 
-### Congratulations! You finished part 1!! Now check out [part 2](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html)
+### Congratulations! You finished part 1!! Now check out [part 2](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html)
+
+🐢

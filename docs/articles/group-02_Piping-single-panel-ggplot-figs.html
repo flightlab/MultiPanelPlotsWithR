@@ -88,7 +88,7 @@
       <h1 data-toc-skip>Part 2: Piping and producing single-panel ggplot figures</h1>
                         <h4 class="author">by Vikram B. Baliga, Andrea Gaede and Shreeram Senthivasan</h4>
             
-            <h4 class="date">Last updated on 2020-09-12 19:49:14</h4>
+            <h4 class="date">Last updated on 2020-09-13 13:15:42</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/flightlab/MultiPanelPlotsWithR/blob/master/vignettes/group-02_Piping-single-panel-ggplot-figs.Rmd"><code>vignettes/group-02_Piping-single-panel-ggplot-figs.Rmd</code></a></small>
       <div class="hidden name"><code>group-02_Piping-single-panel-ggplot-figs.Rmd</code></div>
@@ -101,9 +101,9 @@
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>This vignette is Part 2 of 3 for an R workshop created for <a href="http://www.biology.ubc.ca/course-listing-2/#500level-4">BIOL 548L</a>, a graduate-level course on data visualization taught at the University of British Columbia.</p>
-<p>When the workshop runs, we split students into three groups with successively increasing levels of difficulty. <strong>To make sense of what follows, we recommend working through (or at least looking at) <a href="https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-01_Fundamentals-data-wrangling-tidyverse.html">Part 1’s vignette</a>.</strong></p>
+<p>When the workshop runs, we split students into three groups with successively increasing levels of difficulty. <strong>To make sense of what follows, we recommend working through (or at least looking at) <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-01_Fundamentals-data-wrangling-tidyverse.html">Part 1’s vignette</a>.</strong></p>
 <p>The goal of Part 2’s vignette is to learn how to structure data to produce single plots ready for presentations and publications</p>
-<p>Part 3’s vignette (which we recommend going through only <em>after</em> completing this page) can be found <a href="https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html">here</a>.</p>
+<p>Part 3’s vignette (which we recommend going through only <em>after</em> completing this page) can be found <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html">here</a>.</p>
 <p>All code and contents of this vignette were written together by Vikram B. Baliga, Andrea Gaede and Shreeram Senthivasan.</p>
 </div>
 <div id="learning-objectives" class="section level2">
@@ -121,9 +121,7 @@
 <a href="#load-or-installload-packages" class="anchor"></a>Load or install&amp;load packages</h2>
 <p>We’ll first load packages that will be necessary. The <code>package.check()</code> function below is designed to first see if each package is already installed. If any aren’t, the function then installs them from CRAN. Then all the packages are loaded.</p>
 <p>The code block is modified from <a href="https://vbaliga.github.io/verify-that-r-packages-are-installed-and-loaded/">this blog post</a></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co">#library(MultiPanelPlotsWithR)</span>
-
-<span class="co">## Modified from: </span>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co">## Modified from: </span>
 <span class="co">## https://vbaliga.github.io/verify-that-r-packages-are-installed-and-loaded/</span>
 
 <span class="co">## First specify the packages of interest</span>
@@ -143,39 +141,41 @@
     <span class="co"># ggmap and maps are optional; needed for creating maps</span>
     <span class="st">"ggmap"</span>,
     <span class="st">"maps"</span>)
+
 <span class="co">## Now load or install&amp;load all packages</span>
-<span class="no">package.check</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(
-  <span class="no">packages</span>,
-  <span class="kw">FUN</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>)
-  {
-    <span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="no">x</span>, <span class="kw">character.only</span> <span class="kw">=</span> <span class="fl">TRUE</span>))
+<span class="no">package.check</span> <span class="kw">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(
+    <span class="no">packages</span>,
+    <span class="kw">FUN</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>)
     {
-      <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="no">x</span>, <span class="kw">dependencies</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                       <span class="kw">repos</span> <span class="kw">=</span> <span class="st">"http://cran.us.r-project.org"</span>)
-      <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">x</span>, <span class="kw">character.only</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+      <span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="no">x</span>, <span class="kw">character.only</span> <span class="kw">=</span> <span class="fl">TRUE</span>))
+      {
+        <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="no">x</span>, <span class="kw">dependencies</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+                         <span class="kw">repos</span> <span class="kw">=</span> <span class="st">"http://cran.us.r-project.org"</span>)
+        <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">x</span>, <span class="kw">character.only</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+      }
     }
-  }
-)</pre></body></html></div>
+  )</pre></body></html></div>
 <div id="data-sets" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-sets" class="anchor"></a>Data sets</h3>
-<p>You can get all data used in this vignette (and the other two!) by downloading <a href="https://github.com/beep-boopR/MultiPanelPlotsWithR/raw/master/inst/extdata/UBC-BIOL548L_data_files.zip">this zip file</a>.</p>
+<p>You can get all data used in this vignette (and the other two!) by downloading <a href="ADD%20NEW%20LINK%20HERE">this zip file</a>.</p>
 </div>
 </div>
 <div id="what-is-literate-programming" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-literate-programming" class="anchor"></a>What is literate programming?</h2>
-<p>Literate programming is a coding paradigm that rethinks the “grammar” of traditional code to more closely resemble writing in a human language, like English.</p>
+<p>“Literate programming” rethinks the “grammar” of traditional code to more closely resemble writing in a human language, like English.</p>
 <p>The primary goal of literate programming is to move away from coding “for computers” (ie, code that simplifies compilation) and instead to write in a way that more resembles how we think.</p>
 <p>In addition to making for much more readable code even with fewer comments, a good literate coding language should make it easier for you to translate ideas into code.</p>
-<p>In the tidyverse, we will largely use the analogy of variables as nouns and functions as verbs that operate on the nouns.</p>
-<p>The main way we will make our code literate however is with the pipe: %&gt;%</p>
+<p>In the <code>tidyverse</code>, we will largely use the analogy of variables as nouns and functions as verbs that operate on the nouns.</p>
+<p>The main way we will make our code literate however is with the pipe: <code>%&gt;%</code></p>
 </div>
 <div id="what-is-a-pipe" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-a-pipe" class="anchor"></a>What is a pipe?</h2>
-<p>A pipe, or %&gt;% , is an operator that takes everything on the left and plugs it into the function on the right.</p>
-<p>In short: x %&gt;% f(y) is equivalent to f(x, y)</p>
+<p>A pipe, or <code>%&gt;%</code>, is an operator that takes everything on the left and plugs it into the function on the right.</p>
+<p>In short: <code>x %&gt;% f(y)</code> is equivalent to <code>f(x, y)</code></p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># So:</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">gapminder</span>, <span class="no">continent</span> <span class="kw">==</span> <span class="st">'Asia'</span>)
 <span class="co">#&gt; # A tibble: 396 x 6</span>
@@ -210,12 +210,12 @@
 <span class="co">#&gt;  9 Afghanistan Asia       1992    41.7 16317921      649.</span>
 <span class="co">#&gt; 10 Afghanistan Asia       1997    41.8 22227415      635.</span>
 <span class="co">#&gt; # … with 386 more rows</span></pre></body></html></div>
-<p>In RStudio you can use the shortcut CTRL/CMD + SHIFT + M to insert a pipe</p>
+<p>In RStudio you can use the shortcut <code>CTRL + SHIFT + M</code> (on Windows) or <code>CMD + SHIFT + M</code> (on Mac) to insert a pipe</p>
 </div>
 <div id="why-bother-with-pipes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-bother-with-pipes" class="anchor"></a>Why bother with pipes?</h2>
-<p>To see how pipes can make code more readable, let’s translate this simple cake recipe into pseudo R code:</p>
+<p>To see how pipes can make code more readable, let’s translate this cake recipe into pseudo R code:</p>
 <ol style="list-style-type: decimal">
 <li>Cream together sugar and butter</li>
 <li>Beat in eggs and vanilla</li>
@@ -278,7 +278,7 @@ If we don’t want to save intermediates, we can just do all the steps in one li
 <p><strong>Where do you find new verbs?</strong></p>
 <p>The RStudio cheat sheets are a whole lot more useful once you start piping – here are a few:</p>
 <p><a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf%22">Data transformation</a></p>
-<p><a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf%22">Data import + restructuring</a></p>
+<p><a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf%22">Data import and restructuring</a></p>
 <p><a href="%22https://www.rstudio.com/resources/cheatsheets/%22">Other cheat sheets</a></p>
 </div>
 <div id="some-prep-work-for-the-coding-part-of-the-lesson" class="section level2">
@@ -295,7 +295,7 @@ If we don’t want to save intermediates, we can just do all the steps in one li
 <div id="anatomy-of-a-ggplot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#anatomy-of-a-ggplot" class="anchor"></a>Anatomy of a ggplot</h2>
-<p><code>ggplot</code> is built around the idea of a “Grammar of Graphics” – a way of describing (almost) any graphic.</p>
+<p><code>ggplot2</code> is built around the idea of a “Grammar of Graphics” – a way of describing (almost) any graphic.</p>
 <p>There are three key components to any graphic under the Grammar of Graphics:</p>
 <ul>
 <li>Data: the information to be conveyed</li>
@@ -309,8 +309,7 @@ If we don’t want to save intermediates, we can just do all the steps in one li
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">my_data</span> <span class="kw">%&gt;%</span>
   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">var1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">var2</span>)) +
   <span class="fu">geom_point</span>()</pre></body></html></div>
-<p>But how do you know what geometries are available or what aesthetic mappings you can use for each?<br>
-Use the <a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf%22">plotting with ggplot2 cheat sheet</a></p>
+<p>But how do you know what geometries are available or what aesthetic mappings you can use for each? Use the <a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf%22">plotting with ggplot2 cheat sheet</a></p>
 <p>Other possibly relevant componenets include:</p>
 <ul>
 <li>Coordinate systems (eg cartesian vs polar plots)</li>
@@ -412,7 +411,8 @@ Use the <a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-visua
     <span class="fu">geom_boxplot</span>(<span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">outlier.size</span> <span class="kw">=</span> <span class="fl">0</span>) +
     <span class="fu">geom_point</span>(
       <span class="fu">aes</span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="no">species</span>),
-      <span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_jitterdodge</span>(<span class="kw">jitter.height</span> <span class="kw">=</span> <span class="fl">0.3</span>, <span class="kw">jitter.width</span> <span class="kw">=</span> <span class="fl">0.2</span>)
+      <span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_jitterdodge</span>(<span class="kw">jitter.height</span> <span class="kw">=</span> <span class="fl">0.3</span>,
+                                      <span class="kw">jitter.width</span> <span class="kw">=</span> <span class="fl">0.2</span>)
     ) +
     <span class="fu">scale_fill_manual</span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">col_hb</span>, <span class="no">col_zb</span>)) +
     <span class="fu">scale_shape_manual</span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">24</span>, <span class="fl">21</span>))</pre></body></html></div>
@@ -423,7 +423,8 @@ Use the <a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-visua
     <span class="fu">geom_boxplot</span>(<span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">outlier.size</span> <span class="kw">=</span> <span class="fl">0</span>) +
     <span class="fu">geom_point</span>(
       <span class="fu">aes</span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="no">species</span>),
-      <span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_jitterdodge</span>(<span class="kw">jitter.height</span> <span class="kw">=</span> <span class="fl">0.3</span>, <span class="kw">jitter.width</span> <span class="kw">=</span> <span class="fl">0.2</span>)
+      <span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_jitterdodge</span>(<span class="kw">jitter.height</span> <span class="kw">=</span> <span class="fl">0.3</span>,
+                                      <span class="kw">jitter.width</span> <span class="kw">=</span> <span class="fl">0.2</span>)
     ) +
     <span class="fu">scale_fill_manual</span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">col_hb</span>, <span class="no">col_zb</span>)) +
     <span class="fu">scale_shape_manual</span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">24</span>, <span class="fl">21</span>)) +
@@ -475,7 +476,8 @@ Use the <a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-visua
     <span class="fu">geom_boxplot</span>(<span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">outlier.size</span> <span class="kw">=</span> <span class="fl">0</span>) +
     <span class="fu">geom_point</span>(
       <span class="fu">aes</span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="no">species</span>),
-      <span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_jitterdodge</span>(<span class="kw">jitter.height</span> <span class="kw">=</span> <span class="fl">0.3</span>, <span class="kw">jitter.width</span> <span class="kw">=</span> <span class="fl">0.2</span>)
+      <span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_jitterdodge</span>(<span class="kw">jitter.height</span> <span class="kw">=</span> <span class="fl">0.3</span>,
+                                      <span class="kw">jitter.width</span> <span class="kw">=</span> <span class="fl">0.2</span>)
     ) +
     <span class="fu">scale_fill_manual</span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">col_hb</span>, <span class="no">col_zb</span>)) +
     <span class="fu">scale_shape_manual</span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">24</span>, <span class="fl">21</span>)) +
@@ -492,7 +494,8 @@ Use the <a href="%22https://github.com/rstudio/cheatsheets/raw/master/data-visua
     <span class="fu">geom_boxplot</span>(<span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">outlier.size</span> <span class="kw">=</span> <span class="fl">0</span>) +
     <span class="fu">geom_point</span>(
       <span class="fu">aes</span>(<span class="kw">shape</span> <span class="kw">=</span> <span class="no">species</span>),
-      <span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_jitterdodge</span>(<span class="kw">jitter.height</span> <span class="kw">=</span> <span class="fl">0.3</span>, <span class="kw">jitter.width</span> <span class="kw">=</span> <span class="fl">0.2</span>)
+      <span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_jitterdodge</span>(<span class="kw">jitter.height</span> <span class="kw">=</span> <span class="fl">0.3</span>,
+                                      <span class="kw">jitter.width</span> <span class="kw">=</span> <span class="fl">0.2</span>)
     ) +
     <span class="fu">scale_fill_manual</span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">col_hb</span>, <span class="no">col_zb</span>)) +
     <span class="fu">scale_shape_manual</span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">24</span>, <span class="fl">21</span>)) +
@@ -1513,7 +1516,9 @@ To fudge the lines, let’s make another dataset:</p>
       ),
       <span class="kw">width</span> <span class="kw">=</span> <span class="fl">0.02</span>
     ) +
-    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="kw">colour</span> <span class="kw">=</span> <span class="no">direction</span>, <span class="kw">shape</span> <span class="kw">=</span> <span class="no">direction</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="no">direction</span>)) +
+    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="kw">colour</span> <span class="kw">=</span> <span class="no">direction</span>,
+                   <span class="kw">shape</span> <span class="kw">=</span> <span class="no">direction</span>,
+                   <span class="kw">size</span> <span class="kw">=</span> <span class="no">direction</span>)) +
     <span class="co"># Annotate points over threshold</span>
     <span class="fu">annotate</span>(
       <span class="kw">geom</span> <span class="kw">=</span> <span class="st">"segment"</span>,
@@ -1537,6 +1542,79 @@ To fudge the lines, let’s make another dataset:</p>
     <span class="fu">scale_x_continuous</span>(<span class="kw">breaks</span> <span class="kw">=</span> -<span class="fl">1</span>:<span class="fl">4</span> / <span class="fl">2</span>)
 <span class="no">fig_C</span></pre></body></html></div>
 <p><img src="group-02_Piping-single-panel-ggplot-figs_files/figure-html/unnamed-chunk-61-1.png" width="700"></p>
+<div id="figure-3-panel-a" class="section level4">
+<h4 class="hasAnchor">
+<a href="#figure-3-panel-a" class="anchor"></a>Figure 3 Panel A:</h4>
+<p>Panel A is a bit complicated, so we’ll just provide the full code here</p>
+<div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="co"># First, import data</span>
+<span class="no">fig_A</span> <span class="kw">&lt;-</span>
+  <span class="fu">read_csv</span>(<span class="st">"./Fig3A_data.csv"</span>) <span class="kw">%&gt;%</span>
+  <span class="co"># Now take every nth data point (produces plot faster)</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu">row_number</span>() <span class="kw">%%</span> <span class="fl">5</span> <span class="kw">==</span> <span class="fl">0</span>) <span class="kw">%&gt;%</span>
+  <span class="co"># Clean outliers</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(<span class="no">spike</span>) <span class="kw">&lt;</span> <span class="fl">7</span> * <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="no">spike</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="no">time</span>, <span class="no">spike</span>)) +
+    <span class="fu">geom_path</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.1</span>) +
+    <span class="fu">theme_void</span>() +
+    <span class="co"># Y-axis vertical scale</span>
+    <span class="fu">annotate</span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="st">"segment"</span>,
+             <span class="kw">y</span> <span class="kw">=</span> <span class="fl">0.00278</span> - <span class="fl">0.01</span>, <span class="kw">yend</span> <span class="kw">=</span> <span class="fl">0.00278</span> + <span class="fl">0.01</span>,
+             <span class="kw">x</span> <span class="kw">=</span> -<span class="fl">1.5</span>, <span class="kw">xend</span> <span class="kw">=</span> -<span class="fl">1.5</span>,
+             <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>) +
+    <span class="co"># Y-axis scale label</span>
+    <span class="fu">annotate</span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="st">"text"</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fl">0.00278</span>, <span class="kw">x</span> <span class="kw">=</span> -<span class="fl">3</span>,
+             <span class="kw">label</span> <span class="kw">=</span> <span class="st">"0.2 mV"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">angle</span> <span class="kw">=</span> <span class="fl">90</span>) +
+    <span class="co"># X-axis scale bar</span>
+    <span class="fu">annotate</span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="st">"segment"</span>,
+             <span class="kw">y</span> <span class="kw">=</span> -<span class="fl">0.035</span>, <span class="kw">yend</span> <span class="kw">=</span> -<span class="fl">0.035</span>,
+             <span class="kw">x</span> <span class="kw">=</span> <span class="fl">70</span> + <span class="fl">1.5</span>, <span class="kw">xend</span> <span class="kw">=</span> <span class="fl">75</span> + <span class="fl">1.5</span>,
+             <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>) +
+    <span class="co"># X-axis scale label</span>
+    <span class="fu">annotate</span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="st">"text"</span>, <span class="kw">y</span> <span class="kw">=</span> -<span class="fl">0.04</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="fl">74</span>,
+             <span class="kw">label</span> <span class="kw">=</span> <span class="st">"5s"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">5</span>) +
+    <span class="co"># Large ticks</span>
+    <span class="fu">annotate</span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="st">"segment"</span>,
+             <span class="kw">y</span> <span class="kw">=</span> -<span class="fl">0.03</span>, <span class="kw">yend</span> <span class="kw">=</span> -<span class="fl">0.025</span>,
+             <span class="kw">x</span> <span class="kw">=</span> <span class="fl">1.5</span> + <span class="fl">1</span>:<span class="fl">15</span> * <span class="fl">5</span>, <span class="kw">xend</span> <span class="kw">=</span> <span class="fl">1.5</span> + <span class="fl">1</span>:<span class="fl">15</span> * <span class="fl">5</span>,
+             <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1</span>) +
+    <span class="co"># Small ticks within large ticks</span>
+    <span class="fu">annotate</span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="st">"segment"</span>,
+             <span class="kw">y</span> <span class="kw">=</span> -<span class="fl">0.027</span>, <span class="kw">yend</span> <span class="kw">=</span> -<span class="fl">0.028</span>,
+             <span class="kw">x</span> <span class="kw">=</span> <span class="fl">1.5</span> + <span class="fl">1</span>:<span class="fl">79</span>, <span class="kw">xend</span> <span class="kw">=</span> <span class="fl">1.5</span> + <span class="fl">1</span>:<span class="fl">79</span>,
+             <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">0.8</span>) +
+    <span class="co"># Arrows</span>
+    <span class="fu">annotate</span>(
+      <span class="kw">geom</span> <span class="kw">=</span> <span class="st">"segment"</span>,
+      <span class="kw">y</span> <span class="kw">=</span> -<span class="fl">0.0275</span>,
+      <span class="kw">yend</span> <span class="kw">=</span> -<span class="fl">0.0275</span>,
+      <span class="kw">x</span> <span class="kw">=</span> -<span class="fl">10</span> + <span class="fl">2.5</span> + <span class="fl">1</span>:<span class="fl">8</span> * <span class="fl">10</span>,
+      <span class="kw">xend</span> <span class="kw">=</span> -<span class="fl">10</span> + <span class="fl">5.5</span> + <span class="fl">1</span>:<span class="fl">8</span> * <span class="fl">10</span>,
+      <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">1.2</span>,
+      <span class="kw">arrow</span> <span class="kw">=</span> <span class="fu">arrow</span>(
+        <span class="co"># Control the direction of each arrow. first = left; last = right</span>
+        <span class="kw">ends</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"first"</span>, <span class="st">"last"</span>, <span class="st">"last"</span>, <span class="st">"last"</span>,
+                 <span class="st">"first"</span>, <span class="st">"first"</span>, <span class="st">"first"</span>, <span class="st">"last"</span>),
+        <span class="co"># Control the size of each arrow head</span>
+        <span class="kw">length</span> <span class="kw">=</span> <span class="fu">unit</span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">6</span>), <span class="st">"pt"</span>),
+        <span class="kw">type</span> <span class="kw">=</span> <span class="st">"closed"</span>
+        ),
+      <span class="co"># Use 'sharp' arrow heads</span>
+      <span class="kw">linejoin</span> <span class="kw">=</span> <span class="st">'mitre'</span>)
+<span class="co">#&gt; Parsed with column specification:</span>
+<span class="co">#&gt; cols(</span>
+<span class="co">#&gt;   time = col_double(),</span>
+<span class="co">#&gt;   stim = col_double(),</span>
+<span class="co">#&gt;   spike = col_double()</span>
+<span class="co">#&gt; )</span>
+<span class="no">fig_A</span></pre></body></html></div>
+<p><img src="group-02_Piping-single-panel-ggplot-figs_files/figure-html/panel_A-1.png" width="700"></p>
+</div>
+<div id="congratulations-you-finished-part-2" class="section level3">
+<h3 class="hasAnchor">
+<a href="#congratulations-you-finished-part-2" class="anchor"></a>Congratulations! You finished part 2!!</h3>
+<p>Now check out <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html">part 3</a></p>
+<p>🐢</p>
+</div>
 </div>
   </div>
 

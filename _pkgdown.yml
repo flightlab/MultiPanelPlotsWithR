@@ -18,7 +18,13 @@ authors:
   Shree Senthivasan:
     href: https://www.zoology.ubc.ca/person/shreeram-senthivasan/
 
+reference:
+- title: Please see Vignettes for course content
+
 navbar:
+  structure:
+    left:  [home, articles]
+    right: [github]
   components:
     articles:
       text: Vignettes

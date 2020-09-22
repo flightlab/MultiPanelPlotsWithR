@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 
 ```{r file_copying, include = FALSE}
 
+  library(MultiPanelPlotsWithR)
+
 # Gaede et al. 2017 data. (Can likely be parallelized, but we can do that later)
   file.copy(system.file("extdata", "Fig3A_data.csv",
               package = "MultiPanelPlotsWithR"),
@@ -59,15 +61,14 @@ knitr::opts_chunk$set(
 
 This vignette is Part 3 of 3 for an R workshop created for 
 [BIOL 548L](http://www.biology.ubc.ca/course-listing-2/#500level-4), a 
-graduate-level course on data visualization taught at the University of British 
-Columbia. 
+graduate-level course taught at the University of British Columbia. 
 
 When the workshop runs, we split students into three groups with successively
 increasing levels of difficulty. **To make sense of what follows, we recommend 
 working through (or at least looking at) 
-[Part 1's vignette](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-01_Fundamentals-data-wrangling-tidyverse.html) 
+[Part 1's vignette](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-01_Fundamentals-data-wrangling-tidyverse.html) 
 and 
-[Part 2's vignette](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html)
+[Part 2's vignette](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html)
 .**
 
 All code and contents of this vignette were written together by Vikram B. 
@@ -130,8 +131,6 @@ The code block is modified from
 [this blog post](https://vbaliga.github.io/verify-that-r-packages-are-installed-and-loaded/) 
 
 ```{r package_loading, message=FALSE, warning=FALSE}
-#library(MultiPanelPlotsWithR)
-
 ## Modified from: 
 ## https://vbaliga.github.io/verify-that-r-packages-are-installed-and-loaded/
 
@@ -152,25 +151,27 @@ packages <-
     # ggmap and maps are optional; needed for creating maps
     "ggmap",
     "maps")
+
 ## Now load or install&load all packages
-package.check <- lapply(
-  packages,
-  FUN = function(x)
-  {
-    if (!require(x, character.only = TRUE))
+package.check <-
+  lapply(
+    packages,
+    FUN = function(x)
     {
-      install.packages(x, dependencies = TRUE,
-                       repos = "http://cran.us.r-project.org")
-      library(x, character.only = TRUE)
+      if (!require(x, character.only = TRUE))
+      {
+        install.packages(x, dependencies = TRUE,
+                         repos = "http://cran.us.r-project.org")
+        library(x, character.only = TRUE)
+      }
     }
-  }
-)
+  )
 ```
 
 ### Data sets
 
 You can get all data used in this vignette (and the other two vignettes!) by 
-downloading [this zip file](https://github.com/beep-boopR/MultiPanelPlotsWithR/raw/master/inst/extdata/UBC-BIOL548L_data_files.zip).
+downloading [this zip file](ADD NEW LINK HERE).
 
 #### Prep work for figure legends:
 
@@ -230,7 +231,7 @@ point_zb  <- pointsGrob(
 
 We will first create each panel individually. To save space, we'll hide the code
 that generates each plot. To see the code for each plot that follows, please see
-[Part 2's vignette](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-02.html).
+[Part 2's vignette](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html).
 
 #### Figure 3 Panel A:
 ```{r panel_A, echo=FALSE, fig.height=2.16, fig.width=3.5, message=FALSE, warning=FALSE}
@@ -590,6 +591,7 @@ plot_grid(fig_B, fig_C)
 I'll create an example by pasting `fig_B` over and over again. Each panel will 
 be numbered so you can track how plots are added sequentially within 
 `plot_grid()`.
+
 ```{r sequential_adding}
 plot_grid(fig_B, fig_B, fig_B,
           labels=c("1","2","3"))
@@ -660,7 +662,7 @@ cow_A
 
 **Panels B and C**  
 When combining B and C, we should note that C has an x-axis label but B does 
-not. Therefore, we will add blank plots (NULL) as padding and then adjust the
+not. Therefore, we will add blank plots (`NULL`) as padding and then adjust the
 relative heights to fit things comfortably. We still need to supply 4 labels, 
 so "" will be used for blank plots. 
 
@@ -708,14 +710,15 @@ cow_BCD
 ## Combine all the sets of panels together
 
 It may help to specify the dimensions of the plot window to ensure that the plot
-is made with correct overall proportions.  
+is made with correct overall proportions: 
 
-try(`dev.off(), silent = T`)  
+For Windows users, this should work:
+`try(dev.off(), silent = TRUE)`
 `dev.new(width = 8.5, height = 11, units = "in")`
+(You may need to run the `dev.new...` line more than once)
 
 For Mac users, `qartz()` seems to be the way to go. E.g.:
 `quartz(width = 8.5, height = 11)`
-
 
 **Now for the plot itself:**  
 ```{r cowAtoF,fig.height=11, fig.width=8.5}
@@ -848,4 +851,5 @@ plot_grid(fig_map,
 ```
 
 
-🐢
+That's all for now. Have fun!
+

@@ -43,9 +43,6 @@
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Vignettes
@@ -64,10 +61,13 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../reference/index.html">Reference</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/beep-boopR/MultiPanelPlotsWithR/">
+  <a href="https://github.com/flightlab/MultiPanelPlotsWithR/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -88,9 +88,9 @@
       <h1 data-toc-skip>Part 3: Using cowplot to construct multi-panel figures entirely via code</h1>
                         <h4 class="author">by Vikram B. Baliga, Andrea Gaede and Shreeram Senthivasan</h4>
             
-            <h4 class="date">Last updated on 2020-09-12 09:58:56</h4>
+            <h4 class="date">Last updated on 2020-09-13 13:43:42</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/beep-boopR/MultiPanelPlotsWithR/blob/master/vignettes/group-03_Using-cowplot-multi-panel.Rmd"><code>vignettes/group-03_Using-cowplot-multi-panel.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/flightlab/MultiPanelPlotsWithR/blob/master/vignettes/group-03_Using-cowplot-multi-panel.Rmd"><code>vignettes/group-03_Using-cowplot-multi-panel.Rmd</code></a></small>
       <div class="hidden name"><code>group-03_Using-cowplot-multi-panel.Rmd</code></div>
 
     </div>
@@ -100,8 +100,8 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>This vignette is Part 3 of 3 for an R workshop created for <a href="http://www.biology.ubc.ca/course-listing-2/#500level-4">BIOL 548L</a>, a graduate-level course on data visualization taught at the University of British Columbia.</p>
-<p>When the workshop runs, we split students into three groups with successively increasing levels of difficulty. <strong>To make sense of what follows, we recommend working through (or at least looking at) <a href="https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-01_Fundamentals-data-wrangling-tidyverse.html">Part 1’s vignette</a> and <a href="https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html">Part 2’s vignette</a> .</strong></p>
+<p>This vignette is Part 3 of 3 for an R workshop created for <a href="http://www.biology.ubc.ca/course-listing-2/#500level-4">BIOL 548L</a>, a graduate-level course taught at the University of British Columbia.</p>
+<p>When the workshop runs, we split students into three groups with successively increasing levels of difficulty. <strong>To make sense of what follows, we recommend working through (or at least looking at) <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-01_Fundamentals-data-wrangling-tidyverse.html">Part 1’s vignette</a> and <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html">Part 2’s vignette</a> .</strong></p>
 <p>All code and contents of this vignette were written together by Vikram B. Baliga, Andrea Gaede and Shreeram Senthivasan.</p>
 </div>
 <div id="the-endgame-create-a-multi-panel-plot-entirely-via-code" class="section level2">
@@ -135,9 +135,7 @@
 <a href="#load-or-installload-packages" class="anchor"></a>Load or install&amp;load packages</h3>
 <p>We’ll first load packages that will be necessary. The <code>package.check()</code> function below is designed to first see if each package is already installed. If any aren’t, the function then installs them from CRAN. Then all the packages are loaded.</p>
 <p>The code block is modified from <a href="https://vbaliga.github.io/verify-that-r-packages-are-installed-and-loaded/">this blog post</a></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co">#library(MultiPanelPlotsWithR)</span>
-
-<span class="co">## Modified from: </span>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co">## Modified from: </span>
 <span class="co">## https://vbaliga.github.io/verify-that-r-packages-are-installed-and-loaded/</span>
 
 <span class="co">## First specify the packages of interest</span>
@@ -157,24 +155,26 @@
     <span class="co"># ggmap and maps are optional; needed for creating maps</span>
     <span class="st">"ggmap"</span>,
     <span class="st">"maps"</span>)
+
 <span class="co">## Now load or install&amp;load all packages</span>
-<span class="no">package.check</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(
-  <span class="no">packages</span>,
-  <span class="kw">FUN</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>)
-  {
-    <span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="no">x</span>, <span class="kw">character.only</span> <span class="kw">=</span> <span class="fl">TRUE</span>))
+<span class="no">package.check</span> <span class="kw">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(
+    <span class="no">packages</span>,
+    <span class="kw">FUN</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>)
     {
-      <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="no">x</span>, <span class="kw">dependencies</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                       <span class="kw">repos</span> <span class="kw">=</span> <span class="st">"http://cran.us.r-project.org"</span>)
-      <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">x</span>, <span class="kw">character.only</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+      <span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="no">x</span>, <span class="kw">character.only</span> <span class="kw">=</span> <span class="fl">TRUE</span>))
+      {
+        <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="no">x</span>, <span class="kw">dependencies</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+                         <span class="kw">repos</span> <span class="kw">=</span> <span class="st">"http://cran.us.r-project.org"</span>)
+        <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">x</span>, <span class="kw">character.only</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+      }
     }
-  }
-)</pre></body></html></div>
+  )</pre></body></html></div>
 </div>
 <div id="data-sets" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-sets" class="anchor"></a>Data sets</h3>
-<p>You can get all data used in this vignette (and the other two vignettes!) by downloading <a href="https://github.com/beep-boopR/MultiPanelPlotsWithR/raw/master/inst/extdata/UBC-BIOL548L_data_files.zip">this zip file</a>.</p>
+<p>You can get all data used in this vignette (and the other two vignettes!) by downloading <a href="ADD%20NEW%20LINK%20HERE">this zip file</a>.</p>
 <div id="prep-work-for-figure-legends" class="section level4">
 <h4 class="hasAnchor">
 <a href="#prep-work-for-figure-legends" class="anchor"></a>Prep work for figure legends:</h4>
@@ -225,7 +225,7 @@
 <div id="first-create-and-save-panels-as-separate-ggplot-objects" class="section level2">
 <h2 class="hasAnchor">
 <a href="#first-create-and-save-panels-as-separate-ggplot-objects" class="anchor"></a>First, create and save panels as separate <code>ggplot</code> objects</h2>
-<p>We will first create each panel individually. To save space, we’ll hide the code that generates each plot. To see the code for each plot that follows, please see <a href="https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-02.html">Part 2’s vignette</a>.</p>
+<p>We will first create each panel individually. To save space, we’ll hide the code that generates each plot. To see the code for each plot that follows, please see <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html">Part 2’s vignette</a>.</p>
 <div id="figure-3-panel-a" class="section level4">
 <h4 class="hasAnchor">
 <a href="#figure-3-panel-a" class="anchor"></a>Figure 3 Panel A:</h4>
@@ -327,7 +327,7 @@ Within the argument <code>plot.margin</code>, the order is top, right, bottom, l
 <span class="no">cow_A</span></pre></body></html></div>
 <p><img src="group-03_Using-cowplot-multi-panel_files/figure-html/cow_A-1.png" width="700"></p>
 <p><strong>Panels B and C</strong><br>
-When combining B and C, we should note that C has an x-axis label but B does not. Therefore, we will add blank plots (NULL) as padding and then adjust the relative heights to fit things comfortably. We still need to supply 4 labels, so "" will be used for blank plots.</p>
+When combining B and C, we should note that C has an x-axis label but B does not. Therefore, we will add blank plots (<code>NULL</code>) as padding and then adjust the relative heights to fit things comfortably. We still need to supply 4 labels, so "" will be used for blank plots.</p>
 <p>One neat trick is that using a negative number within <code>rel_heights</code> reduces space between plots (or elements). We can use this to reduce the gap between panels if we don’t like how <code>cowplot</code> handles things by default.</p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">cow_BC</span> <span class="kw">&lt;-</span> <span class="fu">plot_grid</span>(<span class="kw">NULL</span>, <span class="no">fig_B</span>, <span class="kw">NULL</span>, <span class="no">fig_C</span>,
                     <span class="co"># A negative rel_height shrinks space between elements</span>
@@ -363,8 +363,8 @@ Similarly, with panel D, we’ll add a <code>NULL</code> object to the cowplot a
 <div id="combine-all-the-sets-of-panels-together" class="section level2">
 <h2 class="hasAnchor">
 <a href="#combine-all-the-sets-of-panels-together" class="anchor"></a>Combine all the sets of panels together</h2>
-<p>It may help to specify the dimensions of the plot window to ensure that the plot is made with correct overall proportions.</p>
-<p>try(<code>dev.off(), silent = T</code>)<br><code><a href="https://rdrr.io/r/grDevices/dev.html">dev.new(width = 8.5, height = 11, units = "in")</a></code></p>
+<p>It may help to specify the dimensions of the plot window to ensure that the plot is made with correct overall proportions:</p>
+<p>For Windows users, this should work: <code><a href="https://rdrr.io/r/base/try.html">try(dev.off(), silent = TRUE)</a></code> <code><a href="https://rdrr.io/r/grDevices/dev.html">dev.new(width = 8.5, height = 11, units = "in")</a></code> (You may need to run the <code>dev.new...</code> line more than once)</p>
 <p>For Mac users, <code>qartz()</code> seems to be the way to go. E.g.: <code><a href="https://rdrr.io/r/grDevices/quartz.html">quartz(width = 8.5, height = 11)</a></code></p>
 <p><strong>Now for the plot itself:</strong></p>
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">cow_A2F</span> <span class="kw">&lt;-</span> <span class="fu">plot_grid</span>(<span class="no">cow_A</span>, <span class="kw">NULL</span>, <span class="no">cow_BCD</span>, <span class="no">cow_EF</span>,
@@ -464,7 +464,7 @@ Similarly, with panel D, we’ll add a <code>NULL</code> object to the cowplot a
           <span class="no">photo_panel</span>,
           <span class="no">fig_F</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
 <p><img src="group-03_Using-cowplot-multi-panel_files/figure-html/map_image_plot-1.png" width="576"></p>
-<p>🐢</p>
+<p>That’s all for now. Have fun!</p>
 </div>
 </div>
   </div>

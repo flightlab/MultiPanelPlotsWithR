@@ -1,12 +1,16 @@
-# Welcome to the plotting exercises for BIOL548L!
-BIOL548L is a graduate course at The University of British Columbia that focuses
-on wrangling data in R for publication quality figures. We highlight 
-[`cowplot`](https://github.com/wilkelab/cowplot) and packages in the 
-[`Tidyverse`](https://www.tidyverse.org/).
+# Welcome to the plotting exercises for BIOL 548L!
+BIOL 548L is a graduate course at the University of British Columbia. All of the
+materials on this site were developed for a workshop in this course that focuses
+on wrangling data in R to create publication-quality figures. We highlight
+packages in the
+[`tidyverse`](https://www.tidyverse.org/) and ultimately build towards 
+developing multi-panel plots via
+[`cowplot`](https://github.com/wilkelab/cowplot).
 
 
-Please see the vignettes in drop-down menu above
+To get started, please see the vignettes in the drop-down menu above.
 
-
-## We're going to make this entire figure with code:
+## Over three vignettes, we make this entire figure via code:
 ![Figure_3](images/gaedeetal_fig3.png)
+
+🐢

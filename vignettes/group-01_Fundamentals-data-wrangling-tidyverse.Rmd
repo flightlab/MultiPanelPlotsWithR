@@ -38,8 +38,7 @@ Columbia.
 When the workshop runs, we split students into three groups with successively
 increasing levels of difficulty. We recommend everyone starts here and works 
 through the code that follows. This vignette shows users how to load a clean data file into R and make boxplots and scatterplots. Once you are comfortable with the contents of this page, please feel free to move on to
-[Part 2](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html) and
-ultimately to Part 3 (which we recommend going through only *after* completing 
+[Part 2](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html) and ultimately to Part 3 (which we recommend going through only *after* completing 
 Part 2) [here](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html).
 
 All code and contents of this vignette were written together by Vikram B. 
@@ -70,12 +69,11 @@ library(readxl)
 You can get all data used in this vignette (and the other two!) by downloading 
 [this zip file](https://github.com/beep-boopR/MultiPanelPlotsWithR/raw/master/inst/extdata/UBC-BIOL548L_data_files.zip).
 
-
 ## Importing and peeking at data:
 **Import data using base R command, and give it the name `my_data`**
 ```{r}
 my_data <- read.csv("gapminder.csv")
-# In practise, read_csv() is often better
+# In practise, the function read_csv() from the 'readr' package is often better
 
 ```
 
@@ -86,20 +84,25 @@ my_data
 ```
 
 ```{r}
-# Structure
+# Inspect the structure of the data
 str(my_data)
-# Summarize columns
+
+# Summarize column information
 summary(my_data)
-# Get column names (good for wide datasets)
+
+# Get column names (variables). This is handy for wide datasets i.e. many variables
 names(my_data)
-# Get first 6 lines
+
+# Get first 6 lines/rows (observations)
 head(my_data)
-# Get last 6 lines
+
+# Get last 6 lines/rows 
 tail(my_data)
 ```
 
 **Arguments can be added to a function using commas**  
-**Note:** arguments with the default setting are hidden, unless specified. Here n changes the default from 6 to 10 lines
+**Note:** Unless specified, default arguments are automatically assigned. Here, `n = 10` overrides the default (hidden) argument of `n = 6` and produces the first 10 observations of `my_data`.
+
 ```{r}
 head(my_data, n = 10)
 ```
@@ -114,10 +117,13 @@ head(my_data, n = 10)
 ```{r}
 my_data <- read_csv("gapminder.csv")
 # Cleaner import and print with read_csv, don't need head()
+
 my_data
 # Note that words read in as `chr` not `factors`, this is good!
+
 str(my_data)
 # But underlying data is the same
+
 summary(my_data)
 ```
 **Other formats for import**
@@ -157,7 +163,7 @@ qplot(x = lifeExp, data = my_data)
 ```
 ```{r}
 # The same function here makes a scatter plot
-qplot(x = gdpPercap, y = lifeExp, data = my_data)
+qplot(x = gdpPercap, y = lifeExp, data = my_data)?qplot
 ```
 ```{r}
 # The same function here makes a dot plot because the x axis is categorical

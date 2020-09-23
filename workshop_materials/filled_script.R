@@ -19,66 +19,75 @@ library(maps)
 #------------------------------------------------#
 
 ## Import data using base R command, and give it the name `my_data`
-my_data <- read.csv("gapminder.csv")
+my.data <- read.csv("./workshop_materials/gapminder.csv")
 # In practise, read_csv() is often better
 
-# Sanity check your data
-# Same as print(my_data)
-my_data
-# Structure
-str(my_data)
-# Summarize columns
-summary(my_data)
-# Get column names (good for wide datasets)
-names(my_data)
+# Explore features of your data --- same as print(my_data)
+my.data
 
-# Get first 6 lines
-head(my_data)
+# Inspect the structure of the data
+str(my.data)
+
+# Summarize column information
+summary(my.data)
+
+# Get column names (variables). This is handy for wide data sets i.e. many
+# variables
+names(my.data)
+
+# Get first 6 lines/rows
+head(my.data)
 # Arguments can be added to a function using commas
-# Note: arguments with the default
-# setting are hidden, unless specified
-# here n changes the default from 6 to 10 lines
-head(my_data, n = 10)
-# The helpfile lists what arguments are available
+# Note: arguments with the default setting are hidden, unless specified. Here
+# `n` changes the default from 6 to 10 lines
+head(my.data, n = 10)
+# The helpfile lists what arguments are available for any given function
 ?head
 
-# Get last 6 lines
-tail(my_data)
+# Get last 6 lines/rows
+tail(my.data)
+
+# Or simply explore the entire data frame
+View(my.data)
 
 # A better import option using Tidyverse
-my_data <- read_csv("gapminder.csv")
+my_data <- read_csv("./workshop_materials/gapminder.csv")
 # Cleaner import and print with read_csv, don't need head()
 my_data
+
 # Note that words read in as `chr` not `factors`, this is good!
 str(my_data)
 # But underlying data is the same
 summary(my_data)
 
 # Other formats for import
-my_data <- read_delim("gapminder.csv", ',')
-# Looks like a weird error
-my_data <- read_excel("gapminder.xlsx")
-# Inspect with head, or excel. Shows two junk rows
-head(my_data)
+my_data_c <- read_delim("./workshop_materials/gapminder.csv", ',')
+
+my_data_x <- read_excel("./workshop_materials/gapminder.xlsx")
+# Ignore the "New names:" note
+
+# Inspect with head. Shows two junk rows
+head(my_data_x)
 
 # This can be solved by adding an argument
 # `skip` is the number of rows to skip
-my_data <- read_excel("gapminder.xlsx",
-                   skip = 2)
+my_data_x <- read_excel("./workshop_materials/gapminder.xlsx",
+                        skip = 2)
 
-my_data <- read_csv("gapminder.csv",col_names = FALSE)
+my_data_c <- read_csv("./workshop_materials/gapminder.csv",
+                      col_names = FALSE)
 # Setting `col_names` to false made the column headers row one
 # and added dummy column names
-my_data
+my_data_c
 
-
-my_data <- read_csv("gapminder.csv",col_names = TRUE)
-# This looks correct. Note: true is the default so was not needed above
-my_data
+my_data_c <- read_csv("./workshop_materials/gapminder.csv",
+                      col_names = TRUE)
+# This looks correct. Note: true is the default argument so was not needed above
+my_data_c
 
 ## See powerpoint slide for how to best structure data for tidyverse / ggplot
 
-## Plotting
+######  Plotting #####
 # This command makes a histogram of the `lifeExp` column of the `my_data`
 # dataset
 qplot(x = lifeExp, data = my_data)

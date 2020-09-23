@@ -14,6 +14,10 @@ library(ggmap)
 library(maps)
 
 
+#############################   BEFORE BEGINNING  ############################
+## Please click:
+## Session --> Set Working Directory --> To Source File Location
+
 #------------------------------------------------#
 #####                GROUP 1                 #####
 #------------------------------------------------#
@@ -144,14 +148,22 @@ qplot(x = lifeExp,
       geom = 'histogram')
 
 # Let's apply a log scale and add a trendline to a scatter plot
-# Note that x axis is compressed
-qplot(x = gdpPercap, y = lifeExp, data = my_data, geom = 'point')
-# Here the x axis is log transformed
-qplot(x = gdpPercap, y = lifeExp, log = 'x',
-      data = my_data, geom = 'point')
+# Note that dat points on the x axis are compressed with a linear scale
+qplot(x = gdpPercap,
+      y = lifeExp,
+      data = my_data,
+      geom = 'point')
 
-# Let's add a trendline to the data as well
-# The linear regression model (`lm`) will be added on top of our previous plot
+# Here the x axis is log transformed
+qplot(x = gdpPercap,
+      y = lifeExp,
+      log = 'x',
+      data = my_data,
+      geom = 'point')
+
+# Let's add titles and a trendline to the data
+# The linear regression model (`lm`) will be added as a layer on top of our
+# previous plot
 qplot(x = gdpPercap,
       y = lifeExp,
       log = 'x',
@@ -161,12 +173,12 @@ qplot(x = gdpPercap,
       data = my_data,
       # The following line adds a `smooth` trendline
       # We want our regression to be a linear model, or `lm`
-      method = 'lm',
+      method = lm,
       # the `c()` function allows us to pass multiple variables
       # to the `geom` argument
-      geom = c('point','smooth'))
+      geom = c('point', 'smooth'))
 
-# And for completeness
+# And now for a boxplot
 qplot(x = continent,
       y = lifeExp,
       main = "Boxplot of life expectancy by continent",
@@ -174,6 +186,23 @@ qplot(x = continent,
       ylab = "Life expectancy (years)",
       data = my_data,
       geom = 'boxplot')
+
+
+# These plots can be assigned to an object using the "<-" symbol so that it
+# is stored in your "global environment" and can be recalled, modified or worked
+# with elsewhere in the script
+my_boxplot <-
+  qplot(x = continent,
+        y = lifeExp,
+        main = "Boxplot of life expectancy by continent",
+        xlab = "Continent",
+        ylab = "Life expectancy (years)",
+        data = my_data,
+        geom = 'boxplot')
+
+# Now displaying your plot is as simple as printing the original dataset
+my_boxplot
+
 
 
 #------------------------------------------------#

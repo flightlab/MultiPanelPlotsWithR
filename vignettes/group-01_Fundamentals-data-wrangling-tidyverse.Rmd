@@ -37,12 +37,6 @@ This vignette is Part 1 of 3 for an R workshop created for
 graduate-level course taught at the University of British Columbia. 
 
 When the workshop runs, we split students into three groups with successively
-<<<<<<< HEAD
-increasing levels of difficulty. We recommend everyone starts here and works 
-through the code that follows. This vignette shows users how to load a clean data file into R and make boxplots and scatterplots. Once you are comfortable with the contents of this page, please feel free to move on to
-[Part 2](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html) and ultimately to Part 3 (which we recommend going through only *after* completing 
-Part 2) [here](https://beep-boopr.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html).
-=======
 increasing levels of difficulty. We recommend everyone starts here and works
 through the code that follows. This vignette shows users how to load a clean
 data file into R and make boxplots and scatterplots. Once you are comfortable
@@ -50,7 +44,6 @@ with the contents of this page, please feel free to move on to
 [Part 2](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html) and
 ultimately to Part 3 (which we recommend going through only *after* completing 
 Part 2) [here](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html).
->>>>>>> 4000a61aa566fe8c88f2528a671d5f902b5c4778
 
 All code and contents of this vignette were written together by Vikram B. 
 Baliga, Andrea Gaede and Shreeram Senthivasan.  
@@ -115,12 +108,8 @@ tail(my_data)
 ```
 
 **Arguments can be added to a function using commas**  
-<<<<<<< HEAD
-**Note:** Unless specified, default arguments are automatically assigned. Here, `n = 10` overrides the default (hidden) argument of `n = 6` and produces the first 10 observations of `my_data`.
-=======
 **Note:** arguments with the default setting are hidden, unless specified. Here
 `n` changes the default from 6 to 10 lines
->>>>>>> 4000a61aa566fe8c88f2528a671d5f902b5c4778
 
 ```{r}
 head(my_data, n = 10)
@@ -189,7 +178,7 @@ qplot(x = lifeExp, data = my_data)
 ```
 ```{r}
 # The same function here makes a scatter plot
-qplot(x = gdpPercap, y = lifeExp, data = my_data)?qplot
+qplot(x = gdpPercap, y = lifeExp, data = my_data)
 ```
 ```{r}
 # The same function here makes a dot plot because 

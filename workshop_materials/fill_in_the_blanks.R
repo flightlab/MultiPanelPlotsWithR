@@ -185,23 +185,21 @@ qplot(x = continent,
 #####   _What is literate programming?    #####
 #---------------------------------------------#
 
-# Literate programming is a coding paradigm that rethinks the "grammar" of
-# traditional code to more closely resemble writing in a human language, like
-# English
+# "Literate programming" rethinks the "grammar" of traditional code to more
+# closely resemble writing in a human language, like English.
 
 # The primary goal of literate programming is to move away from coding "for
 # computers" (ie, code that simplifies compilation) and instead to write in a
-# way that more resembles how we think
+# way that more resembles how we think.
 
-# In addition to making for much more readable code even with fewer comments,
-# a good literate coding language should make it easier for you to translate
-# ideas into code
+# In addition to making for much more readable code even with fewer comments, a
+# good literate coding language should make it easier for you to translate ideas
+# into code.
 
 # In the tidyverse, we will largely use the analogy of variables as nouns and
-# functions as verbs that operate on the nouns
-
-# The main way we will make our code literate however is with the pipe: %>%
-
+# functions as verbs that operate on the nouns.
+#
+# The main way we will make our code literate however is with the pipe: `%>%`
 
 #------------------------------#
 #####   _What is a pipe?   #####
@@ -226,9 +224,9 @@ gapminder %>%
 #####   _Why bother with pipes?   #####
 #-------------------------------------#
 
-# To see how pipes can make code more readable, let's translate this simple
-# cake recipe into pseudo R code:
-
+# To see how pipes can make code more readable, let's translate this cake
+# recipe into pseudo R code:
+#
 # 1. Cream together sugar and butter
 # 2. Beat in eggs and vanilla
 # 3. Mix in flour and baking powder
@@ -1510,29 +1508,3 @@ plot_grid(fig_map, photo_panel, fig_F, ncol = 1)
 # expectancy changed between 1952, 1980, and 2007?
 library(gapminder)
 gapminder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

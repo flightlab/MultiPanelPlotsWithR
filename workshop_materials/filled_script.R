@@ -19,7 +19,7 @@ library(maps)
 #------------------------------------------------#
 
 ## Import data using base R command, and give it the name `my_data`
-my.data <- read.csv("./workshop_materials/gapminder.csv")
+my.data <- read.csv("gapminder.csv")
 # In practise, read_csv() is often better
 
 # Explore features of your data --- same as print(my_data)
@@ -51,7 +51,7 @@ tail(my.data)
 View(my.data)
 
 # A better import option using Tidyverse
-my_data <- read_csv("./workshop_materials/gapminder.csv")
+my_data <- read_csv("gapminder.csv")
 # Cleaner import and print with read_csv, don't need head()
 my_data
 
@@ -61,9 +61,9 @@ str(my_data)
 summary(my_data)
 
 # Other formats for import
-my_data_c <- read_delim("./workshop_materials/gapminder.csv", ',')
+my_data_c <- read_delim("gapminder.csv", ',')
 
-my_data_x <- read_excel("./workshop_materials/gapminder.xlsx")
+my_data_x <- read_excel("gapminder.xlsx")
 # Ignore the "New names:" note
 
 # Inspect with head. Shows two junk rows
@@ -71,16 +71,16 @@ head(my_data_x)
 
 # This can be solved by adding an argument
 # `skip` is the number of rows to skip
-my_data_x <- read_excel("./workshop_materials/gapminder.xlsx",
+my_data_x <- read_excel("gapminder.xlsx",
                         skip = 2)
 
-my_data_c <- read_csv("./workshop_materials/gapminder.csv",
+my_data_c <- read_csv("gapminder.csv",
                       col_names = FALSE)
 # Setting `col_names` to false made the column headers row one
 # and added dummy column names
 my_data_c
 
-my_data_c <- read_csv("./workshop_materials/gapminder.csv",
+my_data_c <- read_csv("gapminder.csv",
                       col_names = TRUE)
 # This looks correct. Note: true is the default argument so was not needed above
 my_data_c
@@ -91,13 +91,15 @@ my_data_c
 # This command makes a histogram of the `lifeExp` column of the `my_data`
 # dataset
 qplot(x = lifeExp, data = my_data)
+
 # The same function here makes a scatter plot
 qplot(x = gdpPercap, y = lifeExp, data = my_data)
+
 # The same function here makes a dot plot because the x axis is categorical
 qplot(x = continent, y = lifeExp, data = my_data)
 
 # How can the same function make three different classes of plots?
-# One of the hidden arguments is `geom` which specifies the type of plot
+# One of the hidden arguments is `geom` which specifies the type of plot.
 # The default is `auto` which leads to a guess of the plot type based on the
 # data type(s) in the column(s) you specify
 ?qplot
@@ -105,22 +107,29 @@ qplot(x = continent, y = lifeExp, data = my_data)
 # Now let's specify the type of plot explicitly
 qplot(x = lifeExp, data = my_data, geom = 'histogram')
 qplot(x = gdpPercap, y = lifeExp, data = my_data, geom = 'point')
+
 # Note that we are specifying boxplot instead of point plot
 qplot(x = continent, y = lifeExp, data = my_data, geom = 'boxplot')
 
 # Now let's change the number of bins in a histogram and make the plot prettier
 # The hidden argument `bins` has a default valute of 30
 qplot(x = lifeExp, data = my_data, geom = 'histogram')
+
 # This changes the number of bins to 10
 qplot(x = lifeExp, bins = 10, data = my_data, geom = 'histogram')
+
 # Alternatively you can choose the width you want the bins to have
 qplot(x = lifeExp, binwidth = 5, data = my_data, geom = 'histogram')
+
 # Let's add a title
 qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", data = my_data, geom = 'histogram')
+
 # Let's add a title
 qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", data = my_data, geom = 'histogram')
+
 # Let's add an x axis label
 qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", xlab = "Life expectancy (years)", data = my_data, geom = 'histogram')
+
 # Let's add a y axis label
 qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", xlab = "Life expectancy (years)", ylab = "Count", data = my_data, geom = 'histogram')
 

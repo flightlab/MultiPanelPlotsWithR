@@ -1,4 +1,4 @@
-This is the directory files that will be used for the R demo for the 2019
+This is the directory files that will be used for the R demo for the 2020
 iteration of BIOL548L at the University of British Columbia. All code was
 written together by Shreeram Senthivasan, Vikram Baliga, and Andrea Gaede.
 
@@ -6,7 +6,7 @@ Below is a description of the included files and directories.
 
 
 filled_script.R      -- Script for all three groups, no code has been removed
-fill_in_the_blanks.R -- Script for all three groups, some code removed for 
+fill_in_the_blanks.R -- Script for all three groups, some code removed for
                         in-class demo
 condensed_script.R   -- Script pared down and reorganized to only generate Fig.
                         3 from the Gaede et al. 2017 paper

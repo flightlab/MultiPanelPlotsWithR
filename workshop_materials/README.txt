@@ -13,7 +13,6 @@ condensed_script.R   -- Script pared down and reorganized to only generate Fig.
 
 Gaede-etal-2017.pdf  -- Paper from Current Biology for reference
 
-BIOL548L-R.Rproj     -- R project file for ease of use in RStudio
 gaedeetal_data/      -- folder containing data files for each panel of Fig. 3
 graphics/            -- folder containing images for Fig. 3
 

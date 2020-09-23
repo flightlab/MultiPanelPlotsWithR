@@ -79,7 +79,7 @@ You can get all data used in this vignette (and the other two!) by downloading
 **Import data using base R command, and give it the name `my_data`**
 
 ```{r}
-my_data <- read.csv("gapminder.csv")
+my.data <- read.csv("gapminder.csv")
 # In practise, the function read_csv() from the 'readr' package is often better
 
 ```
@@ -87,24 +87,29 @@ my_data <- read.csv("gapminder.csv")
 **Take a look at your data**
 ```{r eval=FALSE}
 # Same as print(my_data)
-my_data
+my.data
 ```
 
 ```{r}
 # Inspect the structure of the data
-str(my_data)
+str(my.data)
 
 # Summarize column information
-summary(my_data)
+summary(my.data)
 
 # Get column names (variables). This is handy for wide datasets i.e. many variables
-names(my_data)
+names(my.data)
 
 # Get first 6 lines/rows (observations)
-head(my_data)
+head(my.data)
 
 # Get last 6 lines/rows 
-tail(my_data)
+tail(my.data)
+```
+
+**Simply explore the entire data frame**
+```{r eval=FALSE}
+View(my.data)
 ```
 
 **Arguments can be added to a function using commas**  
@@ -112,13 +117,14 @@ tail(my_data)
 `n` changes the default from 6 to 10 lines
 
 ```{r}
-head(my_data, n = 10)
+head(my.data, n = 10)
 ```
 
 **The helpfile lists what arguments are available**
 ```{r, eval=FALSE}
 ?head
 ```
+
 
 **A better import option using Tidyverse**
 

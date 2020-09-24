@@ -143,7 +143,7 @@ qplot(x = lifeExp,
       geom = 'histogram')
 
 # Let's apply a log scale and add a trendline to a scatter plot
-# Note that dat points on the x axis are compressed with a linear scale
+# Note that data points on the x axis are compressed with a linear scale
 qplot(x = gdpPercap,
       y = lifeExp,
       data = my_data,

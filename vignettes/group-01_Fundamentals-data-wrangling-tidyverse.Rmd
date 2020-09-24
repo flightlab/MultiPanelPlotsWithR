@@ -1,6 +1,6 @@
 ---
 title: "Part 1: Fundamentals of data import, structuring, and plotting in tidyverse"
-author: "by Vikram B. Baliga, Andrea Gaede and Shreeram Senthivasan"
+author: "by Vikram B. Baliga, Andrea Gaede, Shreeram Senthivasan, and Eric Press"
 date: "Last updated on `r Sys.time()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -144,9 +144,9 @@ summary(my_data)
 **Other formats for import**
 
 ```{r}
-my_data <- read_delim("gapminder.csv", ',')
-# Looks like a weird error
-my_data <- read_excel("gapminder.xlsx")
+my_data_c <- read_delim("gapminder.csv", ',')
+
+my_data_x <- read_excel("gapminder.xlsx")
 ```
 
 **Ways to clean up your data during import**
@@ -156,7 +156,7 @@ head(my_data)
 
 # This can be solved by adding an argument `skip` 
 # is the number of rows to skip
-my_data <- read_excel("gapminder.xlsx",
+my_data_x <- read_excel("gapminder.xlsx",
                    skip = 2)
 
 my_data <- read_csv("gapminder.csv",col_names = FALSE)
@@ -177,16 +177,16 @@ my_data
 ```
 
 ## Using qplot to make a histogram, scatter plot, or dot plot
-```{r}
+```{r fig.height=5, fig.width=5}
 # This command makes a histogram of the `lifeExp` 
 # column of the `my_data` dataset
 qplot(x = lifeExp, data = my_data)
 ```
-```{r}
+```{r fig.height=5, fig.width=5}
 # The same function here makes a scatter plot
 qplot(x = gdpPercap, y = lifeExp, data = my_data)
 ```
-```{r}
+```{r fig.height=5, fig.width=5}
 # The same function here makes a dot plot because 
 # the x axis is categorical
 qplot(x = continent, y = lifeExp, data = my_data)
@@ -201,11 +201,11 @@ Type `?qplot` in the console to read the `qplot` documentation
 
 **Now let's specify the type of plot explicitly**
 
-```{r}
+```{r fig.height=5, fig.width=5}
 qplot(x = lifeExp, data = my_data, geom = 'histogram')
 qplot(x = gdpPercap, y = lifeExp, data = my_data, geom = 'point')
 ```
-```{r}
+```{r fig.height=5, fig.width=5}
 # Note that we are now specifying boxplot instead of point plot
 qplot(x = continent, y = lifeExp, data = my_data, geom = 'boxplot')
 ```
@@ -213,31 +213,27 @@ qplot(x = continent, y = lifeExp, data = my_data, geom = 'boxplot')
 ## How to quickly make plots with `qplot()` that are easy to interpret
 **Now let's change the number of bins in a histogram and make the plot prettier**
 
-```{r}
+```{r fig.height=5, fig.width=5}
 # The hidden argument `bins` has a default valute of 30
 qplot(x = lifeExp, data = my_data, geom = 'histogram')
 ```
-```{r}
+```{r fig.height=5, fig.width=5}
 # This changes the number of bins to 10
 qplot(x = lifeExp, bins = 10, data = my_data, geom = 'histogram')
 ```
-```{r}
+```{r fig.height=5, fig.width=5}
 # Alternatively you can choose the width you want the bins to have
 qplot(x = lifeExp, binwidth = 5, data = my_data, geom = 'histogram')
 ```
-```{r}
+```{r fig.height=5, fig.width=5}
 # Let's add a title
 qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", data = my_data, geom = 'histogram')
 ```
-```{r}
-# Let's add an x axis label
-qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", xlab = "Life expectancy (years)", data = my_data, geom = 'histogram')
-```
-```{r}
-# Let's add a y axis label
+```{r fig.height=5, fig.width=5}
+# Let's add x and y axes labels
 qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", xlab = "Life expectancy (years)", ylab = "Count", data = my_data, geom = 'histogram')
 ```
-```{r}
+```{r fig.height=5, fig.width=5}
 # This format is easier to read, but otherwise exactly the same.
 # The convention is to break lines after commas.
 qplot(x = lifeExp,
@@ -251,9 +247,12 @@ qplot(x = lifeExp,
 
 ## Log scale & trendline
 **Let's apply a log scale and add a trendline to a scatter plot**
-```{r, warning=FALSE}
-# Note that x axis is compressed
-qplot(x = gdpPercap, y = lifeExp, data = my_data, geom = 'point')
+```{r fig.height=5, fig.width=5, warning=FALSE}
+# Note that data points on the x axis are compressed with a linear scale
+qplot(x = gdpPercap, 
+      y = lifeExp, 
+      data = my_data, 
+      geom = 'point')
 # Here the x axis is log transformed
 qplot(x = gdpPercap, 
       y = lifeExp, 
@@ -273,14 +272,15 @@ qplot(x = gdpPercap,
       data = my_data,
       # The following line adds a `smooth` trendline
       # We want our regression to be a linear model, or `lm`
-      method = 'lm',
+      method = lm,
       # the `c()` function allows us to pass multiple variables
       # to the `geom` argument
       geom = c('point','smooth'))
+## Ignore warning message
 ```
 
 ## Building a boxplot using gapminder data
-```{r}
+```{r fig.height=5, fig.width=5}
 qplot(x = continent,
       y = lifeExp,
       main = "Boxplot of life expectancy by continent",
@@ -289,6 +289,25 @@ qplot(x = continent,
       data = my_data,
       geom = 'boxplot')
 ```
+
+These plots (or anything else really) can be assigned to an object using the
+`<-` symbol so that it is stored in your "global environment" and can be
+recalled, modified or worked with elsewhere in the script.
+
+```{r fig.height=5, fig.width=5}
+my_boxplot <-
+  qplot(x = continent,
+        y = lifeExp,
+        main = "Boxplot of life expectancy by continent",
+        xlab = "Continent",
+        ylab = "Life expectancy (years)",
+        data = my_data,
+        geom = 'boxplot')
+
+# Now displaying your plot is as simple as printing the original dataset
+my_boxplot
+```
+
 
 ### Congratulations! You finished part 1!! Now check out [part 2](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html)
 

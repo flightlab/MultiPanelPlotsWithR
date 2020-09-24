@@ -455,7 +455,8 @@ data_D <- read_csv("gaedeetal_data/Fig3D_data.csv") %>%
   mutate(
     perc_firing = perc_firing * 100,
     perc_firing = as_factor(perc_firing)
-  )
+  ) %>%
+  tidyr::drop_na()
 
 # Re-plot with new x
 data_D %>%

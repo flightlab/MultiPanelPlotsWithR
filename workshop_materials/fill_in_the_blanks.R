@@ -14,81 +14,97 @@ library(ggmap)
 library(maps)
 
 
+#############################   BEFORE BEGINNING  ############################
+## Please click:
+## Session --> Set Working Directory --> To Source File Location
+
+
 #------------------------------------------------#
 #####                GROUP 1                 #####
 #------------------------------------------------#
 
 ## Import data using base R command, and give it the name `my_data`
-my_data <- read.csv("gapminder.csv")
+my.data <- read.csv("gapminder.csv")
 # In practise, read_csv() is often better
 
-# Sanity check your data
-# Same as print(my_data)
-my_data
-# Structure
-str(my_data)
-# Summarize columns
-summary(my_data)
-# Get column names (good for wide datasets)
-names(my_data)
+# Explore features of your data --- same as print(my_data)
+my.data
 
-# Get first 6 lines
-head(my_data)
+# Inspect the structure of the data
+str(my.data)
+
+# Summarize column information
+summary(my.data)
+
+# Get column names (variables). This is handy for wide data sets i.e. many
+# variables
+names(my.data)
+
+# Get first 6 lines/rows
+head(my.data)
 # Arguments can be added to a function using commas
-# Note: arguments with the default
-# setting are hidden, unless specified
-# here n changes the default from 6 to 10 lines
-head(my_data, n = 10)
-# The helpfile lists what arguments are available
+# Note: arguments with the default setting are hidden, unless specified. Here
+# `n` changes the default from 6 to 10 lines
+head(my.data, n = 10)
+# The helpfile lists what arguments are available for any given function
 ?head
 
-# Get last 6 lines using the `tail()` function
-# REPLACE ME WITH CODE
+# Get last 6 lines/rows
+tail(my.data)
+
+# Or simply explore the entire data frame
+View(my.data)
 
 # A better import option using Tidyverse
 my_data <- read_csv("gapminder.csv")
 # Cleaner import and print with read_csv, don't need head()
 my_data
-# Note that words read in as `chr` not `factors`, this is good!
 str(my_data)
+
 # But underlying data is the same
+summary(my.data)
 summary(my_data)
 
 # Other formats for import
-my_data <- read_delim("gapminder.csv", ',')
-# Looks like a weird error
-my_data <- read_excel("gapminder.xlsx")
-# Inspect with head, or excel. Shows two junk rows
-head(my_data)
+my_data_c <- read_delim("gapminder.csv", ',')
+
+my_data_x <- read_excel("gapminder.xlsx")
+# Ignore the "New names:" note
+
+# Inspect with head. Shows two junk rows
+head(my_data_x)
 
 # This can be solved by adding an argument
 # `skip` is the number of rows to skip
-my_data <- read_excel("gapminder.xlsx",
-                      skip = 2)
+my_data_x <- read_excel("gapminder.xlsx",
+                        skip = 2)
 
-my_data <- read_csv("gapminder.csv",col_names = FALSE)
-# Setting `col_names` to FALSE made the column headers row one
-# and added dummy column names
-my_data
+my_data_c <- read_csv("gapminder.csv",
+                      col_names = FALSE)
+# Setting `col_names` to false made the column headers row one and added dummy
+# column names
+my_data_c
 
-
-my_data <- read_csv("gapminder.csv",col_names = TRUE)
-# This looks correct. Note: TRUE is the default so was not needed above
-my_data
+my_data_c <- read_csv("gapminder.csv",
+                      col_names = TRUE)
+# This looks correct. Note: true is the default argument so was not needed above
+my_data_c
 
 ## See powerpoint slide for how to best structure data for tidyverse / ggplot
 
-## Plotting
+                          ######  Plotting #####
 # This command makes a histogram of the `lifeExp` column of the `my_data`
 # dataset
 qplot(x = lifeExp, data = my_data)
+
 # The same function here makes a scatter plot
 qplot(x = gdpPercap, y = lifeExp, data = my_data)
+
 # The same function here makes a dot plot because the x axis is categorical
 qplot(x = continent, y = lifeExp, data = my_data)
 
 # How can the same function make three different classes of plots?
-# One of the hidden arguments is `geom` which specifies the type of plot
+# One of the hidden arguments is `geom` which specifies the type of plot.
 # The default is `auto` which leads to a guess of the plot type based on the
 # data type(s) in the column(s) you specify
 ?qplot
@@ -96,27 +112,25 @@ qplot(x = continent, y = lifeExp, data = my_data)
 # Now let's specify the type of plot explicitly
 qplot(x = lifeExp, data = my_data, geom = 'histogram')
 qplot(x = gdpPercap, y = lifeExp, data = my_data, geom = 'point')
+
 # Note that we are specifying boxplot instead of point plot
 qplot(x = continent, y = lifeExp, data = my_data, geom = 'boxplot')
 
 # Now let's change the number of bins in a histogram and make the plot prettier
 # The hidden argument `bins` has a default valute of 30
 qplot(x = lifeExp, data = my_data, geom = 'histogram')
+
 # This changes the number of bins to 10
 qplot(x = lifeExp, bins = 10, data = my_data, geom = 'histogram')
-# In the next line, please change the number of bins to 5
-qplot(x = lifeExp, REPLACE_ME, data = my_data, geom = 'histogram')
+
 # Alternatively you can choose the width you want the bins to have
-qplot(x = lifeExp, binwidth = 5, data = my_data, geom = 'histogram')
+qplot(x = lifeExp, bins = 5, data = my_data, geom = 'histogram')
+
 # Let's add a title
 qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", data = my_data, geom = 'histogram')
-# Let's add a title
-qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", data = my_data, geom = 'histogram')
-# Let's add an x axis label
-qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", xlab = "Life expectancy (years)", data = my_data, geom = 'histogram')
-# In the next line, try adding a title, x, and y axis labels
-# Note that you will be using a new argument, ylab
-qplot(x = lifeExp, binwidth = 5, REPLACE_ME, REPLACE_ME, REPLACE_ME, data = my_data, geom = 'histogram')
+
+# Let's add x and y axes labels
+qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", xlab = "Life expectancy (years)", ylab = "Count", data = my_data, geom = 'histogram')
 
 # This format is easier to read, but otherwise exactly the same
 # The convention is to break lines after commas
@@ -129,14 +143,22 @@ qplot(x = lifeExp,
       geom = 'histogram')
 
 # Let's apply a log scale and add a trendline to a scatter plot
-# Note that x axis is compressed
-qplot(x = gdpPercap, y = lifeExp, data = my_data, geom = 'point')
-# Here the x axis is log transformed
-qplot(x = gdpPercap, y = lifeExp, log = 'x',
-      data = my_data, geom = 'point')
+# Note that dat points on the x axis are compressed with a linear scale
+qplot(x = gdpPercap,
+      y = lifeExp,
+      data = my_data,
+      geom = 'point')
 
-# Let's add a trendline to the data as well
-# The linear regression model (`lm`) will be added on top of our previous plot
+# Here the x axis is log transformed
+qplot(x = gdpPercap,
+      y = lifeExp,
+      log = 'x',
+      data = my_data,
+      geom = 'point')
+
+# Let's add titles and a trendline to the data
+# The linear regression model (`lm`) will be added as a layer on top of our
+# previous plot
 qplot(x = gdpPercap,
       y = lifeExp,
       log = 'x',
@@ -146,12 +168,18 @@ qplot(x = gdpPercap,
       data = my_data,
       # The following line adds a `smooth` trendline
       # We want our regression to be a linear model, or `lm`
-      method = 'lm',
+      method = lm,
       # the `c()` function allows us to pass multiple variables
       # to the `geom` argument
-      geom = c('point','smooth'))
+      geom = c('point', 'smooth'))
+## Ignore warning message
 
-# And for completeness
+
+# Make of a plot of the relationship between life expectancy and continent
+# - What plot type should you use?
+# - Label all the axes
+# - Should you transform any of the axes?
+
 qplot(x = continent,
       y = lifeExp,
       main = "Boxplot of life expectancy by continent",
@@ -160,10 +188,20 @@ qplot(x = continent,
       data = my_data,
       geom = 'boxplot')
 
-# Make of a plot of the relationship between life expectancy and population size
-# - What plot type should you use?
-# - Label all the axes
-# - Should you transform any of the axes?
+# These plots (or anything else really) can be assigned to an object using the
+# "<-" symbol so that it is stored in your "global environment" and can be
+# recalled, modified or worked with elsewhere in the script.
+my_boxplot <-
+  qplot(x = continent,
+        y = lifeExp,
+        main = "Boxplot of life expectancy by continent",
+        xlab = "Continent",
+        ylab = "Life expectancy (years)",
+        data = my_data,
+        geom = 'boxplot')
+
+# Now displaying your plot is as simple as printing the original dataset
+my_boxplot
 
 
 #------------------------------------------------#

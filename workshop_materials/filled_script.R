@@ -18,6 +18,7 @@ library(maps)
 ## Please click:
 ## Session --> Set Working Directory --> To Source File Location
 
+
 #------------------------------------------------#
 #####                GROUP 1                 #####
 #------------------------------------------------#
@@ -58,10 +59,10 @@ View(my.data)
 my_data <- read_csv("gapminder.csv")
 # Cleaner import and print with read_csv, don't need head()
 my_data
-
-# Note that words read in as `chr` not `factors`, this is good!
 str(my_data)
+
 # But underlying data is the same
+summary(my.data)
 summary(my_data)
 
 # Other formats for import
@@ -80,8 +81,8 @@ my_data_x <- read_excel("gapminder.xlsx",
 
 my_data_c <- read_csv("gapminder.csv",
                       col_names = FALSE)
-# Setting `col_names` to false made the column headers row one
-# and added dummy column names
+# Setting `col_names` to false made the column headers row one and added dummy
+# column names
 my_data_c
 
 my_data_c <- read_csv("gapminder.csv",
@@ -91,7 +92,7 @@ my_data_c
 
 ## See powerpoint slide for how to best structure data for tidyverse / ggplot
 
-######  Plotting #####
+                          ######  Plotting #####
 # This command makes a histogram of the `lifeExp` column of the `my_data`
 # dataset
 qplot(x = lifeExp, data = my_data)
@@ -123,19 +124,13 @@ qplot(x = lifeExp, data = my_data, geom = 'histogram')
 qplot(x = lifeExp, bins = 10, data = my_data, geom = 'histogram')
 
 # Alternatively you can choose the width you want the bins to have
-qplot(x = lifeExp, binwidth = 5, data = my_data, geom = 'histogram')
+qplot(x = lifeExp, REPLACE_ME, data = my_data, geom = 'histogram')
 
 # Let's add a title
 qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", data = my_data, geom = 'histogram')
 
-# Let's add a title
-qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", data = my_data, geom = 'histogram')
-
-# Let's add an x axis label
-qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", xlab = "Life expectancy (years)", data = my_data, geom = 'histogram')
-
-# Let's add a y axis label
-qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", xlab = "Life expectancy (years)", ylab = "Count", data = my_data, geom = 'histogram')
+# Let's add x and y axes labels
+qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", REPLACE_ME, REPLACE_ME, data = my_data, geom = 'histogram')
 
 # This format is easier to read, but otherwise exactly the same
 # The convention is to break lines after commas
@@ -177,8 +172,14 @@ qplot(x = gdpPercap,
       # the `c()` function allows us to pass multiple variables
       # to the `geom` argument
       geom = c('point', 'smooth'))
+## Ignore warning message
 
-# And now for a boxplot
+
+# Make of a plot of the relationship between life expectancy and continent
+# - What plot type should you use?
+# - Label all the axes
+# - Should you transform any of the axes?
+
 qplot(x = continent,
       y = lifeExp,
       main = "Boxplot of life expectancy by continent",
@@ -187,10 +188,9 @@ qplot(x = continent,
       data = my_data,
       geom = 'boxplot')
 
-
-# These plots can be assigned to an object using the "<-" symbol so that it
-# is stored in your "global environment" and can be recalled, modified or worked
-# with elsewhere in the script
+# These plots (or anything else really) can be assigned to an object using the
+# "<-" symbol so that it is stored in your "global environment" and can be
+# recalled, modified or worked with elsewhere in the script.
 my_boxplot <-
   qplot(x = continent,
         y = lifeExp,
@@ -202,7 +202,6 @@ my_boxplot <-
 
 # Now displaying your plot is as simple as printing the original dataset
 my_boxplot
-
 
 
 #------------------------------------------------#

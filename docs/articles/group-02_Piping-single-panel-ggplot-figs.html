@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MultiPanelPlotsWithR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <h1 data-toc-skip>Part 2: Piping and producing single-panel ggplot figures</h1>
                         <h4 class="author">by Vikram B. Baliga, Andrea Gaede and Shreeram Senthivasan</h4>
             
-            <h4 class="date">Last updated on 2020-09-22 22:14:26</h4>
+            <h4 class="date">Last updated on 2020-09-23 20:44:42</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/flightlab/MultiPanelPlotsWithR/blob/master/vignettes/group-02_Piping-single-panel-ggplot-figs.Rmd"><code>vignettes/group-02_Piping-single-panel-ggplot-figs.Rmd</code></a></small>
       <div class="hidden name"><code>group-02_Piping-single-panel-ggplot-figs.Rmd</code></div>
@@ -371,7 +371,8 @@ If we don’t want to save intermediates, we can just do all the steps in one li
   <span class="fu">mutate</span>(
     <span class="kw">perc_firing</span> <span class="kw">=</span> <span class="no">perc_firing</span> * <span class="fl">100</span>,
     <span class="kw">perc_firing</span> <span class="kw">=</span> <span class="fu">as_factor</span>(<span class="no">perc_firing</span>)
-  )
+  ) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span>() <span class="co">## This will get rid of the annoying warnings</span>
 <span class="co">#&gt; Parsed with column specification:</span>
 <span class="co">#&gt; cols(</span>
 <span class="co">#&gt;   species = col_character(),</span>

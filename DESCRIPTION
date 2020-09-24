@@ -1,6 +1,6 @@
 Package: MultiPanelPlotsWithR
 Title: Multi Panel Plots in R for UBC Graduate Course BIO548L
-Version: 0.9.0.9000
+Version: 1.1.0
 Authors@R: 
     c(
 	person(given = "Douglas L.",
@@ -40,3 +40,19 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Imports: 
+    gapminder,
+    readxl,
+    tidyr,
+    ggplot2,
+    dplyr,
+    plyr,
+    tibble,
+    ggthemes,
+    magick,
+    grid,
+    cowplot,
+    ggmap,
+    maps,
+    readr,
+    forcats

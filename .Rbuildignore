@@ -2,4 +2,6 @@
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
 ^docs$
+^workshop_materials$
+^images$
 ^pkgdown$

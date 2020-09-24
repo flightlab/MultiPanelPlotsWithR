@@ -50,7 +50,7 @@ head(my.data, n = 10)
 ?head
 
 # Get last 6 lines/rows
-tail(my.data)
+REPLACE_ME
 
 # Or simply explore the entire data frame
 View(my.data)
@@ -180,13 +180,13 @@ qplot(x = gdpPercap,
 # - Label all the axes
 # - Should you transform any of the axes?
 
-qplot(x = continent,
-      y = lifeExp,
-      main = "Boxplot of life expectancy by continent",
-      xlab = "Continent",
-      ylab = "Life expectancy (years)",
+qplot(x = REPLACE_ME,
+      y = REPLACE_ME,
+      main = REPLACE_ME,
+      xlab = REPLACE_ME,
+      ylab = REPLACE_ME,
       data = my_data,
-      geom = 'boxplot')
+      geom = REPLACE_ME)
 
 # These plots (or anything else really) can be assigned to an object using the
 # "<-" symbol so that it is stored in your "global environment" and can be

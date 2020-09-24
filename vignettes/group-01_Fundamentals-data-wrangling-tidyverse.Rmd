@@ -1,6 +1,6 @@
 ---
 title: "Part 1: Fundamentals of data import, structuring, and plotting in tidyverse"
-author: "by Vikram B. Baliga, Andrea Gaede, Shreeram Senthivasan, and Eric Press"
+author: "by Vikram B. Baliga, Andrea Gaede, Shreeram Senthivasan, and Eric R. Press"
 date: "Last updated on `r Sys.time()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -46,7 +46,7 @@ ultimately to Part 3 (which we recommend going through only *after* completing
 Part 2) [here](https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html).
 
 All code and contents of this vignette were written together by Vikram B. 
-Baliga, Andrea Gaede and Shreeram Senthivasan.  
+Baliga, Andrea Gaede, Shreeram Senthivasan, and Eric R. Press
 
 
 ## Learning Objectives:
@@ -86,7 +86,7 @@ my.data <- read.csv("gapminder.csv")
 
 **Take a look at your data**
 ```{r eval=FALSE}
-# Same as print(my_data)
+# Same as print(my.data)
 my.data
 ```
 
@@ -132,12 +132,11 @@ head(my.data, n = 10)
 my_data <- read_csv("gapminder.csv")
 # Cleaner import and print with read_csv, don't need head()
 
-my_data
-# Note that words read in as `chr` not `factors`, this is good!
-
 str(my_data)
-# But underlying data is the same
 
+
+# But underlying data is the same
+summary(my.data)
 summary(my_data)
 ```
 
@@ -151,15 +150,14 @@ my_data_x <- read_excel("gapminder.xlsx")
 
 **Ways to clean up your data during import**
 ```{r}
-# Inspect with head, or excel. We see two junk rows:
-head(my_data)
+# Inspect with head. We see two junk rows:
+head(my_data_x)
 
 # This can be solved by adding an argument `skip` 
 # is the number of rows to skip
-my_data_x <- read_excel("gapminder.xlsx",
-                   skip = 2)
+my_data_x <- read_excel("gapminder.xlsx", skip = 2)
 
-my_data <- read_csv("gapminder.csv",col_names = FALSE)
+my_data <- read_csv("gapminder.csv", col_names = FALSE)
 # Setting `col_names` to false made the column headers 
 # row one and added dummy column names
 my_data
@@ -168,18 +166,16 @@ my_data
 ```{r}
 # We're now going to import the gapminder dataset 
 # using the preferred read_csv() function
-my_data <- read_csv("gapminder.csv",col_names = TRUE)
+my_data <- read_csv("gapminder.csv", col_names = TRUE)
 ```
 ```{r}
-# This looks correct. Note: TRUE is the default 
-# so was not needed above
+# This looks correct. Note: TRUE is the default so it was not needed above
 my_data
 ```
 
 ## Using qplot to make a histogram, scatter plot, or dot plot
 ```{r fig.height=5, fig.width=5}
-# This command makes a histogram of the `lifeExp` 
-# column of the `my_data` dataset
+# This command makes a histogram of the `lifeExp` column of the `my_data` dataset
 qplot(x = lifeExp, data = my_data)
 ```
 ```{r fig.height=5, fig.width=5}
@@ -198,6 +194,7 @@ default is `auto` which leads to a guess of the plot type based on the data
 type(s) in the column(s) you specify.
 
 Type `?qplot` in the console to read the `qplot` documentation
+
 
 **Now let's specify the type of plot explicitly**
 
@@ -261,8 +258,7 @@ qplot(x = gdpPercap,
       geom = 'point')
 
 # Let's add a trendline to the data as well.
-# The linear regression model (`lm`) will be added on 
-# top of our previous plot
+# The linear regression model 'lm' will be added on top of our previous plot
 qplot(x = gdpPercap,
       y = lifeExp,
       log = 'x',

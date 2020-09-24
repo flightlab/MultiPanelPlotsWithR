@@ -86,9 +86,9 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Part 1: Fundamentals of data import, structuring, and plotting in tidyverse</h1>
-                        <h4 class="author">by Vikram B. Baliga, Andrea Gaede, Shreeram Senthivasan, and Eric Press</h4>
+                        <h4 class="author">by Vikram B. Baliga, Andrea Gaede, Shreeram Senthivasan, and Eric R. Press</h4>
             
-            <h4 class="date">Last updated on 2020-09-24 13:06:08</h4>
+            <h4 class="date">Last updated on 2020-09-24 13:34:45</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/flightlab/MultiPanelPlotsWithR/blob/master/vignettes/group-01_Fundamentals-data-wrangling-tidyverse.Rmd"><code>vignettes/group-01_Fundamentals-data-wrangling-tidyverse.Rmd</code></a></small>
       <div class="hidden name"><code>group-01_Fundamentals-data-wrangling-tidyverse.Rmd</code></div>
@@ -102,7 +102,7 @@
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>This vignette is Part 1 of 3 for an R workshop created for <a href="http://www.biology.ubc.ca/course-listing-2/#500level-4">BIOL 548L</a>, a graduate-level course taught at the University of British Columbia.</p>
 <p>When the workshop runs, we split students into three groups with successively increasing levels of difficulty. We recommend everyone starts here and works through the code that follows. This vignette shows users how to load a clean data file into R and make boxplots and scatterplots. Once you are comfortable with the contents of this page, please feel free to move on to <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html">Part 2</a> and ultimately to Part 3 (which we recommend going through only <em>after</em> completing Part 2) <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html">here</a>.</p>
-<p>All code and contents of this vignette were written together by Vikram B. Baliga, Andrea Gaede and Shreeram Senthivasan.</p>
+<p>All code and contents of this vignette were written together by Vikram B. Baliga, Andrea Gaede, Shreeram Senthivasan, and Eric R. Press</p>
 </div>
 <div id="learning-objectives" class="section level2">
 <h2 class="hasAnchor">
@@ -120,6 +120,7 @@
 <a href="#load-or-install-load-necessary-packages" class="anchor"></a>Load or install &amp; load necessary packages</h2>
 <p>Before running the code below, make sure you have the necessary packages loaded. If you do not have the packages listed below installed on your computer, then download them from the CRAN site using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> and then load them with <code>library()</code> as shown below.</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gapminder</span>)
+<span class="co">#&gt; Warning: package 'gapminder' was built under R version 4.0.2</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
@@ -147,7 +148,7 @@
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">my.data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(<span class="st">"gapminder.csv"</span>)
 <span class="co"># In practise, the function read_csv() from the 'readr' package is often better</span></pre></body></html></div>
 <p><strong>Take a look at your data</strong></p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Same as print(my_data)</span>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Same as print(my.data)</span>
 <span class="no">my.data</span></pre></body></html></div>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># Inspect the structure of the data</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">my.data</span>)
@@ -229,23 +230,6 @@
 <span class="co">#&gt; )</span>
 <span class="co"># Cleaner import and print with read_csv, don't need head()</span>
 
-<span class="no">my_data</span>
-<span class="co">#&gt; # A tibble: 1,704 x 6</span>
-<span class="co">#&gt;    country     continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 Afghanistan Asia       1952    28.8  8425333      779.</span>
-<span class="co">#&gt;  2 Afghanistan Asia       1957    30.3  9240934      821.</span>
-<span class="co">#&gt;  3 Afghanistan Asia       1962    32.0 10267083      853.</span>
-<span class="co">#&gt;  4 Afghanistan Asia       1967    34.0 11537966      836.</span>
-<span class="co">#&gt;  5 Afghanistan Asia       1972    36.1 13079460      740.</span>
-<span class="co">#&gt;  6 Afghanistan Asia       1977    38.4 14880372      786.</span>
-<span class="co">#&gt;  7 Afghanistan Asia       1982    39.9 12881816      978.</span>
-<span class="co">#&gt;  8 Afghanistan Asia       1987    40.8 13867957      852.</span>
-<span class="co">#&gt;  9 Afghanistan Asia       1992    41.7 16317921      649.</span>
-<span class="co">#&gt; 10 Afghanistan Asia       1997    41.8 22227415      635.</span>
-<span class="co">#&gt; # … with 1,694 more rows</span>
-<span class="co"># Note that words read in as `chr` not `factors`, this is good!</span>
-
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">my_data</span>)
 <span class="co">#&gt; tibble [1,704 × 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)</span>
 <span class="co">#&gt;  $ country  : chr [1:1704] "Afghanistan" "Afghanistan" "Afghanistan" "Afghanistan" ...</span>
@@ -263,8 +247,24 @@
 <span class="co">#&gt;   ..   pop = col_double(),</span>
 <span class="co">#&gt;   ..   gdpPercap = col_double()</span>
 <span class="co">#&gt;   .. )</span>
-<span class="co"># But underlying data is the same</span>
 
+
+<span class="co"># But underlying data is the same</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">my.data</span>)
+<span class="co">#&gt;    country           continent              year         lifeExp     </span>
+<span class="co">#&gt;  Length:1704        Length:1704        Min.   :1952   Min.   :23.60  </span>
+<span class="co">#&gt;  Class :character   Class :character   1st Qu.:1966   1st Qu.:48.20  </span>
+<span class="co">#&gt;  Mode  :character   Mode  :character   Median :1980   Median :60.71  </span>
+<span class="co">#&gt;                                        Mean   :1980   Mean   :59.47  </span>
+<span class="co">#&gt;                                        3rd Qu.:1993   3rd Qu.:70.85  </span>
+<span class="co">#&gt;                                        Max.   :2007   Max.   :82.60  </span>
+<span class="co">#&gt;       pop              gdpPercap       </span>
+<span class="co">#&gt;  Min.   :6.001e+04   Min.   :   241.2  </span>
+<span class="co">#&gt;  1st Qu.:2.794e+06   1st Qu.:  1202.1  </span>
+<span class="co">#&gt;  Median :7.024e+06   Median :  3531.8  </span>
+<span class="co">#&gt;  Mean   :2.960e+07   Mean   :  7215.3  </span>
+<span class="co">#&gt;  3rd Qu.:1.959e+07   3rd Qu.:  9325.5  </span>
+<span class="co">#&gt;  Max.   :1.319e+09   Max.   :113523.1</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">my_data</span>)
 <span class="co">#&gt;    country           continent              year         lifeExp     </span>
 <span class="co">#&gt;  Length:1704        Length:1704        Min.   :1952   Min.   :23.60  </span>
@@ -300,24 +300,23 @@
 <span class="co">#&gt; * `` -&gt; ...5</span>
 <span class="co">#&gt; * `` -&gt; ...6</span></pre></body></html></div>
 <p><strong>Ways to clean up your data during import</strong></p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># Inspect with head, or excel. We see two junk rows:</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">my_data</span>)
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># Inspect with head. We see two junk rows:</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">my_data_x</span>)
 <span class="co">#&gt; # A tibble: 6 x 6</span>
-<span class="co">#&gt;   country     continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Afghanistan Asia       1952    28.8  8425333      779.</span>
-<span class="co">#&gt; 2 Afghanistan Asia       1957    30.3  9240934      821.</span>
-<span class="co">#&gt; 3 Afghanistan Asia       1962    32.0 10267083      853.</span>
-<span class="co">#&gt; 4 Afghanistan Asia       1967    34.0 11537966      836.</span>
-<span class="co">#&gt; 5 Afghanistan Asia       1972    36.1 13079460      740.</span>
-<span class="co">#&gt; 6 Afghanistan Asia       1977    38.4 14880372      786.</span>
+<span class="co">#&gt;   `Gapminder data` ...2      ...3  ...4    ...5     ...6       </span>
+<span class="co">#&gt;   &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;      </span>
+<span class="co">#&gt; 1 43685            12423     &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;       </span>
+<span class="co">#&gt; 2 country          continent year  lifeExp pop      gdpPercap  </span>
+<span class="co">#&gt; 3 Afghanistan      Asia      1952  28.801  8425333  779.4453145</span>
+<span class="co">#&gt; 4 Afghanistan      Asia      1957  30.332  9240934  820.8530296</span>
+<span class="co">#&gt; 5 Afghanistan      Asia      1962  31.997  10267083 853.10071  </span>
+<span class="co">#&gt; 6 Afghanistan      Asia      1967  34.02   11537966 836.1971382</span>
 
 <span class="co"># This can be solved by adding an argument `skip` </span>
 <span class="co"># is the number of rows to skip</span>
-<span class="no">my_data_x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span>(<span class="st">"gapminder.xlsx"</span>,
-                   <span class="kw">skip</span> <span class="kw">=</span> <span class="fl">2</span>)
+<span class="no">my_data_x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span>(<span class="st">"gapminder.xlsx"</span>, <span class="kw">skip</span> <span class="kw">=</span> <span class="fl">2</span>)
 
-<span class="no">my_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>(<span class="st">"gapminder.csv"</span>,<span class="kw">col_names</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="no">my_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>(<span class="st">"gapminder.csv"</span>, <span class="kw">col_names</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="co">#&gt; Parsed with column specification:</span>
 <span class="co">#&gt; cols(</span>
 <span class="co">#&gt;   X1 = col_character(),</span>
@@ -346,7 +345,7 @@
 <span class="co">#&gt; # … with 1,695 more rows</span></pre></body></html></div>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="co"># We're now going to import the gapminder dataset </span>
 <span class="co"># using the preferred read_csv() function</span>
-<span class="no">my_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>(<span class="st">"gapminder.csv"</span>,<span class="kw">col_names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="no">my_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>(<span class="st">"gapminder.csv"</span>, <span class="kw">col_names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="co">#&gt; Parsed with column specification:</span>
 <span class="co">#&gt; cols(</span>
 <span class="co">#&gt;   country = col_character(),</span>
@@ -356,8 +355,7 @@
 <span class="co">#&gt;   pop = col_double(),</span>
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span></pre></body></html></div>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># This looks correct. Note: TRUE is the default </span>
-<span class="co"># so was not needed above</span>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># This looks correct. Note: TRUE is the default so it was not needed above</span>
 <span class="no">my_data</span>
 <span class="co">#&gt; # A tibble: 1,704 x 6</span>
 <span class="co">#&gt;    country     continent  year lifeExp      pop gdpPercap</span>
@@ -377,8 +375,7 @@
 <div id="using-qplot-to-make-a-histogram-scatter-plot-or-dot-plot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-qplot-to-make-a-histogram-scatter-plot-or-dot-plot" class="anchor"></a>Using qplot to make a histogram, scatter plot, or dot plot</h2>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co"># This command makes a histogram of the `lifeExp` </span>
-<span class="co"># column of the `my_data` dataset</span>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co"># This command makes a histogram of the `lifeExp` column of the `my_data` dataset</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>)
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-14-1.png" width="480"></p>
@@ -452,8 +449,7 @@ One of the hidden arguments is <code>geom</code> which specifies the type of plo
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-25-2.png" width="480"></p>
 <div class="sourceCode" id="cb27"><html><body><pre class="r">
 <span class="co"># Let's add a trendline to the data as well.</span>
-<span class="co"># The linear regression model (`lm`) will be added on </span>
-<span class="co"># top of our previous plot</span>
+<span class="co"># The linear regression model 'lm' will be added on top of our previous plot</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">gdpPercap</span>,
       <span class="kw">y</span> <span class="kw">=</span> <span class="no">lifeExp</span>,
       <span class="kw">log</span> <span class="kw">=</span> <span class="st">'x'</span>,

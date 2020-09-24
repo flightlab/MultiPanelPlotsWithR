@@ -3,5 +3,6 @@
 ^_pkgdown\.yml$
 ^docs$
 ^workshop_materials$
+^workshop_materials\.zip$
 ^images$
 ^pkgdown$

@@ -66,6 +66,9 @@ page) can be found
 All code and contents of this vignette were written together by Vikram B. 
 Baliga, Andrea Gaede and Shreeram Senthivasan.  
 
+You can get all data used in this vignette (and the other two!) by downloading 
+[this zip file](https://github.com/flightlab/MultiPanelPlotsWithR/releases/download/v1.1.0/workshop_materials.zip).
+
 ## Learning Objectives:
 1. Articulate the advantages of literate programming
 2. Employ piping to restructure data for tidyverse

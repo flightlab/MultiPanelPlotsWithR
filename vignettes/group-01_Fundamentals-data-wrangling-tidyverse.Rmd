@@ -73,7 +73,7 @@ library(readxl)
 ### Data sets
 
 You can get all data used in this vignette (and the other two!) by downloading 
-[this zip file](ADD NEW LINK HERE).
+[this zip file](https://github.com/flightlab/MultiPanelPlotsWithR/releases/download/v1.1.0/workshop_materials.zip).
 
 ## Importing and peeking at data:
 **Import data using base R command, and give it the name `my_data`**

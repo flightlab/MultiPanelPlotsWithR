@@ -23,7 +23,7 @@ library(maps)
 #####                GROUP 1                 #####
 #------------------------------------------------#
 
-## Import data using base R command, and give it the name `my_data`
+## Import data using base R command, and give it the name `my.data`
 my.data <- read.csv("gapminder.csv")
 # In practise, read_csv() is often better
 
@@ -124,13 +124,13 @@ qplot(x = lifeExp, data = my_data, geom = 'histogram')
 qplot(x = lifeExp, bins = 10, data = my_data, geom = 'histogram')
 
 # Alternatively you can choose the width you want the bins to have
-qplot(x = lifeExp, REPLACE_ME, data = my_data, geom = 'histogram')
+qplot(x = lifeExp, bins = 5, data = my_data, geom = 'histogram')
 
 # Let's add a title
 qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", data = my_data, geom = 'histogram')
 
 # Let's add x and y axes labels
-qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", REPLACE_ME, REPLACE_ME, data = my_data, geom = 'histogram')
+qplot(x = lifeExp, binwidth = 5, main = "Histogram of life expectancy", xlab = "Life expectancy (years)", ylab = "Count", data = my_data, geom = 'histogram')
 
 # This format is easier to read, but otherwise exactly the same
 # The convention is to break lines after commas

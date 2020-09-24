@@ -79,16 +79,16 @@ head(my_data_x)
 my_data_x <- read_excel("gapminder.xlsx",
                         skip = 2)
 
-my_data_c <- read_csv("gapminder.csv",
+my_data <- read_csv("gapminder.csv",
                       col_names = FALSE)
 # Setting `col_names` to false made the column headers row one and added dummy
 # column names
-my_data_c
+my_data
 
-my_data_c <- read_csv("gapminder.csv",
+my_data <- read_csv("gapminder.csv",
                       col_names = TRUE)
 # This looks correct. Note: true is the default argument so was not needed above
-my_data_c
+my_data
 
 ## See powerpoint slide for how to best structure data for tidyverse / ggplot
 

@@ -1,12 +1,18 @@
-This is the directory files that will be used for the "Multi-panel plots with R"
-demo for the 2020 iteration of BIOL 548L at the University of British Columbia.
+This directory contains files that will be used for the "Multi-panel plots with
+R" demo for the 2022 iteration of BIOL 548L at the University of British
+Columbia.
 
 All code was originally written together in 2019 by Shreeram Senthivasan, Vikram
 Baliga, and Andrea Gaede. Further edits in subsequent years have been provided
-by Eric Press and Vikram Baliga.
+by Vikram Baliga and Eric Press.
 
 
 #### STUDENTS ####
+All of the materials herein are designed to work with:
+- R version 4.0.0 or newer. Latest version (4.2.1) recommended
+- "tidyverse" R package version 1.3 or newer. Latest version (1.3.2) recommended
+- RStudio (optional, but recommended!). Version 2022.02.0 or newer
+
 To get started, please open fill_in_the_blanks.R in a fresh RStudio session.
 Then in the top menu bar please click:
 Session --> Set Working Directory --> To Source File Location

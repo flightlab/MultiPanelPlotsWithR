@@ -1,9 +1,9 @@
 Package: MultiPanelPlotsWithR
 Title: Multi Panel Plots in R for UBC Graduate Course BIO548L
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: 
     c(
-	person(given = "Douglas L.",
+	  person(given = "Douglas L.",
            family = "Altshuler",
            role = c("edt"),
            email = "doug@zoology.ubc.ca",
@@ -19,10 +19,10 @@ Authors@R:
            email = "andrea.gaede@gmail.com",
            comment = c(ORCID = "0000-0002-1909-7004")),
     person(given = "Eric R.", 
-             family = "Press",
-             role = "aut",
-             email = "epress12@gmail.com",
-             comment = c(ORCID = "0000-0002-1944-3755")),
+           family = "Press",
+           role = "ctb",
+           email = "epress12@gmail.com",
+           comment = c(ORCID = "0000-0002-1944-3755")),
     person(given = "Shree",
            family = "Senthivasan",
            role = c("aut"),

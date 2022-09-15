@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MultiPanelPlotsWithR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Vignettes
@@ -61,14 +57,11 @@
     </li>
   </ul>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/flightlab/MultiPanelPlotsWithR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/flightlab/MultiPanelPlotsWithR/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -85,45 +78,65 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Part 1: Fundamentals of data import, structuring, and plotting in tidyverse</h1>
-                        <h4 class="author">by Vikram B. Baliga, Andrea Gaede, Shreeram Senthivasan, and Eric R. Press</h4>
+      <h1 data-toc-skip>Part 1: Fundamentals of data import,
+structuring, and plotting in tidyverse</h1>
+                        <h4 data-toc-skip class="author">by Vikram B.
+Baliga, Andrea Gaede, Shreeram Senthivasan, and Eric R. Press</h4>
             
-            <h4 class="date">Last updated on 2020-09-24 13:34:45</h4>
+            <h4 data-toc-skip class="date">Last updated on 2022-09-15
+15:56:07</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/flightlab/MultiPanelPlotsWithR/blob/master/vignettes/group-01_Fundamentals-data-wrangling-tidyverse.Rmd"><code>vignettes/group-01_Fundamentals-data-wrangling-tidyverse.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/flightlab/MultiPanelPlotsWithR/blob/HEAD/vignettes/group-01_Fundamentals-data-wrangling-tidyverse.Rmd" class="external-link"><code>vignettes/group-01_Fundamentals-data-wrangling-tidyverse.Rmd</code></a></small>
       <div class="hidden name"><code>group-01_Fundamentals-data-wrangling-tidyverse.Rmd</code></div>
 
     </div>
 
     
     
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>This vignette is Part 1 of 3 for an R workshop created for <a href="http://www.biology.ubc.ca/course-listing-2/#500level-4">BIOL 548L</a>, a graduate-level course taught at the University of British Columbia.</p>
-<p>When the workshop runs, we split students into three groups with successively increasing levels of difficulty. We recommend everyone starts here and works through the code that follows. This vignette shows users how to load a clean data file into R and make boxplots and scatterplots. Once you are comfortable with the contents of this page, please feel free to move on to <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html">Part 2</a> and ultimately to Part 3 (which we recommend going through only <em>after</em> completing Part 2) <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html">here</a>.</p>
-<p>All code and contents of this vignette were written together by Vikram B. Baliga, Andrea Gaede, Shreeram Senthivasan, and Eric R. Press</p>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p>This vignette is Part 1 of 3 for an R workshop created for <a href="http://www.biology.ubc.ca/course-listing-2/#500level-4" class="external-link">BIOL
+548L</a>, a graduate-level course taught at the University of British
+Columbia.</p>
+<p>When the workshop runs, we split students into three groups with
+successively increasing levels of difficulty. We recommend everyone
+starts here and works through the code that follows. This vignette shows
+users how to load a clean data file into R and make boxplots and
+scatterplots. Once you are comfortable with the contents of this page,
+please feel free to move on to <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html">Part
+2</a> and ultimately to Part 3 (which we recommend going through only
+<em>after</em> completing Part 2) <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-03_Using-cowplot-multi-panel.html">here</a>.</p>
+<p>All code and contents of this vignette were written together by
+Vikram B. Baliga, Andrea Gaede, Shreeram Senthivasan, and Eric R.
+Press</p>
 </div>
-<div id="learning-objectives" class="section level2">
-<h2 class="hasAnchor">
-<a href="#learning-objectives" class="anchor"></a>Learning Objectives:</h2>
+<div class="section level2">
+<h2 id="learning-objectives">Learning Objectives:<a class="anchor" aria-label="anchor" href="#learning-objectives"></a>
+</h2>
 <ol style="list-style-type: decimal">
-<li>Determine how to import and control data stored in different filetypes</li>
-<li>Understand the best practices for structuring data in <code>tidyverse/ggplot2</code>
+<li>Determine how to import and control data stored in different
+filetypes</li>
+<li>Understand the best practices for structuring data in
+<code>tidyverse/ggplot2</code>
 </li>
 <li>Construct basic plots using <code>ggplot2</code>
 </li>
 </ol>
 </div>
-<div id="load-or-install-load-necessary-packages" class="section level2">
-<h2 class="hasAnchor">
-<a href="#load-or-install-load-necessary-packages" class="anchor"></a>Load or install &amp; load necessary packages</h2>
-<p>Before running the code below, make sure you have the necessary packages loaded. If you do not have the packages listed below installed on your computer, then download them from the CRAN site using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> and then load them with <code>library()</code> as shown below.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gapminder</span>)
-<span class="co">#&gt; Warning: package 'gapminder' was built under R version 4.0.2</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<div class="section level2">
+<h2 id="load-or-install-load-necessary-packages">Load or install &amp; load necessary packages<a class="anchor" aria-label="anchor" href="#load-or-install-load-necessary-packages"></a>
+</h2>
+<p>Before running the code below, make sure you have the necessary
+packages loaded. If you do not have the packages listed below installed
+on your computer, then download them from the CRAN site using
+<code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages()</a></code> and then load them with
+<code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> as shown below.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jennybc/gapminder" class="external-link">gapminder</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -132,26 +145,32 @@
 <span class="co">#&gt; The following objects are masked from 'package:base':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     intersect, setdiff, setequal, union</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tibble</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">readr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">readxl</span>)</pre></body></html></div>
-<div id="data-sets" class="section level3">
-<h3 class="hasAnchor">
-<a href="#data-sets" class="anchor"></a>Data sets</h3>
-<p>You can get all data used in this vignette (and the other two!) by downloading <a href="https://github.com/flightlab/MultiPanelPlotsWithR/releases/download/v1.1.0/workshop_materials.zip">this zip file</a>.</p>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org" class="external-link">readxl</a></span><span class="op">)</span></code></pre></div>
+<div class="section level3">
+<h3 id="data-sets">Data sets<a class="anchor" aria-label="anchor" href="#data-sets"></a>
+</h3>
+<p>You can get all data used in this vignette (and the other two!) by
+downloading <a href="https://github.com/flightlab/MultiPanelPlotsWithR/releases/download/v1.1.0/workshop_materials.zip" class="external-link">this
+zip file</a>.</p>
 </div>
 </div>
-<div id="importing-and-peeking-at-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#importing-and-peeking-at-data" class="anchor"></a>Importing and peeking at data:</h2>
-<p><strong>Import data using base R command, and give it the name <code>my_data</code></strong></p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">my.data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(<span class="st">"gapminder.csv"</span>)
-<span class="co"># In practise, the function read_csv() from the 'readr' package is often better</span></pre></body></html></div>
+<div class="section level2">
+<h2 id="importing-and-peeking-at-data">Importing and peeking at data:<a class="anchor" aria-label="anchor" href="#importing-and-peeking-at-data"></a>
+</h2>
+<p><strong>Import data using base R command, and give it the name
+<code>my_data</code></strong></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"gapminder.csv"</span><span class="op">)</span>
+<span class="co"># In practise, the function read_csv() from the 'readr' package is often better</span></code></pre></div>
 <p><strong>Take a look at your data</strong></p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Same as print(my.data)</span>
-<span class="no">my.data</span></pre></body></html></div>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># Inspect the structure of the data</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">my.data</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Same as print(my.data)</span>
+<span class="va">my.data</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Inspect the structure of the data</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">my.data</span><span class="op">)</span>
 <span class="co">#&gt; 'data.frame':    1704 obs. of  6 variables:</span>
 <span class="co">#&gt;  $ country  : chr  "Afghanistan" "Afghanistan" "Afghanistan" "Afghanistan" ...</span>
 <span class="co">#&gt;  $ continent: chr  "Asia" "Asia" "Asia" "Asia" ...</span>
@@ -161,7 +180,7 @@
 <span class="co">#&gt;  $ gdpPercap: num  779 821 853 836 740 ...</span>
 
 <span class="co"># Summarize column information</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">my.data</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">my.data</span><span class="op">)</span>
 <span class="co">#&gt;    country           continent              year         lifeExp     </span>
 <span class="co">#&gt;  Length:1704        Length:1704        Min.   :1952   Min.   :23.60  </span>
 <span class="co">#&gt;  Class :character   Class :character   1st Qu.:1966   1st Qu.:48.20  </span>
@@ -178,11 +197,11 @@
 <span class="co">#&gt;  Max.   :1.319e+09   Max.   :113523.1</span>
 
 <span class="co"># Get column names (variables). This is handy for wide datasets i.e. many variables</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">my.data</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">my.data</span><span class="op">)</span>
 <span class="co">#&gt; [1] "country"   "continent" "year"      "lifeExp"   "pop"       "gdpPercap"</span>
 
 <span class="co"># Get first 6 lines/rows (observations)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">my.data</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">my.data</span><span class="op">)</span>
 <span class="co">#&gt;       country continent year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt; 1 Afghanistan      Asia 1952  28.801  8425333  779.4453</span>
 <span class="co">#&gt; 2 Afghanistan      Asia 1957  30.332  9240934  820.8530</span>
@@ -192,18 +211,23 @@
 <span class="co">#&gt; 6 Afghanistan      Asia 1977  38.438 14880372  786.1134</span>
 
 <span class="co"># Get last 6 lines/rows </span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(<span class="no">my.data</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">my.data</span><span class="op">)</span>
 <span class="co">#&gt;       country continent year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt; 1699 Zimbabwe    Africa 1982  60.363  7636524  788.8550</span>
 <span class="co">#&gt; 1700 Zimbabwe    Africa 1987  62.351  9216418  706.1573</span>
 <span class="co">#&gt; 1701 Zimbabwe    Africa 1992  60.377 10704340  693.4208</span>
 <span class="co">#&gt; 1702 Zimbabwe    Africa 1997  46.809 11404948  792.4500</span>
 <span class="co">#&gt; 1703 Zimbabwe    Africa 2002  39.989 11926563  672.0386</span>
-<span class="co">#&gt; 1704 Zimbabwe    Africa 2007  43.487 12311143  469.7093</span></pre></body></html></div>
+<span class="co">#&gt; 1704 Zimbabwe    Africa 2007  43.487 12311143  469.7093</span></code></pre></div>
 <p><strong>Simply explore the entire data frame</strong></p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/View.html">View</a></span>(<span class="no">my.data</span>)</pre></body></html></div>
-<p><strong>Arguments can be added to a function using commas</strong><br><strong>Note:</strong> arguments with the default setting are hidden, unless specified. Here <code>n</code> changes the default from 6 to 10 lines</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">my.data</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="va">my.data</span><span class="op">)</span></code></pre></div>
+<p><strong>Arguments can be added to a function using
+commas</strong><br><strong>Note:</strong> arguments with the default setting are hidden,
+unless specified. Here <code>n</code> changes the default from 6 to 10
+lines</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">my.data</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 <span class="co">#&gt;        country continent year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt; 1  Afghanistan      Asia 1952  28.801  8425333  779.4453</span>
 <span class="co">#&gt; 2  Afghanistan      Asia 1957  30.332  9240934  820.8530</span>
@@ -214,24 +238,25 @@
 <span class="co">#&gt; 7  Afghanistan      Asia 1982  39.854 12881816  978.0114</span>
 <span class="co">#&gt; 8  Afghanistan      Asia 1987  40.822 13867957  852.3959</span>
 <span class="co">#&gt; 9  Afghanistan      Asia 1992  41.674 16317921  649.3414</span>
-<span class="co">#&gt; 10 Afghanistan      Asia 1997  41.763 22227415  635.3414</span></pre></body></html></div>
+<span class="co">#&gt; 10 Afghanistan      Asia 1997  41.763 22227415  635.3414</span></code></pre></div>
 <p><strong>The helpfile lists what arguments are available</strong></p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r">?<span class="no">head</span></pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">?</span><span class="va">head</span></code></pre></div>
 <p><strong>A better import option using Tidyverse</strong></p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">my_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>(<span class="st">"gapminder.csv"</span>)
-<span class="co">#&gt; Parsed with column specification:</span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   country = col_character(),</span>
-<span class="co">#&gt;   continent = col_character(),</span>
-<span class="co">#&gt;   year = col_double(),</span>
-<span class="co">#&gt;   lifeExp = col_double(),</span>
-<span class="co">#&gt;   pop = col_double(),</span>
-<span class="co">#&gt;   gdpPercap = col_double()</span>
-<span class="co">#&gt; )</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"gapminder.csv"</span><span class="op">)</span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">1704</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="co">#&gt; <span style="color: #BB0000;">chr</span> (2): country, continent</span>
+<span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (4): year, lifeExp, pop, gdpPercap</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
 <span class="co"># Cleaner import and print with read_csv, don't need head()</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">my_data</span>)
-<span class="co">#&gt; tibble [1,704 × 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">my_data</span><span class="op">)</span>
+<span class="co">#&gt; spec_tbl_df [1,704 × 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)</span>
 <span class="co">#&gt;  $ country  : chr [1:1704] "Afghanistan" "Afghanistan" "Afghanistan" "Afghanistan" ...</span>
 <span class="co">#&gt;  $ continent: chr [1:1704] "Asia" "Asia" "Asia" "Asia" ...</span>
 <span class="co">#&gt;  $ year     : num [1:1704] 1952 1957 1962 1967 1972 ...</span>
@@ -240,17 +265,18 @@
 <span class="co">#&gt;  $ gdpPercap: num [1:1704] 779 821 853 836 740 ...</span>
 <span class="co">#&gt;  - attr(*, "spec")=</span>
 <span class="co">#&gt;   .. cols(</span>
-<span class="co">#&gt;   ..   country = col_character(),</span>
-<span class="co">#&gt;   ..   continent = col_character(),</span>
-<span class="co">#&gt;   ..   year = col_double(),</span>
-<span class="co">#&gt;   ..   lifeExp = col_double(),</span>
-<span class="co">#&gt;   ..   pop = col_double(),</span>
-<span class="co">#&gt;   ..   gdpPercap = col_double()</span>
+<span class="co">#&gt;   ..   country = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   ..   continent = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   ..   year = <span style="color: #00BB00;">col_double()</span>,</span>
+<span class="co">#&gt;   ..   lifeExp = <span style="color: #00BB00;">col_double()</span>,</span>
+<span class="co">#&gt;   ..   pop = <span style="color: #00BB00;">col_double()</span>,</span>
+<span class="co">#&gt;   ..   gdpPercap = <span style="color: #00BB00;">col_double()</span></span>
 <span class="co">#&gt;   .. )</span>
+<span class="co">#&gt;  - attr(*, "problems")=&lt;externalptr&gt;</span>
 
 
 <span class="co"># But underlying data is the same</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">my.data</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">my.data</span><span class="op">)</span>
 <span class="co">#&gt;    country           continent              year         lifeExp     </span>
 <span class="co">#&gt;  Length:1704        Length:1704        Min.   :1952   Min.   :23.60  </span>
 <span class="co">#&gt;  Class :character   Class :character   1st Qu.:1966   1st Qu.:48.20  </span>
@@ -265,7 +291,7 @@
 <span class="co">#&gt;  Mean   :2.960e+07   Mean   :  7215.3  </span>
 <span class="co">#&gt;  3rd Qu.:1.959e+07   3rd Qu.:  9325.5  </span>
 <span class="co">#&gt;  Max.   :1.319e+09   Max.   :113523.1</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">my_data</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">my_data</span><span class="op">)</span>
 <span class="co">#&gt;    country           continent              year         lifeExp     </span>
 <span class="co">#&gt;  Length:1704        Length:1704        Min.   :1952   Min.   :23.60  </span>
 <span class="co">#&gt;  Class :character   Class :character   1st Qu.:1966   1st Qu.:48.20  </span>
@@ -279,221 +305,250 @@
 <span class="co">#&gt;  Median :7.024e+06   Median :  3531.8  </span>
 <span class="co">#&gt;  Mean   :2.960e+07   Mean   :  7215.3  </span>
 <span class="co">#&gt;  3rd Qu.:1.959e+07   3rd Qu.:  9325.5  </span>
-<span class="co">#&gt;  Max.   :1.319e+09   Max.   :113523.1</span></pre></body></html></div>
+<span class="co">#&gt;  Max.   :1.319e+09   Max.   :113523.1</span></code></pre></div>
 <p><strong>Other formats for import</strong></p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">my_data_c</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span>(<span class="st">"gapminder.csv"</span>, <span class="st">','</span>)
-<span class="co">#&gt; Parsed with column specification:</span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   country = col_character(),</span>
-<span class="co">#&gt;   continent = col_character(),</span>
-<span class="co">#&gt;   year = col_double(),</span>
-<span class="co">#&gt;   lifeExp = col_double(),</span>
-<span class="co">#&gt;   pop = col_double(),</span>
-<span class="co">#&gt;   gdpPercap = col_double()</span>
-<span class="co">#&gt; )</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_data_c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_delim</a></span><span class="op">(</span><span class="st">"gapminder.csv"</span>, <span class="st">','</span><span class="op">)</span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">1704</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="co">#&gt; <span style="color: #BB0000;">chr</span> (2): country, continent</span>
+<span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (4): year, lifeExp, pop, gdpPercap</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
 
-<span class="no">my_data_x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span>(<span class="st">"gapminder.xlsx"</span>)
+<span class="va">my_data_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span><span class="st">"gapminder.xlsx"</span><span class="op">)</span>
 <span class="co">#&gt; New names:</span>
 <span class="co">#&gt; * `` -&gt; ...2</span>
 <span class="co">#&gt; * `` -&gt; ...3</span>
 <span class="co">#&gt; * `` -&gt; ...4</span>
 <span class="co">#&gt; * `` -&gt; ...5</span>
-<span class="co">#&gt; * `` -&gt; ...6</span></pre></body></html></div>
+<span class="co">#&gt; * `` -&gt; ...6</span></code></pre></div>
 <p><strong>Ways to clean up your data during import</strong></p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># Inspect with head. We see two junk rows:</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">my_data_x</span>)
-<span class="co">#&gt; # A tibble: 6 x 6</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Inspect with head. We see two junk rows:</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">my_data_x</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 6</span></span>
 <span class="co">#&gt;   `Gapminder data` ...2      ...3  ...4    ...5     ...6       </span>
-<span class="co">#&gt;   &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;      </span>
-<span class="co">#&gt; 1 43685            12423     &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;       </span>
-<span class="co">#&gt; 2 country          continent year  lifeExp pop      gdpPercap  </span>
-<span class="co">#&gt; 3 Afghanistan      Asia      1952  28.801  8425333  779.4453145</span>
-<span class="co">#&gt; 4 Afghanistan      Asia      1957  30.332  9240934  820.8530296</span>
-<span class="co">#&gt; 5 Afghanistan      Asia      1962  31.997  10267083 853.10071  </span>
-<span class="co">#&gt; 6 Afghanistan      Asia      1967  34.02   11537966 836.1971382</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 43685            12423     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>         </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> country          continent year  lifeExp pop      gdpPercap  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Afghanistan      Asia      1952  28.801  8425333  779.4453145</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Afghanistan      Asia      1957  30.332  9240934  820.8530296</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Afghanistan      Asia      1962  31.997  10267083 853.10071  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Afghanistan      Asia      1967  34.02   11537966 836.1971382</span>
 
 <span class="co"># This can be solved by adding an argument `skip` </span>
 <span class="co"># is the number of rows to skip</span>
-<span class="no">my_data_x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span>(<span class="st">"gapminder.xlsx"</span>, <span class="kw">skip</span> <span class="kw">=</span> <span class="fl">2</span>)
+<span class="va">my_data_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span><span class="st">"gapminder.xlsx"</span>, skip <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
-<span class="no">my_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>(<span class="st">"gapminder.csv"</span>, <span class="kw">col_names</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="co">#&gt; Parsed with column specification:</span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   X1 = col_character(),</span>
-<span class="co">#&gt;   X2 = col_character(),</span>
-<span class="co">#&gt;   X3 = col_character(),</span>
-<span class="co">#&gt;   X4 = col_character(),</span>
-<span class="co">#&gt;   X5 = col_character(),</span>
-<span class="co">#&gt;   X6 = col_character()</span>
-<span class="co">#&gt; )</span>
+<span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"gapminder.csv"</span>, col_names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">1705</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="co">#&gt; <span style="color: #BB0000;">chr</span> (6): X1, X2, X3, X4, X5, X6</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
 <span class="co"># Setting `col_names` to false made the column headers </span>
 <span class="co"># row one and added dummy column names</span>
-<span class="no">my_data</span>
-<span class="co">#&gt; # A tibble: 1,705 x 6</span>
+<span class="va">my_data</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,705 × 6</span></span>
 <span class="co">#&gt;    X1          X2        X3    X4      X5       X6         </span>
-<span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;      </span>
-<span class="co">#&gt;  1 country     continent year  lifeExp pop      gdpPercap  </span>
-<span class="co">#&gt;  2 Afghanistan Asia      1952  28.801  8425333  779.4453145</span>
-<span class="co">#&gt;  3 Afghanistan Asia      1957  30.332  9240934  820.8530296</span>
-<span class="co">#&gt;  4 Afghanistan Asia      1962  31.997  10267083 853.10071  </span>
-<span class="co">#&gt;  5 Afghanistan Asia      1967  34.02   11537966 836.1971382</span>
-<span class="co">#&gt;  6 Afghanistan Asia      1972  36.088  13079460 739.9811058</span>
-<span class="co">#&gt;  7 Afghanistan Asia      1977  38.438  14880372 786.11336  </span>
-<span class="co">#&gt;  8 Afghanistan Asia      1982  39.854  12881816 978.0114388</span>
-<span class="co">#&gt;  9 Afghanistan Asia      1987  40.822  13867957 852.3959448</span>
-<span class="co">#&gt; 10 Afghanistan Asia      1992  41.674  16317921 649.3413952</span>
-<span class="co">#&gt; # … with 1,695 more rows</span></pre></body></html></div>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="co"># We're now going to import the gapminder dataset </span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> country     continent year  lifeExp pop      gdpPercap  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Afghanistan Asia      1952  28.801  8425333  779.4453145</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Afghanistan Asia      1957  30.332  9240934  820.8530296</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Afghanistan Asia      1962  31.997  10267083 853.10071  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Afghanistan Asia      1967  34.02   11537966 836.1971382</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Afghanistan Asia      1972  36.088  13079460 739.9811058</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Afghanistan Asia      1977  38.438  14880372 786.11336  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Afghanistan Asia      1982  39.854  12881816 978.0114388</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Afghanistan Asia      1987  40.822  13867957 852.3959448</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Afghanistan Asia      1992  41.674  16317921 649.3413952</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 1,695 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># We're now going to import the gapminder dataset </span>
 <span class="co"># using the preferred read_csv() function</span>
-<span class="no">my_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>(<span class="st">"gapminder.csv"</span>, <span class="kw">col_names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="co">#&gt; Parsed with column specification:</span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   country = col_character(),</span>
-<span class="co">#&gt;   continent = col_character(),</span>
-<span class="co">#&gt;   year = col_double(),</span>
-<span class="co">#&gt;   lifeExp = col_double(),</span>
-<span class="co">#&gt;   pop = col_double(),</span>
-<span class="co">#&gt;   gdpPercap = col_double()</span>
-<span class="co">#&gt; )</span></pre></body></html></div>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># This looks correct. Note: TRUE is the default so it was not needed above</span>
-<span class="no">my_data</span>
-<span class="co">#&gt; # A tibble: 1,704 x 6</span>
+<span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"gapminder.csv"</span>, col_names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">1704</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="co">#&gt; <span style="color: #BB0000;">chr</span> (2): country, continent</span>
+<span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (4): year, lifeExp, pop, gdpPercap</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># This looks correct. Note: TRUE is the default so it was not needed above</span>
+<span class="va">my_data</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,704 × 6</span></span>
 <span class="co">#&gt;    country     continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 Afghanistan Asia       1952    28.8  8425333      779.</span>
-<span class="co">#&gt;  2 Afghanistan Asia       1957    30.3  9240934      821.</span>
-<span class="co">#&gt;  3 Afghanistan Asia       1962    32.0 10267083      853.</span>
-<span class="co">#&gt;  4 Afghanistan Asia       1967    34.0 11537966      836.</span>
-<span class="co">#&gt;  5 Afghanistan Asia       1972    36.1 13079460      740.</span>
-<span class="co">#&gt;  6 Afghanistan Asia       1977    38.4 14880372      786.</span>
-<span class="co">#&gt;  7 Afghanistan Asia       1982    39.9 12881816      978.</span>
-<span class="co">#&gt;  8 Afghanistan Asia       1987    40.8 13867957      852.</span>
-<span class="co">#&gt;  9 Afghanistan Asia       1992    41.7 16317921      649.</span>
-<span class="co">#&gt; 10 Afghanistan Asia       1997    41.8 22227415      635.</span>
-<span class="co">#&gt; # … with 1,694 more rows</span></pre></body></html></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Afghanistan Asia       <span style="text-decoration: underline;">1</span>952    28.8  8<span style="text-decoration: underline;">425</span>333      779.</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Afghanistan Asia       <span style="text-decoration: underline;">1</span>957    30.3  9<span style="text-decoration: underline;">240</span>934      821.</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Afghanistan Asia       <span style="text-decoration: underline;">1</span>962    32.0 10<span style="text-decoration: underline;">267</span>083      853.</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Afghanistan Asia       <span style="text-decoration: underline;">1</span>967    34.0 11<span style="text-decoration: underline;">537</span>966      836.</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Afghanistan Asia       <span style="text-decoration: underline;">1</span>972    36.1 13<span style="text-decoration: underline;">079</span>460      740.</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Afghanistan Asia       <span style="text-decoration: underline;">1</span>977    38.4 14<span style="text-decoration: underline;">880</span>372      786.</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Afghanistan Asia       <span style="text-decoration: underline;">1</span>982    39.9 12<span style="text-decoration: underline;">881</span>816      978.</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Afghanistan Asia       <span style="text-decoration: underline;">1</span>987    40.8 13<span style="text-decoration: underline;">867</span>957      852.</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Afghanistan Asia       <span style="text-decoration: underline;">1</span>992    41.7 16<span style="text-decoration: underline;">317</span>921      649.</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Afghanistan Asia       <span style="text-decoration: underline;">1</span>997    41.8 22<span style="text-decoration: underline;">227</span>415      635.</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 1,694 more rows</span></span></code></pre></div>
 </div>
-<div id="using-qplot-to-make-a-histogram-scatter-plot-or-dot-plot" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-qplot-to-make-a-histogram-scatter-plot-or-dot-plot" class="anchor"></a>Using qplot to make a histogram, scatter plot, or dot plot</h2>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co"># This command makes a histogram of the `lifeExp` column of the `my_data` dataset</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>)
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
+<div class="section level2">
+<h2 id="using-qplot-to-make-a-histogram-scatter-plot-or-dot-plot">Using qplot to make a histogram, scatter plot, or dot plot<a class="anchor" aria-label="anchor" href="#using-qplot-to-make-a-histogram-scatter-plot-or-dot-plot"></a>
+</h2>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># This command makes a histogram of the `lifeExp` column of the `my_data` dataset</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lifeExp</span>, data <span class="op">=</span> <span class="va">my_data</span><span class="op">)</span>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-14-1.png" width="480"></p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="co"># The same function here makes a scatter plot</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">gdpPercap</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The same function here makes a scatter plot</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gdpPercap</span>, y <span class="op">=</span> <span class="va">lifeExp</span>, data <span class="op">=</span> <span class="va">my_data</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-15-1.png" width="480"></p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="co"># The same function here makes a dot plot because </span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The same function here makes a dot plot because </span>
 <span class="co"># the x axis is categorical</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">continent</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>)</pre></body></html></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">continent</span>, y <span class="op">=</span> <span class="va">lifeExp</span>, data <span class="op">=</span> <span class="va">my_data</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-16-1.png" width="480"></p>
-<p><strong>How can the same function make three different classes of plots?</strong><br>
-One of the hidden arguments is <code>geom</code> which specifies the type of plot. The default is <code>auto</code> which leads to a guess of the plot type based on the data type(s) in the column(s) you specify.</p>
-<p>Type <code><a href="https://ggplot2.tidyverse.org/reference/qplot.html">?qplot</a></code> in the console to read the <code>qplot</code> documentation</p>
+<p><strong>How can the same function make three different classes of
+plots?</strong><br>
+One of the hidden arguments is <code>geom</code> which specifies the
+type of plot. The default is <code>auto</code> which leads to a guess of
+the plot type based on the data type(s) in the column(s) you
+specify.</p>
+<p>Type <code><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">?qplot</a></code> in the console to read the
+<code>qplot</code> documentation</p>
 <p><strong>Now let’s specify the type of plot explicitly</strong></p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>, <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'histogram'</span>)
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lifeExp</span>, data <span class="op">=</span> <span class="va">my_data</span>, geom <span class="op">=</span> <span class="st">'histogram'</span><span class="op">)</span>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-17-1.png" width="480"></p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">gdpPercap</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>, <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'point'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gdpPercap</span>, y <span class="op">=</span> <span class="va">lifeExp</span>, data <span class="op">=</span> <span class="va">my_data</span>, geom <span class="op">=</span> <span class="st">'point'</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-17-2.png" width="480"></p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="co"># Note that we are now specifying boxplot instead of point plot</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">continent</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>, <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'boxplot'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Note that we are now specifying boxplot instead of point plot</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">continent</span>, y <span class="op">=</span> <span class="va">lifeExp</span>, data <span class="op">=</span> <span class="va">my_data</span>, geom <span class="op">=</span> <span class="st">'boxplot'</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-18-1.png" width="480"></p>
 </div>
-<div id="how-to-quickly-make-plots-with-qplot-that-are-easy-to-interpret" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-quickly-make-plots-with-qplot-that-are-easy-to-interpret" class="anchor"></a>How to quickly make plots with <code>qplot()</code> that are easy to interpret</h2>
-<p><strong>Now let’s change the number of bins in a histogram and make the plot prettier</strong></p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="co"># The hidden argument `bins` has a default valute of 30</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>, <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'histogram'</span>)
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
+<div class="section level2">
+<h2 id="how-to-quickly-make-plots-with-qplot-that-are-easy-to-interpret">How to quickly make plots with <code>qplot()</code> that are easy to
+interpret<a class="anchor" aria-label="anchor" href="#how-to-quickly-make-plots-with-qplot-that-are-easy-to-interpret"></a>
+</h2>
+<p><strong>Now let’s change the number of bins in a histogram and make
+the plot prettier</strong></p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The hidden argument `bins` has a default valute of 30</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lifeExp</span>, data <span class="op">=</span> <span class="va">my_data</span>, geom <span class="op">=</span> <span class="st">'histogram'</span><span class="op">)</span>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-19-1.png" width="480"></p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="co"># This changes the number of bins to 10</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">bins</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>, <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'histogram'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># This changes the number of bins to 10</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lifeExp</span>, bins <span class="op">=</span> <span class="fl">10</span>, data <span class="op">=</span> <span class="va">my_data</span>, geom <span class="op">=</span> <span class="st">'histogram'</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-20-1.png" width="480"></p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="co"># Alternatively you can choose the width you want the bins to have</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">binwidth</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>, <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'histogram'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Alternatively you can choose the width you want the bins to have</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lifeExp</span>, binwidth <span class="op">=</span> <span class="fl">5</span>, data <span class="op">=</span> <span class="va">my_data</span>, geom <span class="op">=</span> <span class="st">'histogram'</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-21-1.png" width="480"></p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="co"># Let's add a title</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">binwidth</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Histogram of life expectancy"</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>, <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'histogram'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Let's add a title</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lifeExp</span>, binwidth <span class="op">=</span> <span class="fl">5</span>, main <span class="op">=</span> <span class="st">"Histogram of life expectancy"</span>, data <span class="op">=</span> <span class="va">my_data</span>, geom <span class="op">=</span> <span class="st">'histogram'</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-22-1.png" width="480"></p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="co"># Let's add x and y axes labels</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">lifeExp</span>, <span class="kw">binwidth</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Histogram of life expectancy"</span>, <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Life expectancy (years)"</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Count"</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>, <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'histogram'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Let's add x and y axes labels</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lifeExp</span>, binwidth <span class="op">=</span> <span class="fl">5</span>, main <span class="op">=</span> <span class="st">"Histogram of life expectancy"</span>, xlab <span class="op">=</span> <span class="st">"Life expectancy (years)"</span>, ylab <span class="op">=</span> <span class="st">"Count"</span>, data <span class="op">=</span> <span class="va">my_data</span>, geom <span class="op">=</span> <span class="st">'histogram'</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-23-1.png" width="480"></p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="co"># This format is easier to read, but otherwise exactly the same.</span>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># This format is easier to read, but otherwise exactly the same.</span>
 <span class="co"># The convention is to break lines after commas.</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">lifeExp</span>,
-      <span class="kw">binwidth</span> <span class="kw">=</span> <span class="fl">5</span>,
-      <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Histogram of life expectancy"</span>,
-      <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Life expectancy (years)"</span>,
-      <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Count"</span>,
-      <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>,
-      <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'histogram'</span>)</pre></body></html></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lifeExp</span>,
+      binwidth <span class="op">=</span> <span class="fl">5</span>,
+      main <span class="op">=</span> <span class="st">"Histogram of life expectancy"</span>,
+      xlab <span class="op">=</span> <span class="st">"Life expectancy (years)"</span>,
+      ylab <span class="op">=</span> <span class="st">"Count"</span>,
+      data <span class="op">=</span> <span class="va">my_data</span>,
+      geom <span class="op">=</span> <span class="st">'histogram'</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-24-1.png" width="480"></p>
 </div>
-<div id="log-scale-trendline" class="section level2">
-<h2 class="hasAnchor">
-<a href="#log-scale-trendline" class="anchor"></a>Log scale &amp; trendline</h2>
-<p><strong>Let’s apply a log scale and add a trendline to a scatter plot</strong></p>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="co"># Note that data points on the x axis are compressed with a linear scale</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">gdpPercap</span>,
-      <span class="kw">y</span> <span class="kw">=</span> <span class="no">lifeExp</span>,
-      <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>,
-      <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'point'</span>)</pre></body></html></div>
+<div class="section level2">
+<h2 id="log-scale-trendline">Log scale &amp; trendline<a class="anchor" aria-label="anchor" href="#log-scale-trendline"></a>
+</h2>
+<p><strong>Let’s apply a log scale and add a trendline to a scatter
+plot</strong></p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Note that data points on the x axis are compressed with a linear scale</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gdpPercap</span>, 
+      y <span class="op">=</span> <span class="va">lifeExp</span>, 
+      data <span class="op">=</span> <span class="va">my_data</span>, 
+      geom <span class="op">=</span> <span class="st">'point'</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-25-1.png" width="480"></p>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="co"># Here the x axis is log transformed</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">gdpPercap</span>,
-      <span class="kw">y</span> <span class="kw">=</span> <span class="no">lifeExp</span>,
-      <span class="kw">log</span> <span class="kw">=</span> <span class="st">'x'</span>,
-      <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>,
-      <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'point'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Here the x axis is log transformed</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gdpPercap</span>, 
+      y <span class="op">=</span> <span class="va">lifeExp</span>, 
+      log <span class="op">=</span> <span class="st">'x'</span>,
+      data <span class="op">=</span> <span class="va">my_data</span>, 
+      geom <span class="op">=</span> <span class="st">'point'</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-25-2.png" width="480"></p>
-<div class="sourceCode" id="cb27"><html><body><pre class="r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># Let's add a trendline to the data as well.</span>
 <span class="co"># The linear regression model 'lm' will be added on top of our previous plot</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">gdpPercap</span>,
-      <span class="kw">y</span> <span class="kw">=</span> <span class="no">lifeExp</span>,
-      <span class="kw">log</span> <span class="kw">=</span> <span class="st">'x'</span>,
-      <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Scatter plot of life expectancy versus GDP per capita"</span>,
-      <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Log-transformed GDP per capita ($)"</span>,
-      <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Life expectancy (years)"</span>,
-      <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>,
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gdpPercap</span>,
+      y <span class="op">=</span> <span class="va">lifeExp</span>,
+      log <span class="op">=</span> <span class="st">'x'</span>,
+      main <span class="op">=</span> <span class="st">"Scatter plot of life expectancy versus GDP per capita"</span>,
+      xlab <span class="op">=</span> <span class="st">"Log-transformed GDP per capita ($)"</span>,
+      ylab <span class="op">=</span> <span class="st">"Life expectancy (years)"</span>,
+      data <span class="op">=</span> <span class="va">my_data</span>,
       <span class="co"># The following line adds a `smooth` trendline</span>
       <span class="co"># We want our regression to be a linear model, or `lm`</span>
-      <span class="kw">method</span> <span class="kw">=</span> <span class="no">lm</span>,
+      method <span class="op">=</span> <span class="va">lm</span>,
       <span class="co"># the `c()` function allows us to pass multiple variables</span>
       <span class="co"># to the `geom` argument</span>
-      <span class="kw">geom</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'point'</span>,<span class="st">'smooth'</span>))
-<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span></pre></body></html></div>
+      geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'point'</span>,<span class="st">'smooth'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-25-3.png" width="480"></p>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="co">## Ignore warning message</span></pre></body></html></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Ignore warning message</span></code></pre></div>
 </div>
-<div id="building-a-boxplot-using-gapminder-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#building-a-boxplot-using-gapminder-data" class="anchor"></a>Building a boxplot using gapminder data</h2>
-<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">continent</span>,
-      <span class="kw">y</span> <span class="kw">=</span> <span class="no">lifeExp</span>,
-      <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Boxplot of life expectancy by continent"</span>,
-      <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Continent"</span>,
-      <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Life expectancy (years)"</span>,
-      <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>,
-      <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'boxplot'</span>)</pre></body></html></div>
+<div class="section level2">
+<h2 id="building-a-boxplot-using-gapminder-data">Building a boxplot using gapminder data<a class="anchor" aria-label="anchor" href="#building-a-boxplot-using-gapminder-data"></a>
+</h2>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">continent</span>,
+      y <span class="op">=</span> <span class="va">lifeExp</span>,
+      main <span class="op">=</span> <span class="st">"Boxplot of life expectancy by continent"</span>,
+      xlab <span class="op">=</span> <span class="st">"Continent"</span>,
+      ylab <span class="op">=</span> <span class="st">"Life expectancy (years)"</span>,
+      data <span class="op">=</span> <span class="va">my_data</span>,
+      geom <span class="op">=</span> <span class="st">'boxplot'</span><span class="op">)</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-26-1.png" width="480"></p>
-<p>These plots (or anything else really) can be assigned to an object using the <code>&lt;-</code> symbol so that it is stored in your “global environment” and can be recalled, modified or worked with elsewhere in the script.</p>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">my_boxplot</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">continent</span>,
-        <span class="kw">y</span> <span class="kw">=</span> <span class="no">lifeExp</span>,
-        <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Boxplot of life expectancy by continent"</span>,
-        <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Continent"</span>,
-        <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Life expectancy (years)"</span>,
-        <span class="kw">data</span> <span class="kw">=</span> <span class="no">my_data</span>,
-        <span class="kw">geom</span> <span class="kw">=</span> <span class="st">'boxplot'</span>)
+<p>These plots (or anything else really) can be assigned to an object
+using the <code>&lt;-</code> symbol so that it is stored in your “global
+environment” and can be recalled, modified or worked with elsewhere in
+the script.</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_boxplot</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">continent</span>,
+        y <span class="op">=</span> <span class="va">lifeExp</span>,
+        main <span class="op">=</span> <span class="st">"Boxplot of life expectancy by continent"</span>,
+        xlab <span class="op">=</span> <span class="st">"Continent"</span>,
+        ylab <span class="op">=</span> <span class="st">"Life expectancy (years)"</span>,
+        data <span class="op">=</span> <span class="va">my_data</span>,
+        geom <span class="op">=</span> <span class="st">'boxplot'</span><span class="op">)</span>
 
 <span class="co"># Now displaying your plot is as simple as printing the original dataset</span>
-<span class="no">my_boxplot</span></pre></body></html></div>
+<span class="va">my_boxplot</span></code></pre></div>
 <p><img src="group-01_Fundamentals-data-wrangling-tidyverse_files/figure-html/unnamed-chunk-27-1.png" width="480"></p>
-<div id="congratulations-you-finished-part-1-now-check-out-part-2" class="section level3">
-<h3 class="hasAnchor">
-<a href="#congratulations-you-finished-part-1-now-check-out-part-2" class="anchor"></a>Congratulations! You finished part 1!! Now check out <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html">part 2</a>
+<div class="section level3">
+<h3 id="congratulations-you-finished-part-1-now-check-out-part-2">Congratulations! You finished part 1!! Now check out <a href="https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-02_Piping-single-panel-ggplot-figs.html">part
+2</a><a class="anchor" aria-label="anchor" href="#congratulations-you-finished-part-1-now-check-out-part-2"></a>
 </h3>
 <p>🐢</p>
 </div>
@@ -511,11 +566,17 @@ One of the hidden arguments is <code>geom</code> which specifies the type of plo
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.vikram-baliga.com/">Vikram B. Baliga</a>, <a href="https://www.andreagaede.com/">Andrea Gaede</a>, <a href="https://www.grad.ubc.ca/campus-community/meet-our-students/press-eric">Eric R. Press</a>, <a href="https://www.zoology.ubc.ca/person/shreeram-senthivasan/">Shree Senthivasan</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.vikram-baliga.com/" class="external-link">Vikram B.
+Baliga</a>, <a href="https://www.andreagaede.com/" class="external-link">Andrea Gaede</a>,
+<a href="https://www.zoology.ubc.ca/person/shreeram-senthivasan/" class="external-link">Shree
+Senthivasan</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.1.</p>
 </div>
 
       </footer>
@@ -523,6 +584,8 @@ One of the hidden arguments is <code>geom</code> which specifies the type of plo
 
   
 
+
+  
 
   </body>
 </html>

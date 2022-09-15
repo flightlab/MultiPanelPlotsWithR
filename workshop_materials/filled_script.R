@@ -14,7 +14,7 @@ library(ggmap)
 library(maps)
 
 
-#############################   BEFORE BEGINNING  ############################
+##############################   BEFORE BEGINNING  #############################
 ## Please click:
 ## Session --> Set Working Directory --> To Source File Location
 

@@ -133,7 +133,7 @@ fig_A <-
 
 # Reshape raw data
 data_B_raw <- read_csv("gaedeetal_data/Fig3B_data.csv") %>%
-  gather(key = bin, value = count, starts_with("bin")) %>%
+  pivot_longer(names_to = "bin", values_to = "count", starts_with("bin")) %>%
   group_by(trial, direction, speed) %>%
   summarize(
     raw_firing_rate = mean(count)
@@ -206,7 +206,7 @@ fig_B <- data_B %>%
 
 # Reorganize raw data
 data_C_raw <- read_csv("gaedeetal_data/Fig3C_data.csv") %>%
-  gather(key = bin, value = count, starts_with("bin")) %>%
+  pivot_longer(names_to = "bin", values_to = "count", starts_with("bin")) %>%
   group_by(trial, direction, speed) %>%
   summarize(
     raw_firing_rate = mean(count)
@@ -310,7 +310,7 @@ fig_D <- read_csv("gaedeetal_data/Fig3D_data.csv") %>%
 fig_E <- read_csv("./gaedeetal_data/Fig3E_data.csv") %>%
   # Add missing info
   mutate(species = c("hb", "zb", "pg")) %>%
-  gather(key = speed, value = prop, -species) %>%
+  pivot_longer(names_to = "speed", values_to = "prop", -species) %>%
   # Reorder factors
   mutate(
     species = fct_relevel(species, c("hb","zb","pg")),
@@ -357,7 +357,7 @@ fig_F <- read_csv("./gaedeetal_data/Fig3F_data.csv") %>%
       species == 2 ~ "hb"
     )
   ) %>%
-  gather(key = speed, value = prop, -species) %>%
+  pivot_longer(names_to = "speed", values_to = "prop", -species) %>%
   group_by(species, speed) %>%
   summarise(prop = mean(prop)) %>%
   ungroup %>%

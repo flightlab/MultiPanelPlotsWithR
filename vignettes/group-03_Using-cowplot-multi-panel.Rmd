@@ -317,7 +317,7 @@ theme_548 <- theme_classic() +
 fudge_axis_BC <- tibble(speed = c(-0.5,2), firing_rate = c(-1,2))
 
 data_B_raw <- read_csv("Fig3B_data.csv") %>%
-  gather(key = bin, value = count, starts_with("bin")) %>%
+  pivot_longer(names_to = "bin", values_to = "count", starts_with("bin")) %>%
   group_by(trial, direction, speed) %>%
   summarize(
     raw_firing_rate = mean(count)
@@ -387,7 +387,7 @@ fig_B
 ### Figure 3 Panel C:
 ```{r panel_C, echo=FALSE, fig.height=3.5, fig.width=3.5, warning=FALSE, message=FALSE}
 data_C_raw <- read_csv("Fig3C_data.csv") %>%
-  gather(key = bin, value = count, starts_with("bin")) %>%
+  pivot_longer(names_to = "bin", values_to = "count", starts_with("bin")) %>%
   group_by(trial, direction, speed) %>%
   summarize(
     raw_firing_rate = mean(count)
@@ -485,7 +485,7 @@ fig_D
 ```{r panel_E, fig.height=2.16, fig.width=4.5, echo=FALSE, warning=FALSE,message=FALSE}
 data_E <- read_csv("./Fig3E_data.csv") %>%
   mutate(species = c("hb", "zb", "pg")) %>%
-  gather(key = speed, value = prop, -species)
+  pivot_longer(names_to = "speed", values_to = "prop", -species)
 
 data_E <- data_E %>%
   mutate(
@@ -533,7 +533,7 @@ data_F <- read_csv("./Fig3F_data.csv") %>%
       species == 2 ~ "hb"
     )
   ) %>%
-  gather(key = speed, value = prop, -species) %>%
+  pivot_longer(names_to = "speed", values_to = "prop", -species) %>%
   group_by(species, speed) %>%
   summarise(prop = mean(prop)) %>%
   ungroup %>%

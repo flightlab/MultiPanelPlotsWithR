@@ -33,14 +33,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MultiPanelPlotsWithR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Vignettes
      
     <span class="caret"></span>
@@ -83,8 +83,8 @@ figures</h1>
                         <h4 data-toc-skip class="author">by Vikram B.
 Baliga, Andrea Gaede and Shreeram Senthivasan</h4>
             
-            <h4 data-toc-skip class="date">Last updated on 2022-09-15
-15:56:21</h4>
+            <h4 data-toc-skip class="date">Last updated on 2022-09-23
+12:18:17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/flightlab/MultiPanelPlotsWithR/blob/HEAD/vignettes/group-02_Piping-single-panel-ggplot-figs.Rmd" class="external-link"><code>vignettes/group-02_Piping-single-panel-ggplot-figs.Rmd</code></a></small>
       <div class="hidden name"><code>group-02_Piping-single-panel-ggplot-figs.Rmd</code></div>
@@ -377,7 +377,7 @@ things and will usually look something like this:</p>
 <p>But how do you know what geometries are available or what aesthetic
 mappings you can use for each? Use the <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf" class="external-link">plotting
 with ggplot2 cheat sheet</a></p>
-<p>Other possibly relevant componenets include:</p>
+<p>Other possibly relevant components include:</p>
 <ul>
 <li>Coordinate systems (eg cartesian vs polar plots)</li>
 <li>Scales (eg mapping specifc colours to groups)</li>
@@ -395,8 +395,8 @@ with ggplot2 cheat sheet</a></p>
 <span class="co">#&gt; <span style="color: #BB0000;">chr</span> (1): species</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (2): perc_firing, num_bins</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 
 <span class="co"># Visualize data</span>
 <span class="va">data_D</span>
@@ -452,8 +452,8 @@ with ggplot2 cheat sheet</a></p>
 <span class="co">#&gt; <span style="color: #BB0000;">chr</span> (1): species</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (2): perc_firing, num_bins</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
 <p><strong>Re-plot with new x:</strong></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data_D</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -609,15 +609,16 @@ with ggplot2 cheat sheet</a></p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (16): 0.1, 0.24, 0.5, 1, 1.5, 2, 4, 8, 16, 24, 32, 48, 64, 80, 128, 256</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 16</span></span>
 <span class="co">#&gt;   `0.1` `0.24`  `0.5`    `1`  `1.5`     `2`     `4`    `8`   `16`   `24`   `32`</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     0 0.035<span style="text-decoration: underline;">7</span> 0.017<span style="text-decoration: underline;">9</span> 0      0      0.107   0.035<span style="text-decoration: underline;">7</span>  0.035<span style="text-decoration: underline;">7</span> 0.053<span style="text-decoration: underline;">6</span> 0.089<span style="text-decoration: underline;">3</span> 0.071<span style="text-decoration: underline;">4</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     0 0      0      0.018<span style="text-decoration: underline;">7</span> 0      0.009<span style="text-decoration: underline;">35</span> 0.009<span style="text-decoration: underline;">35</span> 0.093<span style="text-decoration: underline;">5</span> 0.168  0.121  0.187 </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     0 0      0.094<span style="text-decoration: underline;">7</span> 0.052<span style="text-decoration: underline;">6</span> 0.010<span style="text-decoration: underline;">5</span> 0.126   0.126   0.084<span style="text-decoration: underline;">2</span> 0.147  0      0.147 </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: 48 &lt;dbl&gt;, 64 &lt;dbl&gt;, 80 &lt;dbl&gt;, 128 &lt;dbl&gt;, 256 &lt;dbl&gt;</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: `48` &lt;dbl&gt;, `64` &lt;dbl&gt;, `80` &lt;dbl&gt;, `128` &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   `256` &lt;dbl&gt;</span></span></code></pre></div>
 <p><strong>Restructure data for plotting:</strong></p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Add the missing info</span>
@@ -628,42 +629,42 @@ with ggplot2 cheat sheet</a></p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (16): 0.1, 0.24, 0.5, 1, 1.5, 2, 4, 8, 16, 24, 32, 48, 64, 80, 128, 256</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 17</span></span>
 <span class="co">#&gt;   `0.1` `0.24`  `0.5`    `1`  `1.5`     `2`     `4`    `8`   `16`   `24`   `32`</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     0 0.035<span style="text-decoration: underline;">7</span> 0.017<span style="text-decoration: underline;">9</span> 0      0      0.107   0.035<span style="text-decoration: underline;">7</span>  0.035<span style="text-decoration: underline;">7</span> 0.053<span style="text-decoration: underline;">6</span> 0.089<span style="text-decoration: underline;">3</span> 0.071<span style="text-decoration: underline;">4</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     0 0      0      0.018<span style="text-decoration: underline;">7</span> 0      0.009<span style="text-decoration: underline;">35</span> 0.009<span style="text-decoration: underline;">35</span> 0.093<span style="text-decoration: underline;">5</span> 0.168  0.121  0.187 </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     0 0      0.094<span style="text-decoration: underline;">7</span> 0.052<span style="text-decoration: underline;">6</span> 0.010<span style="text-decoration: underline;">5</span> 0.126   0.126   0.084<span style="text-decoration: underline;">2</span> 0.147  0      0.147 </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: 48 &lt;dbl&gt;, 64 &lt;dbl&gt;, 80 &lt;dbl&gt;, 128 &lt;dbl&gt;, 256 &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   species &lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: `48` &lt;dbl&gt;, `64` &lt;dbl&gt;, `80` &lt;dbl&gt;, `128` &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   `256` &lt;dbl&gt;, species &lt;chr&gt;</span></span>
 
 <span class="co"># Pull the y-values down from the header</span>
 <span class="va">data_E</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"./Fig3E_data.csv"</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hb"</span>, <span class="st">"zb"</span>, <span class="st">"pg"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">speed</span>, value <span class="op">=</span> <span class="va">prop</span>, <span class="op">-</span><span class="va">species</span><span class="op">)</span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"speed"</span>, values_to <span class="op">=</span> <span class="st">"prop"</span>, <span class="op">-</span><span class="va">species</span><span class="op">)</span>
 <span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">3</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">16</span></span>
 <span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (16): 0.1, 0.24, 0.5, 1, 1.5, 2, 4, 8, 16, 24, 32, 48, 64, 80, 128, 256</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="va">data_E</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 48 × 3</span></span>
 <span class="co">#&gt;    species speed   prop</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> hb      0.1   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> zb      0.1   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> pg      0.1   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> hb      0.24  0.035<span style="text-decoration: underline;">7</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> zb      0.24  0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> pg      0.24  0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> hb      0.5   0.017<span style="text-decoration: underline;">9</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> zb      0.5   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> pg      0.5   0.094<span style="text-decoration: underline;">7</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> hb      1     0     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> hb      0.24  0.035<span style="text-decoration: underline;">7</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> hb      0.5   0.017<span style="text-decoration: underline;">9</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> hb      1     0     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> hb      1.5   0     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> hb      2     0.107 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> hb      4     0.035<span style="text-decoration: underline;">7</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> hb      8     0.035<span style="text-decoration: underline;">7</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> hb      16    0.053<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> hb      24    0.089<span style="text-decoration: underline;">3</span></span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 38 more rows</span></span></code></pre></div>
 <p><strong>Plot data:</strong></p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
@@ -679,15 +680,15 @@ with ggplot2 cheat sheet</a></p>
 <span class="co">#&gt;    species speed   prop</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> hb      0.1   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> zb      0.1   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> pg      0.1   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> hb      0.24  0.035<span style="text-decoration: underline;">7</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> zb      0.24  0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> pg      0.24  0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> hb      0.5   0.017<span style="text-decoration: underline;">9</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> zb      0.5   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> pg      0.5   0.094<span style="text-decoration: underline;">7</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> hb      1     0     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> hb      0.24  0.035<span style="text-decoration: underline;">7</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> hb      0.5   0.017<span style="text-decoration: underline;">9</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> hb      1     0     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> hb      1.5   0     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> hb      2     0.107 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> hb      4     0.035<span style="text-decoration: underline;">7</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> hb      8     0.035<span style="text-decoration: underline;">7</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> hb      16    0.053<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> hb      24    0.089<span style="text-decoration: underline;">3</span></span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 38 more rows</span></span>
 
 <span class="va">data_E</span> <span class="op">&lt;-</span> <span class="va">data_E</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -700,15 +701,15 @@ with ggplot2 cheat sheet</a></p>
 <span class="co">#&gt;    species speed   prop</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> hb      0.1   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> zb      0.1   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> pg      0.1   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> hb      0.24  0.035<span style="text-decoration: underline;">7</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> zb      0.24  0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> pg      0.24  0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> hb      0.5   0.017<span style="text-decoration: underline;">9</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> zb      0.5   0     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> pg      0.5   0.094<span style="text-decoration: underline;">7</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> hb      1     0     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> hb      0.24  0.035<span style="text-decoration: underline;">7</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> hb      0.5   0.017<span style="text-decoration: underline;">9</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> hb      1     0     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> hb      1.5   0     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> hb      2     0.107 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> hb      4     0.035<span style="text-decoration: underline;">7</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> hb      8     0.035<span style="text-decoration: underline;">7</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> hb      16    0.053<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> hb      24    0.089<span style="text-decoration: underline;">3</span></span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 38 more rows</span></span></code></pre></div>
 <p><strong>Plot data again!</strong></p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
@@ -793,8 +794,8 @@ with ggplot2 cheat sheet</a></p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (23): trial, direction, speed, bin1, bin2, bin3, bin4, bin5, bin6, bin7,...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 239 × 23</span></span>
 <span class="co">#&gt;    trial direction    speed  bin1  bin2  bin3  bin4  bin5  bin6  bin7  bin8</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -814,59 +815,59 @@ with ggplot2 cheat sheet</a></p>
 <p><strong>Gather all the bin data into one column:</strong></p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"Fig3B_data.csv"</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">bin</span>, value <span class="op">=</span> <span class="va">count</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bin"</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"bin"</span>, values_to <span class="op">=</span> <span class="st">"count"</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bin"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">239</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">23</span></span>
 <span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (23): trial, direction, speed, bin1, bin2, bin3, bin4, bin5, bin6, bin7,...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 4,780 × 5</span></span>
-<span class="co">#&gt;    trial direction    speed bin   count</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1       135   1.90   bin1  12.0 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2       <span style="color: #BB0000;">NaN</span> <span style="color: #BB0000;">NaN</span>      bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3       315  -<span style="color: #BB0000;">0.696</span>  bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4       <span style="color: #BB0000;">NaN</span> <span style="color: #BB0000;">NaN</span>      bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5       135  -<span style="color: #BB0000;">0.086</span><span style="color: #BB0000; text-decoration: underline;">7</span> bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6       <span style="color: #BB0000;">NaN</span> <span style="color: #BB0000;">NaN</span>      bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7       135   0.821  bin1  16   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8       <span style="color: #BB0000;">NaN</span> <span style="color: #BB0000;">NaN</span>      bin1   4.00</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9       315   1.63   bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10       <span style="color: #BB0000;">NaN</span> <span style="color: #BB0000;">NaN</span>      bin1   0   </span>
+<span class="co">#&gt;    trial direction speed bin   count</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1       135  1.90 bin1  12.0 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     1       135  1.90 bin2   4.00</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     1       135  1.90 bin3   4.00</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     1       135  1.90 bin4   0   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     1       135  1.90 bin5   4.00</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     1       135  1.90 bin6   0   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     1       135  1.90 bin7   0   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     1       135  1.90 bin8   0   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     1       135  1.90 bin9   0   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     1       135  1.90 bin10  4.00</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 4,770 more rows</span></span></code></pre></div>
 <p><strong>Group the data by trial, direction speed:</strong></p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"Fig3B_data.csv"</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">bin</span>, value <span class="op">=</span> <span class="va">count</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bin"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"bin"</span>, values_to <span class="op">=</span> <span class="st">"count"</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bin"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">trial</span>, <span class="va">direction</span>, <span class="va">speed</span><span class="op">)</span>
 <span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">239</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">23</span></span>
 <span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (23): trial, direction, speed, bin1, bin2, bin3, bin4, bin5, bin6, bin7,...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 4,780 × 5</span></span>
 <span class="co">#&gt; <span style="color: #949494;"># Groups:   trial, direction, speed [239]</span></span>
-<span class="co">#&gt;    trial direction    speed bin   count</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1       135   1.90   bin1  12.0 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2       <span style="color: #BB0000;">NaN</span> <span style="color: #BB0000;">NaN</span>      bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3       315  -<span style="color: #BB0000;">0.696</span>  bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4       <span style="color: #BB0000;">NaN</span> <span style="color: #BB0000;">NaN</span>      bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5       135  -<span style="color: #BB0000;">0.086</span><span style="color: #BB0000; text-decoration: underline;">7</span> bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6       <span style="color: #BB0000;">NaN</span> <span style="color: #BB0000;">NaN</span>      bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7       135   0.821  bin1  16   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8       <span style="color: #BB0000;">NaN</span> <span style="color: #BB0000;">NaN</span>      bin1   4.00</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9       315   1.63   bin1   0   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10       <span style="color: #BB0000;">NaN</span> <span style="color: #BB0000;">NaN</span>      bin1   0   </span>
+<span class="co">#&gt;    trial direction speed bin   count</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1       135  1.90 bin1  12.0 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     1       135  1.90 bin2   4.00</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     1       135  1.90 bin3   4.00</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     1       135  1.90 bin4   0   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     1       135  1.90 bin5   4.00</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     1       135  1.90 bin6   0   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     1       135  1.90 bin7   0   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     1       135  1.90 bin8   0   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     1       135  1.90 bin9   0   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     1       135  1.90 bin10  4.00</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 4,770 more rows</span></span></code></pre></div>
 <p><strong>Calculate firing rate for each trial:</strong></p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"Fig3B_data.csv"</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">bin</span>, value <span class="op">=</span> <span class="va">count</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bin"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"bin"</span>, values_to <span class="op">=</span> <span class="st">"count"</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bin"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">trial</span>, <span class="va">direction</span>, <span class="va">speed</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>
     raw_firing_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>
@@ -876,8 +877,8 @@ with ggplot2 cheat sheet</a></p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (23): trial, direction, speed, bin1, bin2, bin3, bin4, bin5, bin6, bin7,...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; `summarise()` has grouped output by 'trial', 'direction'. You can override using the `.groups` argument.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 239 × 4</span></span>
 <span class="co">#&gt; <span style="color: #949494;"># Groups:   trial, direction [239]</span></span>
@@ -898,7 +899,7 @@ with ggplot2 cheat sheet</a></p>
 data:</strong></p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data_B_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"Fig3B_data.csv"</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">bin</span>, value <span class="op">=</span> <span class="va">count</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bin"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"bin"</span>, values_to <span class="op">=</span> <span class="st">"count"</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bin"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">trial</span>, <span class="va">direction</span>, <span class="va">speed</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>
     raw_firing_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>
@@ -909,8 +910,8 @@ data:</strong></p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (23): trial, direction, speed, bin1, bin2, bin3, bin4, bin5, bin6, bin7,...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; `summarise()` has grouped output by 'trial', 'direction'. You can override using the `.groups` argument.</span>
 <span class="va">data_B_raw</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 239 × 4</span></span>
@@ -1291,8 +1292,8 @@ To fudge the lines, let’s make another dataset:</p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (33): bird, trk, site, cell, pd.sum, species, test.dir1, dir1.area, test...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 240 × 33</span></span>
 <span class="co">#&gt;     bird   trk  site  cell pd.sum species test.dir1 dir1.area test.dir2</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -1322,8 +1323,8 @@ To fudge the lines, let’s make another dataset:</p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (33): bird, trk, site, cell, pd.sum, species, test.dir1, dir1.area, test...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 163 × 33</span></span>
 <span class="co">#&gt;     bird   trk  site  cell pd.sum species test.dir1 dir1.area test.dir2</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -1353,8 +1354,8 @@ To fudge the lines, let’s make another dataset:</p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (33): bird, trk, site, cell, pd.sum, species, test.dir1, dir1.area, test...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 163 × 13</span></span>
 <span class="co">#&gt;    species sp80.1 sp80.2 sp80.3 sp80.4 sp80.5 sp80.6 sp80.7 sp80.8 sp80.9</span>
 <span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -1388,8 +1389,8 @@ words:</strong></p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (33): bird, trk, site, cell, pd.sum, species, test.dir1, dir1.area, test...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 163 × 13</span></span>
 <span class="co">#&gt;    species `0.24` `0.5`   `1`   `2`   `4`   `8`  `16`  `24`  `32`  `48`  `64`</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -1403,7 +1404,7 @@ words:</strong></p>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> hb           0     0     0     0     0     0     0     0     0     0     1</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> hb           1     0     0     0     0     0     0     0     0     0     0</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> hb           0     1     0     0     0     0     0     0     0     0     0</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 153 more rows, and 1 more variable: 80 &lt;dbl&gt;</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #949494;"># … with 153 more rows, and 1 more variable: `80` &lt;dbl&gt;</span></span></code></pre></div>
 <p><strong>Reshape data for plotting:</strong></p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"./Fig3F_data.csv"</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -1416,29 +1417,29 @@ words:</strong></p>
       <span class="va">species</span> <span class="op">==</span> <span class="fl">2</span> <span class="op">~</span> <span class="st">"hb"</span>
     <span class="op">)</span>
   <span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">speed</span>, value <span class="op">=</span> <span class="va">prop</span>, <span class="op">-</span><span class="va">species</span><span class="op">)</span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"speed"</span>, values_to <span class="op">=</span> <span class="st">"prop"</span>, <span class="op">-</span><span class="va">species</span><span class="op">)</span>
 <span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">240</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">33</span></span>
 <span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (33): bird, trk, site, cell, pd.sum, species, test.dir1, dir1.area, test...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,956 × 3</span></span>
 <span class="co">#&gt;    species speed  prop</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> hb      0.24      0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> hb      0.24      0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> hb      0.24      0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> hb      0.24      0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> hb      0.24      0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> hb      0.24      0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> hb      0.24      0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> hb      0.24      0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> hb      0.24      1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> hb      0.24      0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> hb      0.5       0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> hb      1         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> hb      2         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> hb      4         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> hb      8         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> hb      16        0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> hb      24        0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> hb      32        0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> hb      48        1</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 1,946 more rows</span></span></code></pre></div>
-<p><strong>Summarize proporions by species and speed:</strong></p>
+<p><strong>Summarize proportions by species and speed:</strong></p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"./Fig3F_data.csv"</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dir1.area</span><span class="op">)</span><span class="op">)</span>  <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -1450,7 +1451,7 @@ words:</strong></p>
       <span class="va">species</span> <span class="op">==</span> <span class="fl">2</span> <span class="op">~</span> <span class="st">"hb"</span>
     <span class="op">)</span>
   <span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">speed</span>, value <span class="op">=</span> <span class="va">prop</span>, <span class="op">-</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"speed"</span>, values_to <span class="op">=</span> <span class="st">"prop"</span>, <span class="op">-</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">speed</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="va">ungroup</span>
@@ -1459,8 +1460,8 @@ words:</strong></p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (33): bird, trk, site, cell, pd.sum, species, test.dir1, dir1.area, test...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; `summarise()` has grouped output by 'species'. You can override using the `.groups` argument.</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 24 × 3</span></span>
 <span class="co">#&gt;    species speed   prop</span>
@@ -1488,7 +1489,7 @@ words:</strong></p>
       <span class="va">species</span> <span class="op">==</span> <span class="fl">2</span> <span class="op">~</span> <span class="st">"hb"</span>
     <span class="op">)</span>
   <span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">speed</span>, value <span class="op">=</span> <span class="va">prop</span>, <span class="op">-</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"speed"</span>, values_to <span class="op">=</span> <span class="st">"prop"</span>, <span class="op">-</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">speed</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="va">ungroup</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -1501,8 +1502,8 @@ words:</strong></p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (33): bird, trk, site, cell, pd.sum, species, test.dir1, dir1.area, test...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; `summarise()` has grouped output by 'species'. You can override using the `.groups` argument.</span>
 <span class="va">data_F</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 24 × 3</span></span>
@@ -1554,7 +1555,7 @@ words:</strong></p>
 <p><strong>Reorganize raw data:</strong></p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data_C_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"Fig3C_data.csv"</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">bin</span>, value <span class="op">=</span> <span class="va">count</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bin"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"bin"</span>, values_to <span class="op">=</span> <span class="st">"count"</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bin"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">trial</span>, <span class="va">direction</span>, <span class="va">speed</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>
     raw_firing_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>
@@ -1565,8 +1566,8 @@ words:</strong></p>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (23): trial, direction, speed, bin1, bin2, bin3, bin4, bin5, bin6, bin7,...</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; `summarise()` has grouped output by 'trial', 'direction'. You can override using the `.groups` argument.</span>
 <span class="va">data_C_raw</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 239 × 4</span></span>
@@ -1752,16 +1753,12 @@ here</p>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by <a href="https://www.vikram-baliga.com/" class="external-link">Vikram B.
-Baliga</a>, <a href="https://www.andreagaede.com/" class="external-link">Andrea Gaede</a>,
-<a href="https://www.zoology.ubc.ca/person/shreeram-senthivasan/" class="external-link">Shree
-Senthivasan</a>.</p>
+<p>Developed by <a href="https://www.vikram-baliga.com/" class="external-link">Vikram B. Baliga</a>, <a href="https://www.andreagaede.com/" class="external-link">Andrea Gaede</a>, <a href="https://www.zoology.ubc.ca/person/shreeram-senthivasan/" class="external-link">Shree Senthivasan</a>.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer>

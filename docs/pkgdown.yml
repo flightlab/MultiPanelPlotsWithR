@@ -1,11 +1,11 @@
 pandoc: '2.18'
-pkgdown: 2.0.1
+pkgdown: 2.0.4
 pkgdown_sha: ~
 articles:
   group-01_Fundamentals-data-wrangling-tidyverse: group-01_Fundamentals-data-wrangling-tidyverse.html
   group-02_Piping-single-panel-ggplot-figs: group-02_Piping-single-panel-ggplot-figs.html
   group-03_Using-cowplot-multi-panel: group-03_Using-cowplot-multi-panel.html
-last_built: 2022-09-15T22:56Z
+last_built: 2022-09-23T19:17Z
 urls:
   reference: https://flightlab.github.io/MultiPanelPlotsWithR/reference
   article: https://flightlab.github.io/MultiPanelPlotsWithR/articles

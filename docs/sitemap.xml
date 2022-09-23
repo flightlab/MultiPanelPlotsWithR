@@ -4,9 +4,6 @@
     <loc>https://flightlab.github.io/MultiPanelPlotsWithR/404.html</loc>
   </url>
   <url>
-    <loc>https://flightlab.github.io/MultiPanelPlotsWithR/LICENSE-text.html</loc>
-  </url>
-  <url>
     <loc>https://flightlab.github.io/MultiPanelPlotsWithR/articles/group-01_Fundamentals-data-wrangling-tidyverse.html</loc>
   </url>
   <url>
@@ -23,6 +20,9 @@
   </url>
   <url>
     <loc>https://flightlab.github.io/MultiPanelPlotsWithR/index.html</loc>
+  </url>
+  <url>
+    <loc>https://flightlab.github.io/MultiPanelPlotsWithR/LICENSE-text.html</loc>
   </url>
   <url>
     <loc>https://flightlab.github.io/MultiPanelPlotsWithR/reference/index.html</loc>

@@ -17,6 +17,8 @@ To get started, please open fill_in_the_blanks.R in a fresh RStudio session.
 Then in the top menu bar please click:
 Session --> Set Working Directory --> To Source File Location
 
+Please also note that all relevant materials for this workshop are also
+available online: https://flightlab.github.io/MultiPanelPlotsWithR/
 
 #### WORKSHOP MATERIALS ####
 Below is a description of all the included files and directories.

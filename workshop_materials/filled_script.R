@@ -426,7 +426,7 @@ data_D
 # Use the plotting with ggplot2 cheat sheet
 # browseURL("https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf")
 
-# Other possibly relevant componenets include:
+# Other possibly relevant components include:
 # - coordinate systems (eg cartesian vs polar plots)
 # - scales (eg mapping specifc colours to groups)
 # - facets (subpanels of similar plots)
@@ -606,7 +606,7 @@ read_csv("./gaedeetal_data/Fig3E_data.csv") %>%
 # Pull the y-values down from the header
 data_E <- read_csv("./gaedeetal_data/Fig3E_data.csv") %>%
   mutate(species = c("hb", "zb", "pg")) %>%
-  gather(key = speed, value = prop, -species)
+  pivot_longer(names_to = "speed", values_to = "prop", -species)
 data_E
 
 # Plot data
@@ -697,16 +697,16 @@ read_csv("gaedeetal_data/Fig3B_data.csv")
 
 # Gather all the bin data into one column
 read_csv("gaedeetal_data/Fig3B_data.csv") %>%
-  gather(key = bin, value = count, starts_with("bin"))
+  pivot_longer(names_to = "bin", values_to = "count", starts_with("bin"))
 
 # Group the data by trial, direction speed
 read_csv("gaedeetal_data/Fig3B_data.csv") %>%
-  gather(key = bin, value = count, starts_with("bin")) %>%
+  pivot_longer(names_to = "bin", values_to = "count", starts_with("bin")) %>%
   group_by(trial, direction, speed)
 
 # Calculate firing rate for each trial
 read_csv("gaedeetal_data/Fig3B_data.csv") %>%
-  gather(key = bin, value = count, starts_with("bin")) %>%
+  pivot_longer(names_to = "bin", values_to = "count", starts_with("bin")) %>%
   group_by(trial, direction, speed) %>%
   summarize(
     raw_firing_rate = mean(count)
@@ -714,7 +714,7 @@ read_csv("gaedeetal_data/Fig3B_data.csv") %>%
 
 # Finally let's ungroup and store this unnormalized data
 data_B_raw <- read_csv("gaedeetal_data/Fig3B_data.csv") %>%
-  gather(key = bin, value = count, starts_with("bin")) %>%
+  pivot_longer(names_to = "bin", values_to = "count", starts_with("bin")) %>%
   group_by(trial, direction, speed) %>%
   summarize(
     raw_firing_rate = mean(count)
@@ -1012,9 +1012,9 @@ read_csv("./gaedeetal_data/Fig3F_data.csv") %>%
       species == 2 ~ "hb"
     )
   ) %>%
-  gather(key = speed, value = prop, -species)
+  pivot_longer(names_to = "speed", values_to = "prop", -species)
 
-# Summarize proporions by species and speed
+# Summarize proportions by species and speed
 read_csv("./gaedeetal_data/Fig3F_data.csv") %>%
   filter(!is.na(dir1.area))  %>%
   select(starts_with("sp")) %>%
@@ -1025,7 +1025,7 @@ read_csv("./gaedeetal_data/Fig3F_data.csv") %>%
       species == 2 ~ "hb"
     )
   ) %>%
-  gather(key = speed, value = prop, -species) %>%
+  pivot_longer(names_to = "speed", values_to = "prop", -species) %>%
   group_by(species, speed) %>%
   summarise(prop = mean(prop)) %>%
   ungroup
@@ -1041,7 +1041,7 @@ data_F <- read_csv("./gaedeetal_data/Fig3F_data.csv") %>%
       species == 2 ~ "hb"
     )
   ) %>%
-  gather(key = speed, value = prop, -species) %>%
+  pivot_longer(names_to = "speed", values_to = "prop", -species) %>%
   group_by(species, speed) %>%
   summarise(prop = mean(prop)) %>%
   ungroup %>%
@@ -1085,7 +1085,7 @@ fig_F
 
 # Reorganize raw data
 data_C_raw <- read_csv("gaedeetal_data/Fig3C_data.csv") %>%
-  gather(key = bin, value = count, starts_with("bin")) %>%
+  pivot_longer(names_to = "bin", values_to = "count", starts_with("bin")) %>%
   group_by(trial, direction, speed) %>%
   summarize(
     raw_firing_rate = mean(count)

@@ -1,6 +1,6 @@
 Package: MultiPanelPlotsWithR
 Title: Multi Panel Plots in R for UBC Graduate Course BIO548L
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: 
     c(
 	  person(given = "Douglas L.",
